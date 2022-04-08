@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+
+	<title> 상품 추가 </title>
+
+	<meta name="generator" content="editplus" />
+
+	<meta name="author" content="zzarungna" />
+
+	<meta name="description" content="memeber form" />
+	<link th:href="@{/style/css1.css}" rel="stylesheet" type="text/css" />
+
+	<script>var IS_ANDROID_APP = 'N';
+	(function () {
+		var customTooltipAllowList = $.fn.tooltip.Constructor.DEFAULTS.whiteList;
+		customTooltipAllowList.table = [];
+		customTooltipAllowList.thead = [];
+		customTooltipAllowList.tbody = [];
+		customTooltipAllowList.tr = [];
+		customTooltipAllowList.td = ["rowspan", "colspan"];
+		customTooltipAllowList.th = [];
+		customTooltipAllowList.caption = [];
+		customTooltipAllowList["*"].push("style");
+	})();
+
+	function determineDropDirection() {
+		$(".dropdown-menu").each(function () {
+			$(this).css({
+				visibility: "hidden",
+				display: "block"
+			});
+
+			$(this).parent().removeClass("dropup");
+
+			if ($(this).offset().top + $(this).outerHeight() + 60 > $(window).innerHeight() + $(window).scrollTop()) {
+				$(this).parent().addClass("dropup");
+			}
+			$(this).removeAttr("style");
+		});
+	}
+
+	determineDropDirection();
+
+	$(window).scroll(determineDropDirection);
+	</script>
+</head>
+<style>
+	.gui-controls > li a.active, gui-controls > li > a.active:hover{
+		background-color: #03A79D;
+	}
+
+	table{
+		border: 1px solid #e5e6e6;
+	}
+	.pdaddFrm-tdl{
+		margin-left: 10px;
+
+
+	}
+
+	.pdaddFrm-tdr{
+		margin-left: 10px;
+
+
+	}
+
+	a{
+		text-decoration: none;
+	}
+
+
+
+</style>
+
+
+<body>
+
+<h3>상품추가</h3>
+
+<form class="pdaddFrmq" id="pdaddFrm" method="post" action="">
+
+	<table class="pdaddFrm" id="pdaddFrm-tb" width="700" height="450">
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 이름</td>
+			<td class="pdaddFrm-tdr"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 가격</td>
+			<td class="pdaddFrm-tdr two"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 수량</td>
+			<td class="pdaddFrm-tdr"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 브랜드</td>
+			<td class="pdaddFrm-tdr two"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 카테고리</td>
+			<td class="pdaddFrm-tdr"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">할인 가격</td>
+			<td class="pdaddFrm-tdr two"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">할인률</td>
+			<td class="pdaddFrm-tdr"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 이미지</td>
+			<td class="pdaddFrm-tdr two"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 옵션</td>
+			<td class="pdaddFrm-tdr"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상품 설명</td>
+			<td class="pdaddFrm-tdr two"><input class="form-control" type="text"></td>
+		</tr>
+
+		<tr class="form-group">
+			<td class="pdaddFrm-tdl one">상세 이미지</td>
+			<td class="pdaddFrm-tdr"><input class="form-control" type="text"></td>
+		</tr>
+
+<!--		<tr>-->
+<!--			<td align="center" bgcolor="#FFFFCC">브랜드</td>-->
+<!--			<td>-->
+<!--				<select name="selinfor">-->
+<!--					<option value="0">선택해주세요</option>-->
+<!--					<option value="1">1</option>-->
+<!--					<option value="2">2</option>-->
+<!--					<option value="3">3</option>-->
+<!--					<option value="4">4</option>-->
+<!--					<option value="5">5</option>-->
+<!--					<option value="6">6</option>-->
+<!--					<option value="7">7</option>-->
+<!--				</select>-->
+<!--			</td>-->
+<!--		</tr>-->
+
+	</table>
+
+	<input type="submit" value="등록하기"/>
+	<input type="reset" value="다시작성"/>
+
+</form>
+</body>
+</html>
+

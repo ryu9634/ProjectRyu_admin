@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+	<script
+			src="https://code.jquery.com/jquery-3.4.1.js"
+			integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			crossorigin="anonymous"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="robots" content="noindex">
+	<!--<link href="http://cocoaphp.com/publish/bootstrap/css/material-design-iconic-font.min.css" rel="stylesheet">-->
+	<script>
+		var TEST_SERVER = false;
+		var VENDOR_DOMAIN = 'https://vendor-cdn.imweb.me';
+		var UPLOAD_URL = '/upload/';
+		var CDN_UPLOAD_URL = 'https://cdn.imweb.me/upload/';
+		var IS_MAIN = false;
+		var IS_MOBILE = false;
+		var ADMIN_URL = '/admin/';
+		var THUMBNAIL_URL = '/thumbnail/';
+		var CDN_THUMBNAIL_URL = 'https://cdn.imweb.me/thumbnail/';
+		var SITE_CODE = 'S20220126fb815f20c3669';
+		var UNIT_CODE = 'u2022012661f14f8d7bca0';
+		var SITE_NO = 'S20220126fb815f20c3669';
+		var UNIT_NO = 'u2022012661f14f8d7bca0';
+		var MAIN_DOMAIN = 'test.imweb.me';
+		var CURRENT_DOMAIN = 'test.imweb.me';
+		var CURRENT_PROTOCOL = 'https://';
+		var GOOGLE_API_KEY = 'AIzaSyA8CCexf9XTJcH09mStr-HRW4nin4k8J7w';
+		var FROALA_VERSION = 311;
+		var FROALA_KEY = '6LF5g1B3D3F3C6C3E2F-11SLJCKHXOSLMc1YGSGb1ZXHSe1CgB5A4D4C3E3C2A13A19B7B2==';
+		var ADOBE_AVIARY_KEY = '94bd22b5cc05424494c5e7aeabab8466';
+		var LIMIT_API_LIST = [];
+		var NO_IMAGE_URL = '/img/no-image.png';
+		var ADMIN_LANG_CODE = 'KR';
+		var SITE_COUNTRY_CODE = 'kr';
+		var KOREA_COUNTRY_CODE = 'kr';
+		var TAIWAN_COUNTRY_CODE = 'tw';
+		var IS_GUEST = false;
+		var MEMBER_HASH = '33a3f270cf1ffde9db3efaaa746835d6ddc643f1';
+		var CHECK_OFFICE = false;
+
+		/****************************************************************/
+		/* m_Completepayment  설명                                      */
+		/****************************************************************/
+		/* 인증완료시 재귀 함수                                         */
+		/* 해당 함수명은 절대 변경하면 안됩니다.                        */
+		/* 해당 함수의 위치는 payplus.js 보다먼저 선언되어여 합니다.    */
+		/* Web 방식의 경우 리턴 값이 form 으로 넘어옴                   */
+		/* EXE 방식의 경우 리턴 값이 json 으로 넘어옴                   */
+		/****************************************************************/
+		function m_Completepayment(FormOrJson, closeEvent) {
+			var frm = document.order_info;
+
+			/********************************************************************/
+			/* FormOrJson은 가맹점 임의 활용 금지                               */
+			/* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다.  */
+			/* FormOrJson 값을 활용 하시려면 기술지원팀으로 문의바랍니다.       */
+			/********************************************************************/
+			GetField(frm, FormOrJson);
+
+
+			if (frm.res_cd.value == "0000") {
+				/*
+				 가맹점 리턴값 처리 영역
+				 */
+
+				frm.submit();
+			}
+			else {
+				alert("[" + frm.res_cd.value + "] " + frm.res_msg.value);
+
+				closeEvent();
+			}
+		}
+	</script>
+
+	<script src="/js/localize/KR_KRW_currency.js?1643094288"></script>
+	<script src="/js/localize/admin/KR.js?1643094288"></script>
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap.css?1630317764">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/jquery-ui.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/ii.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/db-icons.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/css/material-design-iconic-font.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-datepicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/black-tie.css?1608189400">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/simple-line-icons.css?1608179394">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im-icon.css?1643097867">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/preloader.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/owl.carousel2.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/slick.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/animate.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/nprogress.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/css/trackpad-scroll-emulator.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome.min.css?1626931454">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome5.min.css?1608189400">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/froala_311/css/froala_editor.pkgd.css?1607673118">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/froala_311/css/froala_style.min.css?1607673118">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/froala/custom-theme-v3.css?1614049551">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/colorpicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/codemirror.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-spinner.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/chosen.css?1617331870">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/fullcalendar.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/morris.core.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.min.css?1596596378">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im_component.css?1636689958">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/admin.css?1590627710">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/toastr.css?1593569516">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/alarm_menu.css?1643150804">
+	<link rel="stylesheet" type="text/css" href="../style/bootstrap-theme-dashboard.css">
+	<link rel="stylesheet" type="text/css" href="../style/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/select2.css?1590627710">
+	<script src="https://vendor-cdn.imweb.me/js/jquery.js?1627517460"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.browser.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-ui.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap.min.js?1630317768"></script>
+	<script src="https://vendor-cdn.imweb.me/js/tinycolor-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/common.js?1643089417"></script>
+	<script src="https://vendor-cdn.imweb.me/js/im_component.js?1636940317"></script>
+	<script src="https://vendor-cdn.imweb.me/js/admin_common.js?1637641047"></script>
+	<script src="https://vendor-cdn.imweb.me/js/table_list.js?1633057104"></script>
+	<script src="https://vendor-cdn.imweb.me/js/data.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/owl.carousel2.js?1638150602"></script>
+	<script src="https://vendor-cdn.imweb.me/js/slick.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/preloader.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.lazyload.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.trackpad-scroll-emulator.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.fileupload.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/nprogress.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/froala_editor.min.js?1608673099"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/align.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/char_counter.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_beautifier.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_view.min.js?1608643124"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/colors.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/draggable.min.js?1607673168"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/emoticons.min.js?1607673169"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/entities.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/file.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_family.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_size.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/forms.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/fullscreen.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image_manager.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/inline_style.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_breaker.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/link.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/lists.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_format.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_style.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/quote.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/save.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/table.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/url.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/video.min.js?1625125569"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_height.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/third_party/font_awesome.min.js?1607673192"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/ko.js?1607680617"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/zh_tw.js?1608685913"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-scrolltofixed-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/colorpicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.chosen.js?1619084781"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.timepicker.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.print.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autolinker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ThreeCanvas.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/snow.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/lightgallery-all.min.js?1596595980"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autosize.js?1577682292"></script>
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.css?1577682282">
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nestable.doznut.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.number.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/masonry.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/Chart.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.autosize.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/codemirror.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/xml/xml.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/javascript/javascript.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/css/css.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/htmlmixed/htmlmixed.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2_ko.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/imagesloaded.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nanoscroller.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/html5shiv.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.validate.js?1621218311"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.inputmask.bundle.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-with-locales.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-timezone.js?1581998425"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap-datepicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ie-checker-min.js?1577682292"></script>
+	<script src="/admin/js/doz_post.js?1577682293"></script>
+	<script src="/admin/js/admin.js?1640738292"></script>
+	<script src="/admin/js/coupon.js?1638164114"></script>
+	<script src="/admin/js/doznut.js?1614036939"></script>
+	<script src="/admin/js/event_check.js?1585896056"></script>
+	<script src="/js/site_member.js?1641367814"></script>
+	<script src="/js/alarm_menu.js?1603862128"></script>
+	<script src="/admin/js/imweb_analytics.js?1604543771"></script>
+	<script src="/admin/js/site_manage.js?1587087650"></script>
+	<script src="/admin/js/admin_search.js?1639983006"></script>
+	<script src="/admin/js/dashboard.js?1640738292"></script>
+	<script src="/admin/js/config.js?1644196516"></script>
+	<script src="/admin/js/member.js?1639447256"></script>
+	<script src="/admin/js/permission.js?1633057103"></script>
+	<script src="/admin/js/contents.js?1640137207"></script>
+	<script src="/admin/js/payment.js?1637302294"></script>
+	<script src="/admin/js/toastr.js?1577682293"></script>
+	<script src="/admin/js/contents_list.js?1638842547"></script>
+	<script src="/admin/js/zipcode_daum.js?1577682293"></script>
+	<script src="/admin/js/shop_point.js?1577682293"></script>
+	<link rel="stylesheet" th:href="@{/style/css1.css}">
+	<link rel="stylesheet" th:href="@{/style/css2.css}">
+	<script>var IS_ANDROID_APP = 'N';
+		(function () {
+			var customTooltipAllowList = $.fn.tooltip.Constructor.DEFAULTS.whiteList;
+			customTooltipAllowList.table = [];
+			customTooltipAllowList.thead = [];
+			customTooltipAllowList.tbody = [];
+			customTooltipAllowList.tr = [];
+			customTooltipAllowList.td = ["rowspan", "colspan"];
+			customTooltipAllowList.th = [];
+			customTooltipAllowList.caption = [];
+			customTooltipAllowList["*"].push("style");
+		})();
+
+		function determineDropDirection() {
+			$(".dropdown-menu").each(function () {
+				$(this).css({
+					visibility: "hidden",
+					display: "block"
+				});
+
+				$(this).parent().removeClass("dropup");
+
+				if ($(this).offset().top + $(this).outerHeight() + 60 > $(window).innerHeight() + $(window).scrollTop()) {
+					$(this).parent().addClass("dropup");
+				}
+				$(this).removeAttr("style");
+			});
+		}
+
+		determineDropDirection();
+
+		$(window).scroll(determineDropDirection);
+	</script>
+</head>
+
+<body class="menubar-hoverable header-fixed menubar-pin">
+	<!-- BEGIN BASE-->
+	<div id="dashboard_loader" class="se-pre-con" style="display: none">
+		<div class="page-loader-spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+		<div class="progress">
+			<div class="progress-bar" role="progressbar" style="width:70%">
+				<label>70%</label>
+			</div>
+		</div>
+	</div>
+	<div id="base">
+		<!-- END OFFCANVAS LEFT -->
+		<script type="text/javascript">
+			$(function () {
+				SADMIN_MENU_ALERT.openAlert();
+			});
+		</script>
+<!--		<header class="top_header" id="header">-->
+<!--			<div class="headerbar">-->
+<!--				<div class="headerbar-left">-->
+<!--					<ul class="header-nav header-nav-options">-->
+<!--						<li class="hidden-lg hidden-md">-->
+<!--							<a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar"-->
+<!--								href="javascript:void(0);">-->
+<!--								<i class="btl bt-bars"></i>-->
+<!--							</a>-->
+<!--						</li>-->
+<!--						<li class="header-nav-brand">-->
+<!--							<div class="brand-holder">-->
+<!--								<span class="location_text">-->
+<!--									<span>사용자 추가</span> </span>-->
+<!--							</div>-->
+<!--						</li>-->
+<!--					</ul>-->
+<!--				</div>-->
+
+<!--				&lt;!&ndash;끝 #header-navbar-collapse &ndash;&gt;-->
+<!--				&lt;!&ndash;끝 #header-navbar-collapse &ndash;&gt;-->
+<!--			</div>-->
+<!--		</header>-->
+		<!-- BEGIN CONTENT-->
+		<div id="content" style="padding-top: 0;">
+			<section>
+<!--				<div class="card style-transparent card-top no-tab"-->
+<!--					style="z-index: auto; position: relative; top: 0px;">-->
+<!--					<div class="card-head">-->
+<!--						<header>-->
+<!--							<a th:href="@{/admin/memberlist}"><i class="zmdi zmdi-arrow-back"></i>리스트로 돌아가기</a>-->
+<!--						</header>-->
+<!--					</div>-->
+<!--					&lt;!&ndash;end.card-head&ndash;&gt;-->
+<!--				</div>-->
+				<!--end.card-top-->
+
+				<div class="section-body">
+					<div class="tab-pane" id="daily">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card">
+									<div class="card-head">
+										<header>회원 정보</header>
+									</div>
+
+										<!--end.profile-image-->
+									<script>
+										function sample6_execDaumPostcode() {
+											new daum.Postcode({
+												oncomplete: function(data) {
+													// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+													// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+													// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+													var addr = ''; // 주소 변수
+													var extraAddr = ''; // 참고항목 변수
+
+													//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+													if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+														addr = data.roadAddress;
+													} else { // 사용자가 지번 주소를 선택했을 경우(J)
+														addr = data.jibunAddress;
+													}
+
+													// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+													if(data.userSelectedType === 'R'){
+														// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+														// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+														if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+															extraAddr += data.bname;
+														}
+														// 건물명이 있고, 공동주택일 경우 추가한다.
+														if(data.buildingName !== '' && data.apartment === 'Y'){
+															extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+														}
+														// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+														if(extraAddr !== ''){
+															extraAddr = ' (' + extraAddr + ')';
+														}
+														// 조합된 참고항목을 해당 필드에 넣는다.
+														document.getElementById("sample6_extraAddress").value = extraAddr;
+
+													} else {
+														document.getElementById("sample6_extraAddress").value = '';
+													}
+
+													// 우편번호와 주소 정보를 해당 필드에 넣는다.
+													document.getElementById('userZipcode').value = data.zonecode;
+													document.getElementById("userAddress1").value = addr;
+													// 커서를 상세주소 필드로 이동한다.
+													document.getElementById("userAddress2").focus();
+												}
+											}).open();
+										}
+									</script>
+
+									<script>
+										function sendit() {
+											const userid = document.getElementById('userUserid');
+											const userpw = document.getElementById('userUserpw');
+											const userpw_re = document.getElementById('userpw_re');
+											const name = document.getElementById('useruserName');
+											const hp = document.getElementById('userHp');
+
+											if (userid.value == '') {
+												alert('아이디를 입력하세요');
+												userid.focus();
+												return false;
+											}
+											if (userid.value.length < 4 || userid.value.length > 20) {
+												alert('아이디는 4자이상 20자 이하로 입력하세요');
+												userid.focus();
+												return false;
+											}
+
+											if (userpw.value == '') {
+												alert('비밀번호를 입력하세요');
+												userpw.focus();
+												return false;
+											}
+											if (userpw.value.length < 4 || userid.value.length > 20) {
+												alert('비밀번호는 4자이상 20자 이하로 입력하세요');
+												userpw.focus();
+												return false;
+											}
+
+											if (userpw.value != userpw_re.value) {
+												alert('비밀번호와 비밀번호 확인의 값이 다릅니다');
+												userpw.focus();
+												return false;
+											}
+											if (!expNameText.test(name.value)) {
+												alert('이름 형식을 확인하세요\n 한글만 입력가능합니다');
+												name.focus();
+												return false;
+											}
+											if (!expHpText.test(hp.value)) {
+												alert('휴대폰번호 형식을 확인하세요\n 하이픈(-)을 포함해야 합니다');
+												hp.focus();
+												return false;
+											}
+										}
+
+
+									</script>
+
+									<div class="profile-info" style="text-align: center">
+
+										<form   id="join_form"  method="POST" onsubmit="return sendit()" >
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													성함 :
+												</label>
+												<div class="col-md-9">
+													<input type="text" required="required" name="userName"
+														   id="userName" class="form-control" value="" data-nick=""
+														   aria-required="true" >
+													<div class="form-control-line">
+
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													ID :
+												</label>
+												<div class="col-md-9">
+													<input type="text" required="required" name="userUserid"
+														   id="userUserid" class="form-control" value="" >
+
+													<div class="form-control-line"></div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													비밀번호 :
+												</label>
+												<div class="col-md-9">
+													<input type="password" required="required" name="userUserpw"
+														   id="userUserpw" class="form-control" value="">
+													<div class="form-control-line"></div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													비밀번호확인 :
+												</label>
+												<div class="col-md-9">
+													<input type="password" required="required" name="userpw_re"
+														   id="userpw_re" class="form-control" value="" data-nick=""
+														   aria-required="true">
+													<div class="form-control-line"></div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													전화번호 :
+												</label>
+												<div class="col-md-9">
+													<input type="text" required="required" name="userHp"
+														   id="userHp" class="form-control" value="" data-nick=""
+														   aria-required="true" >
+													<div class="form-control-line">
+
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													Email :
+												</label>
+												<div class="col-md-9">
+													<input type="text" required="required" name="userEmail"
+														   id="userEmail" class="form-control" value="">
+													<div class="form-control-line"></div>
+												</div>
+											</div>
+											<p>
+												<input type="button" value="우편번호 검색" onclick="sample6_execDaumPostcode()">
+											</p>
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													우편번호 :
+												</label>
+												<div class="col-md-9">
+													<input type="text" required="required" name="userZipcode"
+														   id="userZipcode" class="form-control" value=""
+														   data-nick=""
+														   aria-required="true">
+
+													<div class="form-control-line">
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													주소 :
+												</label>
+												<div class="col-md-9">
+													<input type="text" required="required" name="userAddress1"
+														   id="userAddress1" class="form-control" value=""
+														   data-nick=""
+														   aria-required="true">
+													<div class="form-control-line"></div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3 control-label text-right" >
+													상세주소 :
+												</label>
+												<div class="col-md-9">
+													<input type="text" required="required" name="sample6_extraAddress"
+														   id="sample6_extraAddress" class="form-control" value=""
+														   data-nick=""
+														   aria-required="true">
+													<div class="form-control-line"></div>
+												</div>
+											</div>
+
+<!--											<div class="form-group">-->
+<!--												<label class="col-sm-3 control-label text-right" >-->
+<!--													참고항목 :-->
+<!--												</label>-->
+<!--												<div class="col-md-9">-->
+<!--													<input type="text" required="required" name="address3"-->
+<!--														   id="sample6_extraAddress" class="form-control" value=""-->
+<!--														   data-nick=""-->
+<!--														   aria-required="true">-->
+<!--													<div class="form-control-line"></div>-->
+<!--												</div>-->
+<!--											</div>-->
+
+											<div style="text-align: center">
+												<input type="button" id="btn-save" value="등록하기" class="btn btn-primary">
+												<input type="reset" value="다시작성" class="btn btn-default-bright">
+											</div>
+										</form>
+					<!--end.tab-pane-->
+				</div>
+				<!--end.section-body.tab-content-->
+
+
+			<!--섹션 끝 -->
+
+			<!-- 사용자 삭제 모달 시작 -->
+			<div class="modal fade" id="remove_member" tabindex="-1" role="dialog" aria-labelledby="formModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+									class="btm bt-times"></i></button>
+							<h3 class="modal-title" id="formModalLabel">사용자 삭제</h3>
+						</div>
+						<div class="modal-body">
+							%1명의 사용자를 삭제하시겠습니까? 삭제된 사용자는 복원할 수 없습니다 </div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary btn-flat" data-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary btn-flat">삭제</button>
+						</div>
+
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- 모달 끝 -->
+			<!-- 사용자 차단 모달 시작 -->
+			<div class="modal fade" id="add_ban" tabindex="-1" role="dialog" aria-labelledby="formModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+									class="btm bt-times"></i></button>
+							<h3 class="modal-title" id="formModalLabel1">사용자 차단</h3>
+						</div>
+						<div class="modal-body">
+							해당 사용자의 마지막 로그인 IP를 기준으로 차단합니다. 차단 관리에서 확인 및 변경이 가능합니다.
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary btn-flat" data-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary btn-flat">차단</button>
+						</div>
+
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- 모달 끝 -->
+		</div>
+		<!--end #content-->
+		<!-- END CONTENT -->
+
+		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+		<!-- BEGIN MENUBAR-->
+		<button type="button" class="hidden-lg hidden-md toggle-btn" data-dismiss="menubar">
+			<span class="sr-only">Toggle navigation</span>
+			<i class="btl bt-times"></i>
+		</button>
+
+
+		<div id="menubar" class="animate">
+			<div class="nano has-scrollbar" style="height: 719px;">
+				<div class="nano-content" tabindex="0" style="right: -15px;">
+					<div class="menubar-scroll-panel" style="padding-bottom: 50px;">
+						<div class="tabled full-width">
+
+							<div>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/logout"><img th:src="@{/image/power-off.png}" style="margin-left: 5px"><span style="font-size: 13px;">&nbsp; &nbsp;&nbsp;관리자 로그아웃</span></a></div>
+							<ul class="dropdown-menu global_setting animation-dock menu-card-styling">
+								<li class="holder ">
+									<a
+										href="/admin/?type=page&amp;_ga=2.254642240.996359343.1645365816-1966519718.1645110617">
+										<div class="tabled">
+											<div class="table-cell vertical-middle width-1">
+												<img width="30" height="30"
+													src="/common/img/flag_shapes/flag_kr_circle.png">
+											</div>
+											<div class="table-cell vertical-middle domain">
+
+												<span data-original-title="일반 방문자의 접속이 제한됩니다. 글로벌 버전으로 업그레이드 해주세요"
+													data-toggle="tooltip" class="badge" data-placement="top"
+													style="margin-left: 5px; vertical-align: top;">미결제</span>
+												<div class="text-gray-bright text-12">hyunwoo1001.imweb.me</div>
+											</div>
+										</div>
+									</a>
+									<div class="tools">
+									</div>
+								</li>
+								<li class="border-top"><a href="javascript:;"
+										onclick="SITE_MANAGE.openAddUnit('S20220127201b2696461e8')" class="text-primary"
+										style="padding-top: 15px;"></a></li>
+							</ul>
+						</div>
+						<ul id="main-menu" class="gui-controls">
+							<li class="  " data-title="preview"><a href="https://www.duoback.co.kr/duobacke"
+									target="_blank">
+									<div class="gui-icon"><i class="db-preview"></i></div><span
+										class="title title_controls">사이트 바로가기</span>
+								</a></li>
+							<li class="spacer"></li>
+<!--							<li class=" " data-title="dashboard"><a th:href="@{/admin/dashboard}"-->
+<!--									class="sidebar-nav-menu">-->
+<!--									<div class="gui-icon"><i class="db-dashboard"></i></div>-->
+<!--									<span class="title title_controls">대시보드</span>-->
+<!--								</a></li>-->
+							<li class="gui-folder expanded" data-title="member"><a href="/admin/member"
+									class="sidebar-nav-menu active" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-user"></i></div>
+									<span class="title title_controls">사용자 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="member_list"><a th:href="@{/admin/memberlist}"><span
+												class="title title_controls">사용자 목록</span></a></li>
+<!--									<li class="  " data-title="member_mail"><a th:href="@{/admin/membermail}"><span-->
+<!--												class="title title_controls">메일 발송 설정</span></a></li>-->
+								</ul>
+							</li>
+							<li class="gui-folder" data-title="shopping"><a href="/admin/shopping"
+									class="sidebar-nav-menu" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-shopping-bag"></i></div>
+									<span class="title title_controls">쇼핑 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="shopping_product"><a th:href="@{/admin/management}">
+											<span class="title title_controls">상품관리</span></a></li>
+									<li class="  " data-title="shopping_order"><a
+											href="/adminpage/shoppingOrder.html"><span
+												class="title title_controls">주문관리</span></a></li>
+									<li class="  " data-title="shopping_cancel"><a
+											th:href="@{/admin/cancel}"><span
+												class="title title_controls">취소관리</span></a></li>
+									<li class="  " data-title="shopping_return"><a
+											th:href="@{/admin/return}"><span
+												class="title title_controls">반품관리</span></a></li>
+									<li class="  " data-title="shopping_exchange"><a
+											th:href="@{/admin/exchange}"><span
+												class="title title_controls">교환관리</span></a></li>
+									<li class="  " data-title="shopping_regularly"><a
+											th:href="@{/admin/dpoint}"><span
+												class="title title_controls">D포인트 관리</span></a></li>
+									<li class="  " data-title="booking_config"><a
+											th:href="@{/admin/coupon}"><span class="title title_controls">쿠폰
+												관리</span></a></li>
+								</ul>
+							</li>
+							<li class="gui-folder" data-title="contents"><a href="/admin/contents"
+									class="sidebar-nav-menu" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-pencil"></i></div>
+									<span class="title title_controls">컨텐츠 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="contents_post"><a th:href="@{/admin/review}"><span class="title title_controls">구매평
+                                    관리</span></a></li>
+									<li class="  " data-title="contents_comment"><a th:href="@{/admin/answer}"><span class="title title_controls">문의
+                                    관리</span></a></li>
+									<li class="  " data-title="contents_comment"><a th:href="@{/admin/notice}"><span class="title title_controls">공지 관리</span></a></li>
+								</ul>
+
+						</ul>
+
+					</div>
+				</div>
+				<div class="nano-pane">
+					<div class="nano-slider" style="height: 516px; top: 46.2052px;"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fold_area tabled animate" style="padding-left: 24px;">
+			<div class="table-cell vertical-middle" style="padding-right: 45px;">
+				<a href="#" class="logo_icon_menu">
+					<h4 style="font-family: 'TmoneyRoundWindExtraBold' !important; text-align: center;">(주)듀오백<br>DUOBACK</h4></a>
+			</div>
+
+		</div>
+		<script>
+
+			$(function () {
+				var $body = $('body');
+				var $btn = $('#toggle_button');
+				var sidebar_mini_class = 'sidebar-mini';
+				var current_sidebar_mini_class = "";
+				var $menubar_toggle = $body.find('#header .menubar-toggle');
+				var $close_btn = $('._close_btn');
+				$btn.off('click touch').on('click touch', function () {
+					if ($body.hasClass(sidebar_mini_class)) {
+						setSideMenu('show');
+					} else {
+						setSideMenu('hide');
+					}
+				});
+				if (current_sidebar_mini_class === sidebar_mini_class) $body.addClass(sidebar_mini_class);
+				else $body.removeClass(sidebar_mini_class);
+				function setSideMenu(show) {
+					$.ajax({
+						type: 'POST',
+						data: { 'status': show },
+						url: ('/admin/ajax/inc/set_side_menu.cm'),
+						dataType: 'json',
+						async: false,
+						cache: false,
+						success: function (res) {
+							if (res.msg === "show") {
+								$body.removeClass(sidebar_mini_class);
+							} else {
+								$body.addClass(sidebar_mini_class);
+							}
+						}
+					});
+				}
+			});
+
+		</script>
+	</div> <!-- END BASE -->
+
+	<script>
+	</script>
+	<div style="position: absolute; width: 1px; height: 1px; left: -10000px;" data-ip="61.74.255.158" data-ip2=""
+		data-ip3="61.74.255.158, 130.176.125.186"><input id="dummy_input" type="text"></div>
+
+	<div class="modal" id="cocoaModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<div class="modal submodal" role="dialog" id="cocoaSubModal" style="z-index: 17001">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<iframe name="hidden_frame" id="hidden_frame"
+		style="position: absolute; left: -9999px; width: 1px; height: 1px; top:-9999px;"></iframe>
+
+
+
+
+	<script>
+	</script>
+
+	<div id="device-breakpoints">
+		<div class="device-xs visible-xs" data-breakpoint="xs"></div>
+		<div class="device-sm visible-sm" data-breakpoint="sm"></div>
+		<div class="device-md visible-md" data-breakpoint="md"></div>
+		<div class="device-lg visible-lg" data-breakpoint="lg"></div>
+	</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<script th:inline="javascript">
+
+		function modifySubmit(){
+			//step2. 게시판 등록
+			let data = { //JavaScript Object
+				"transaction_time": today,
+				"resultCode": "ok",
+				"description": "ok",
+				"data": {
+					userUserid: $("#userUserid").val(),
+					userUserpw: $("#userUserpw").val(),
+					userName: $("#userName").val(),
+					userAddress1: $("#userAddress1").val(),
+					userAddress2: $("#sample6_extraAddress").val(),
+					userZipcode: $("#userZipcode").val(),
+					userHp:$("#userHp").val(),
+					userEmail:$("#userEmail").val(),
+				}
+			}
+			console.log(data);
+
+			$.ajax({
+				type : 'POST'
+				,url : "/duoback/new"
+				,dataType : 'json'
+				,data : JSON.stringify(data)
+				,contentType: 'application/json'
+				,success : function(result) {
+					alert("등록 성공");
+					location.href = "/admin/memberlist";
+				},
+				error: function(request, status, error) {
+					alert("등록 완료");
+					location.href = "/admin/memberlist";
+				}
+			})
+		}
+
+
+	</script>
+	<script>
+		let today = new Date();
+		'use strict'
+		// $(document).ready(function(){
+		// 	//회원가입 버튼(회원가입 기능 작동)
+		// 	$(".join_button").click(function(){
+		// 		$("#goodsadd").submit();
+		// 	});
+		// });
+		let index = {
+			init: function() {
+				$("#btn-save").on("click", () => { //this를 바인딩하기 위해 화샬표 함수 사용
+					this.save();
+				});
+			},
+			save: function() {
+
+				let data = { //JavaScript Object
+					"transaction_time": today,
+					"resultCode": "ok",
+					"description": "ok",
+					"data": {
+						userUserid: $("#userUserid").val(),
+						userUserpw: $("#userUserpw").val(),
+						userName: $("#userName").val(),
+						userAddress1: $("#userAddress1").val(),
+						userAddress2: $("#sample6_extraAddress").val(),
+						userZipcode: $("#userZipcode").val(),
+						userHp:$("#userHp").val(),
+						userEmail:$("#userEmail").val(),
+					}
+				}
+				$.ajax({
+					type: "POST", //Http method
+					url: "/duoback/new", //API 주소
+					data: JSON.stringify(data), //JSON으로 변환
+					contentType: "application/json; charset=utf-8", //MIME 타입
+					dataType: "json" //응답 데이터
+				}).done(function(res) {
+					alert("등록 성공");
+					location.href = "/admin/memberlist";
+				}).fail(function(err) {
+					alert(JSON.stringify(err));
+				});
+			}
+		}
+		index.init();
+
+
+
+
+		//
+		// $(document).ready(function(){
+		// 	//회원가입 버튼(회원가입 기능 작동)
+		// 	$(".join_button").click(function(){
+		// 		$("#join_form").submit();
+		// 	});
+		// });
+
+	</script>
+
+</body>
+
+</html>

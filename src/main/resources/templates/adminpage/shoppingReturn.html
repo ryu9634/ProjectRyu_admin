@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="robots" content="noindex">
+	<!--<link href="http://cocoaphp.com/publish/bootstrap/css/material-design-iconic-font.min.css" rel="stylesheet">-->
+	<script type="text/javascript" async=""
+		charset="UTF-8"></script>
+	<script>
+		var TEST_SERVER = false;
+		var VENDOR_DOMAIN = 'https://vendor-cdn.imweb.me';
+		var UPLOAD_URL = '/upload/';
+		var CDN_UPLOAD_URL = 'https://cdn.imweb.me/upload/';
+		var IS_MAIN = false;
+		var IS_MOBILE = false;
+		var ADMIN_URL = '/admin/';
+		var THUMBNAIL_URL = '/thumbnail/';
+		var CDN_THUMBNAIL_URL = 'https://cdn.imweb.me/thumbnail/';
+		var SITE_CODE = 'S20220127c9945b26c87e8';
+		var UNIT_CODE = 'u2022012761f228e111b38';
+		var SITE_NO = 'S20220127c9945b26c87e8';
+		var UNIT_NO = 'u2022012761f228e111b38';
+		var MAIN_DOMAIN = 'test.imweb.me';
+		var CURRENT_DOMAIN = 'test.imweb.me';
+		var CURRENT_PROTOCOL = 'https://';
+		var GOOGLE_API_KEY = 'AIzaSyA8CCexf9XTJcH09mStr-HRW4nin4k8J7w';
+		var FROALA_VERSION = 311;
+		var FROALA_KEY = '6LF5g1B3D3F3C6C3E2F-11SLJCKHXOSLMc1YGSGb1ZXHSe1CgB5A4D4C3E3C2A13A19B7B2==';
+		var ADOBE_AVIARY_KEY = '94bd22b5cc05424494c5e7aeabab8466';
+		var LIMIT_API_LIST = [];
+		var NO_IMAGE_URL = '/img/no-image.png';
+		var ADMIN_LANG_CODE = 'KR';
+		var SITE_COUNTRY_CODE = 'kr';
+		var KOREA_COUNTRY_CODE = 'kr';
+		var TAIWAN_COUNTRY_CODE = 'tw';
+		var IS_GUEST = false;
+		var MEMBER_HASH = '2ffd5bea640c9973baae318318d4618cb5956107';
+		var CHECK_OFFICE = false;
+
+		/****************************************************************/
+		/* m_Completepayment  설명                                      */
+		/****************************************************************/
+		/* 인증완료시 재귀 함수                                         */
+		/* 해당 함수명은 절대 변경하면 안됩니다.                        */
+		/* 해당 함수의 위치는 payplus.js 보다먼저 선언되어여 합니다.    */
+		/* Web 방식의 경우 리턴 값이 form 으로 넘어옴                   */
+		/* EXE 방식의 경우 리턴 값이 json 으로 넘어옴                   */
+		/****************************************************************/
+		function m_Completepayment(FormOrJson, closeEvent) {
+			var frm = document.order_info;
+
+			/********************************************************************/
+			/* FormOrJson은 가맹점 임의 활용 금지                               */
+			/* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다.  */
+			/* FormOrJson 값을 활용 하시려면 기술지원팀으로 문의바랍니다.       */
+			/********************************************************************/
+			GetField(frm, FormOrJson);
+
+
+			if (frm.res_cd.value == "0000") {
+				/*
+					가맹점 리턴값 처리 영역
+					*/
+
+				frm.submit();
+			}
+			else {
+				alert("[" + frm.res_cd.value + "] " + frm.res_msg.value);
+
+				closeEvent();
+			}
+		}
+	</script>
+
+
+	<!--KR.js 시작-->
+	<script src="../js/KR.js"></script>
+<!--	부트스트랩 테이블 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+	<script src="../js/KR_KRW_currency.js"></script>
+	<!--KR.js 끝-->
+	<!--cdn 시작-->
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap.css?1630317764">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/jquery-ui.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/ii.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/db-icons.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/css/material-design-iconic-font.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-datepicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/black-tie.css?1608189400">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/simple-line-icons.css?1608179394">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im-icon.css?1643097867">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/preloader.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/owl.carousel2.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/slick.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/animate.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/nprogress.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/css/trackpad-scroll-emulator.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome.min.css?1626931454">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome5.min.css?1608189400">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/froala_311/css/froala_editor.pkgd.css?1607673118">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/froala_311/css/froala_style.min.css?1607673118">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/froala/custom-theme-v3.css?1614049551">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/colorpicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/codemirror.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-spinner.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/chosen.css?1617331870">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/fullcalendar.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/morris.core.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.min.css?1596596378">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im_component.css?1636689958">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/admin.css?1590627710">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/toastr.css?1593569516">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/alarm_menu.css?1643150804">
+	<link rel="stylesheet" type="text/css" href="../style/bootstrap-theme-dashboard.css">
+	<link rel="stylesheet" type="text/css" href="../style/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/select2.css?1590627710">
+	<script src="https://vendor-cdn.imweb.me/js/jquery.js?1627517460"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.browser.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-ui.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap.min.js?1630317768"></script>
+	<script src="https://vendor-cdn.imweb.me/js/tinycolor-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/common.js?1643089417"></script>
+	<script src="https://vendor-cdn.imweb.me/js/im_component.js?1636940317"></script>
+	<script src="https://vendor-cdn.imweb.me/js/admin_common.js?1637641047"></script>
+	<script src="https://vendor-cdn.imweb.me/js/table_list.js?1633057104"></script>
+	<script src="https://vendor-cdn.imweb.me/js/data.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/owl.carousel2.js?1638150602"></script>
+	<script src="https://vendor-cdn.imweb.me/js/slick.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/preloader.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.lazyload.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.trackpad-scroll-emulator.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.fileupload.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/nprogress.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/froala_editor.min.js?1608673099"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/align.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/char_counter.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_beautifier.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_view.min.js?1608643124"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/colors.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/draggable.min.js?1607673168"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/emoticons.min.js?1607673169"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/entities.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/file.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_family.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_size.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/forms.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/fullscreen.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image_manager.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/inline_style.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_breaker.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/link.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/lists.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_format.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_style.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/quote.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/save.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/table.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/url.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/video.min.js?1625125569"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_height.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/third_party/font_awesome.min.js?1607673192"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/ko.js?1607680617"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/zh_tw.js?1608685913"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-scrolltofixed-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/colorpicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.chosen.js?1619084781"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.timepicker.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.print.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autolinker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ThreeCanvas.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/snow.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/lightgallery-all.min.js?1596595980"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autosize.js?1577682292"></script>
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.css?1577682282">
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nestable.doznut.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.number.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/masonry.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/Chart.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.autosize.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/codemirror.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/xml/xml.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/javascript/javascript.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/css/css.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/htmlmixed/htmlmixed.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2_ko.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/imagesloaded.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nanoscroller.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/html5shiv.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.validate.js?1621218311"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.inputmask.bundle.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-with-locales.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-timezone.js?1581998425"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap-datepicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ie-checker-min.js?1577682292"></script>
+
+
+	<!--cdn 끝-->
+
+
+	<!--script src 시작-->
+	<script src="../js/admin.js"></script>
+	<script src="../js/admin_search.js"></script>
+	<script src="../js/alarm_menu.js"></script>
+	<script src="../js/config.js"></script>
+	<script src="../js/contents.js"></script>
+	<script src="../js/contents_list.js"></script>
+	<script src="../js/coupon.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="../js/doz_post.js"></script>
+	<script src="../js/doznut.js"></script>
+	<script src="../js/event_check.js"></script>
+	<script src="../js/imweb_analytics.js"></script>
+	<script src="../js/member.js"></script>
+	<script src="../js/payment.js"></script>
+	<script src="../js/permission.js"></script>
+	<script src="../js/shop.js"></script>
+	<script src="../js/shop_order.js"></script>
+	<script src="../js/shop_point.js"></script>
+	<script src="../js/site_manage.js"></script>
+	<script src="../js/site_member.js"></script>
+	<script src="../js/toastr.js"></script>
+
+	<!--plugin js 시작-->
+	<script src="../js/ch-plugin-core-20220121013102.3308b1a6.bundle.js"></script>
+	<script src="../js/ch-plugin-core-20220121013102.87f92793.bundle.js"></script>
+	<script src="../js/ch-plugin-core-20220121013102.aabc5937.bundle.js"></script>
+	<script src="../js/ch-plugin-core-20220121013102.js"></script>
+	<script src="../js/ch-plugin-core.06f13b0a.vendor.js"></script>
+	<!--plugin js 끝-->
+	<!--script src 끝-->
+	<!--css stylesheet 시작-->
+	<link rel="stylesheet" href="../style/css1.css">
+	<link rel="stylesheet" href="../style/css2.css">
+
+	<!--css stylesheet 끝-->
+
+
+	<script>var IS_ANDROID_APP = 'N';
+		(function () {
+			var customTooltipAllowList = $.fn.tooltip.Constructor.DEFAULTS.whiteList;
+			customTooltipAllowList.table = [];
+			customTooltipAllowList.thead = [];
+			customTooltipAllowList.tbody = [];
+			customTooltipAllowList.tr = [];
+			customTooltipAllowList.td = ["rowspan", "colspan"];
+			customTooltipAllowList.th = [];
+			customTooltipAllowList.caption = [];
+			customTooltipAllowList["*"].push("style");
+		})();
+
+		function determineDropDirection() {
+			$(".dropdown-menu").each(function () {
+				$(this).css({
+					visibility: "hidden",
+					display: "block"
+				});
+
+				$(this).parent().removeClass("dropup");
+
+				if ($(this).offset().top + $(this).outerHeight() + 60 > $(window).innerHeight() + $(window).scrollTop()) {
+					$(this).parent().addClass("dropup");
+				}
+				$(this).removeAttr("style");
+			});
+		}
+
+		determineDropDirection();
+
+		$(window).scroll(determineDropDirection);
+	</script>
+</head>
+
+<body class="menubar-hoverable header-fixed menubar-pin">
+	<!-- BEGIN BASE-->
+	<div id="dashboard_loader" class="se-pre-con" style="display: none">
+		<div class="page-loader-spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+		<div class="progress">
+			<div class="progress-bar" role="progressbar" style="width:70%">
+				<label>70%</label>
+			</div>
+		</div>
+	</div>
+	<div id="base">
+		<!-- END OFFCANVAS LEFT -->
+		<script type="text/javascript">
+			$(function () {
+				SADMIN_MENU_ALERT.openAlert();
+			});
+		</script>
+		<!--예약관리 기능 개편 작업이 진행중입니다. 일시적으로 사용이 불가능합니다 (04:00~06:00). 이용에 불편을 드려 죄송합니다-->
+		<header class="top_header" id="header">
+			<div class="headerbar">
+				<div class="headerbar-left">
+					<ul class="header-nav header-nav-options">
+						<li class="header-nav-brand">
+							<div class="brand-holder">
+								<span class="location_text">
+									<a th:href="@{/admin/return}">반품관리</a>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!--끝 #header-navbar-collapse -->
+			</div>
+		</header>
+		<!-- BEGIN CONTENT-->
+		<div id="content">
+			<section class="no-padding-bottom">
+				<div class="section-body">
+					<div class="row">
+
+						<!--end.col-->
+						<div class="col-md-9 col-lg-10 col-xl-10">
+							<div class="row">
+
+								<div class="card">
+									<div class="table-responsive shop-table check" id="prod_list" style="">
+
+										<link rel="stylesheet" type="text/css"
+											  href="https://cdn.datatables.net/v/dt/dt-1.11.5/sl-1.3.4/datatables.min.css" />
+										<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/sl-1.3.4/datatables.min.js"></script>
+										<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+
+										<script type="text/javascript" charset="utf8"
+												src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+										<script>
+											$(document).ready(function () {
+												$('#table_id').DataTable();
+											});
+										</script>
+										<table class="table display no-margin" id="table_id">
+											<thead>
+											<tr>
+												<th>주문 No.</th>
+												<th>유저 No.</th>
+												<th>주문번호</th>
+												<th>주문 날짜</th>
+												<th>판매자</th>
+												<th>주문 상태</th>
+												<th>상품no.</th>
+												<th>상품 이름</th>
+												<th>상품 이미지</th>
+
+											</tr>
+											</thead>
+
+											<tbody>
+<!--											th:onclick="|window.open('@{|/admin/returnview/${m.getOrderIdx()}|}', '@{정보수정}','@{width=850px, height=800px}'); return false|"-->
+											<tr th:each="m : ${returnList}" th:onclick="|window.open('@{|/admin/returnview/${m.getOrderIdx()}|}', '@{정보수정}','@{width=700px, height=850px}'); return false|">
+												<td th:text="${m.orderIdx}"></td>
+												<td th:text="${m.userIdx}"></td>
+												<td th:text="${m.orderNum}"></td>
+												<td th:text="${#temporals.format(m.orderRegdate, 'yyyy-MM-dd')}"></td>
+												<td th:text="${m.orderSeller}"></td>
+												<td th:if="${m.getOrderStatus.toString().equals('RETURNING')}" th:text="환불중" >결제확인 </td>
+												<td th:if="${m.getOrderStatus.toString().equals('RETURNED')}" th:text="환불완료" >결제확인 </td>
+												<td th:text="${m.goods.gdIdx}"></td>
+												<td th:text="${m.goods.gdName}"></td>
+												<td><img th:src="${m.goods.gdImg}" style="max-width: 200px ; max-height: 200px"></td>
+
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--섹션 끝 -->
+		</div>
+		<!--end #content-->
+		<!-- END CONTENT -->
+		<script>
+			$(function () {
+				SHOP_ORDER_MANAGE.initList('return');
+				SHOP_ORDER_MANAGE.loadReturnList('1', { 'status': 'NEW', 's_unitcode': '', 'keyword': '', 's_type': '', 's_filter': '', 'pagesize': '20' }, "/admin/shopping/return/?q=YjowOw%3D%3D");
+			});
+			$(document).ready(function () {
+				$("._owl_dashboard").owlCarousel({
+					autoWidth: true
+				});
+			});
+			$('.html-popover').popover({
+				container: 'body',
+				html: true
+			});
+		</script>
+		<script>
+			$(window).on("keyup", function (e) {
+				if ($.cocoaDialog.isOpen()) {
+					$.cocoaDialog.modalControl(e);
+				}
+				return false;
+			});</script>
+		<!-- BEGIN MENUBAR-->
+		<button type="button" class="hidden-lg hidden-md toggle-btn" data-dismiss="menubar">
+			<span class="sr-only">Toggle navigation</span>
+			<i class="btl bt-times"></i>
+		</button>
+
+
+		<div id="menubar" class="animate">
+			<div class="nano has-scrollbar" style="height: 719px;">
+				<div class="nano-content" tabindex="0" style="right: -15px;">
+					<div class="menubar-scroll-panel" style="padding-bottom: 50px;">
+						<div class="tabled full-width">
+
+							<div>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/logout"><img th:src="@{/image/power-off.png}" style="margin-left: 5px"><span style="font-size: 13px;">&nbsp; &nbsp;&nbsp;관리자 로그아웃</span></a></div><ul class="dropdown-menu global_setting animation-dock menu-card-styling">
+								<li class="holder ">
+									<a
+										href="/admin/?type=page&amp;_ga=2.254642240.996359343.1645365816-1966519718.1645110617">
+										<div class="tabled">
+											<div class="table-cell vertical-middle width-1">
+												<img width="30" height="30"
+													src="/common/img/flag_shapes/flag_kr_circle.png">
+											</div>
+											<div class="table-cell vertical-middle domain">
+
+												<span data-original-title="일반 방문자의 접속이 제한됩니다. 글로벌 버전으로 업그레이드 해주세요"
+													data-toggle="tooltip" class="badge" data-placement="top"
+													style="margin-left: 5px; vertical-align: top;">미결제</span>
+												<div class="text-gray-bright text-12">hyunwoo1001.imweb.me</div>
+											</div>
+										</div>
+									</a>
+									<div class="tools">
+									</div>
+								</li>
+								<li class="border-top"><a href="javascript:;"
+										onclick="SITE_MANAGE.openAddUnit('S20220127201b2696461e8')" class="text-primary"
+										style="padding-top: 15px;"></a></li>
+							</ul>
+						</div>
+						<ul id="main-menu" class="gui-controls">
+							<li class="  " data-title="preview"><a href="https://www.duoback.co.kr/duobacke"
+									target="_blank">
+									<div class="gui-icon"><i class="db-preview"></i></div><span
+										class="title title_controls">사이트 바로가기</span>
+								</a></li>
+							<li class="spacer"></li>
+<!--							<li class=" " data-title="dashboard"><a th:href="@{/admin/dashboard}"-->
+<!--									class="sidebar-nav-menu">-->
+<!--									<div class="gui-icon"><i class="db-dashboard"></i></div>-->
+<!--									<span class="title title_controls">대시보드</span>-->
+<!--								</a></li>-->
+							<li class="gui-folder" data-title="member"><a href="/admin/member" class="sidebar-nav-menu"
+									onclick="return false;">
+
+									<div class="gui-icon expanded"><i class="db-user"></i></div>
+									<span class="title title_controls">사용자 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="member_list"><a th:href="@{/admin/memberlist}"><span
+												class="title title_controls">사용자 목록</span></a></li>
+<!--									<li class="  " data-title="member_mail"><a th:href="@{/admin/membermail}"><span-->
+<!--												class="title title_controls">메일 발송 설정</span></a></li>-->
+								</ul>
+							</li>
+							<li class="gui-folder expanded" data-title="shopping"><a href="/admin/shopping"
+									class="sidebar-nav-menu active" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-shopping-bag"></i></div>
+									<span class="title title_controls">쇼핑 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="shopping_product"><a th:href="@{/admin/management}">
+											<span class="title title_controls">상품관리</span></a></li>
+									<li class="  " data-title="shopping_order"><a
+											th:href="@{/admin/order}"><span
+												class="title title_controls">주문관리</span></a></li>
+									<li class="  " data-title="shopping_cancel"><a
+											th:href="@{/admin/cancel}"><span
+												class="title title_controls">취소관리</span></a></li>
+									<li class="  " data-title="shopping_return"><a th:href="@{/admin/return}"
+											class=" active"><span class="title title_controls">반품관리</span></a></li>
+									<li class="  " data-title="shopping_exchange"><a
+											th:href="@{/admin/exchange}"><span
+												class="title title_controls">교환관리</span></a></li>
+									<li class="  " data-title="shopping_regularly"><a
+											th:href="@{/admin/dpoint}"><span
+												class="title title_controls">D포인트 관리</span></a></li>
+									<li class="  " data-title="booking_config"><a
+											th:href="@{/admin/coupon}"><span class="title title_controls">쿠폰관리</span></a></li>
+								</ul>
+							</li>
+							<li class="gui-folder" data-title="contents"><a href="/admin/contents"
+									class="sidebar-nav-menu" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-pencil"></i></div>
+									<span class="title title_controls">컨텐츠 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="contents_post"><a th:href="@{/admin/review}"><span class="title title_controls">구매평
+                                    관리</span></a></li>
+									<li class="  " data-title="contents_comment"><a th:href="@{/admin/answer}"><span class="title title_controls">문의
+                                    관리</span></a></li>
+									<li class="  " data-title="contents_comment"><a th:href="@{/admin/notice}"><span class="title title_controls">공지 관리</span></a></li>
+								</ul>
+
+						</ul>
+
+					</div>
+				</div>
+				<div class="nano-pane">
+					<div class="nano-slider" style="height: 516px; top: 46.2052px;"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fold_area tabled animate" style="padding-left: 24px;">
+			<div class="table-cell vertical-middle" style="padding-right: 45px;">
+				<a href="#" class="logo_icon_menu">
+					<h4 style="font-family: 'TmoneyRoundWindExtraBold' !important; text-align: center;">(주)듀오백<br>DUOBACK</h4></a>
+			</div>
+
+		</div>
+
+		<script>
+
+			$(function () {
+				var $body = $('body');
+				var $btn = $('#toggle_button');
+				var sidebar_mini_class = 'sidebar-mini';
+				var current_sidebar_mini_class = "";
+				var $menubar_toggle = $body.find('#header .menubar-toggle');
+				var $close_btn = $('._close_btn');
+				$btn.off('click touch').on('click touch', function () {
+					if ($body.hasClass(sidebar_mini_class)) {
+						setSideMenu('show');
+					} else {
+						setSideMenu('hide');
+					}
+				});
+				if (current_sidebar_mini_class === sidebar_mini_class) $body.addClass(sidebar_mini_class);
+				else $body.removeClass(sidebar_mini_class);
+				function setSideMenu(show) {
+					$.ajax({
+						type: 'POST',
+						data: { 'status': show },
+						url: ('/admin/ajax/inc/set_side_menu.cm'),
+						dataType: 'json',
+						async: false,
+						cache: false,
+						success: function (res) {
+							if (res.msg === "show") {
+								$body.removeClass(sidebar_mini_class);
+							} else {
+								$body.addClass(sidebar_mini_class);
+							}
+						}
+					});
+				}
+			});
+
+		</script>
+	</div> <!-- END BASE -->
+	<div style="position: absolute; width: 1px; height: 1px; left: -10000px;" data-ip="1.231.143.137" data-ip2=""
+		data-ip3="1.231.143.137, 130.176.125.114"><input id="dummy_input" type="text"></div>
+
+	<div id="cocoaModal" role="dialog" data-backdrop="true" data-keyboard="true" style="padding-left: 15px;"
+		class="modal in modal_admin">
+		<div class="modal-dialog ui-draggable help">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+							class="btl bt-times"></i></button>
+					<h3 class="modal-title">반품 관리 도움말</h3>
+				</div>
+				<div class="modal-body">
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px;">반드시 확인하세요!</h4>
+					<ul class="description-list">
+						<li><strong>반품 배송지 정보</strong>: 환경설정 &gt; <a href="/admin/config/default" target="_blank"
+								class="text-primary">기본설정</a>의 부가정보 설정에 입력한 정보로 제공됩니다.</li>
+						<li><strong>반품 배송비</strong>: <a href="/admin/shopping/config" target="_blank"
+								class="text-primary">쇼핑 환경설정</a>의 배송 설정의 반품 배송비가 적용 됩니다. (구매자 귀책 사유 한정)</li>
+					</ul>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px;">반품처리 개요</h4>
+					<p><img class="margin-bottom-xxxxl img-responsive" src="/admin/img/order_return_img_00.png"
+							alt="반품처리 흐름도"></p>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px;">수거지시</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="/admin/img/order_return_img_02.png?2"
+							alt="반품수거지시 버튼 화면"></p>
+					<p>구매자는 다음과 같은 방법으로 반품 수거 방법을 선택할 수 있습니다. 네이버페이 주문 및 자동 송장출력 서비스(굿스플로)를 이용중인 판매자의 경우 수거지시가 필요하지
+						않습니다.</p>
+
+					<strong>일반주문</strong>
+					<ul class="description-list margin-bottom-xxxxl">
+						<li><strong>쇼핑몰 지정반품 택배</strong>: 구매자가 판매자의 주거래 택배로 반품 수거를 요청한 것입니다. 반품 수거 송장번호 입력을 지원하지 않으므로
+							필요에 따라 별도 관리해 주셔야 합니다. 판매자는 택배사에 연락해 해당 상품의 반품 수거를 요청한 후 수거지시 처리를 합니다.</li>
+						<li><strong>택배발송</strong>: 구매자 본인이 직접 반품물품을 발송한 경우이며 수거중 상태로 표시됩니다. 구매자가 직접 송장번호를 입력했고, 직접 발송했기
+							때문에 수거확인 후 환불을 진행해주시면 됩니다.</li>
+						<li><strong>직접전달/퀵서비스</strong>: 구매자가 직접 판매자에게 전달하거나 퀵서비스 등을 통해 반품물품을 전달하는 경우입니다. 수거확인 후 환불을 진행해
+							주시면 됩니다.</li>
+						<li>택배 수거가 불가한 상품인 경우 구매자와 연락해 수거 방법을 협의한 후 <strong>기타택배</strong>로 수거지시 처리해 주시기 바랍니다.</li>
+					</ul>
+					<strong>네이버페이 주문</strong>
+					<ul class="description-list margin-bottom-xxxxl">
+						<li><strong>지정 반품 택배</strong> <span class="text-danger">(수거지시 불필요)</span>: 네이버페이 지정 택배사(우체국택배)를
+							통해 반품 수거가 진행되며 판매자는 반품 수거 관련해 별다른 조치를 하실 필요가 없습니다.</li>
+						<li><strong>일반 반품 택배</strong> <span class="text-danger">(수거지시 불필요)</span>: 네이버페이 주문의 반품 수거를 판매자의
+							사전 설정한 택배로 진행되며 판매자는 반품 수거 관련해 별다른 조치를 하실 필요가 없습니다. 이를 사용하기 위해선 <a
+								href="https://admin.pay.naver.com/" class="text-primary" target="_blank">네이버페이센터</a>
+							&gt; 내정보 &gt; 가입정보 변경 &gt; 반품 택배사에서 굿스플로 서비스 신청/관리의 택배사 등록하기를 먼저 진행해 주셔야 합니다. 이를 진행하지 않을 경우
+							네이버페이 지정 반품 택배(우체국택배)로 처리됩니다.</li>
+						<li><strong>직접발송</strong> <span class="text-danger">(수거지시 불필요)</span>: 구매자 본인 혹은 판매자가 직접 반품물품을
+							발송한 경우이며 수거중 상태로 표시됩니다. 구매자가 직접 송장번호를 입력했고, 직접 발송했기 때문에 수거확인 후 환불을 진행해주시면 됩니다.</li>
+
+					</ul>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px;">수거지시(굿스플로 자동 송장출력 서비스 이용시)</h4>
+					<p>굿스플로 자동 송장출력 서비스를 이용하실 경우 수거지시 버튼이 2가지로 분리됩니다. </p>
+					<ul class="description-list margin-bottom-xxxxl">
+						<li><strong>직접 수거지시</strong>: 직접 택배사에 수거요청한 뒤 수거중으로 변경합니다. </li>
+						<li><strong>자동 수거지시</strong>: 굿스플로 서비스를 통해 자동 송장출력 및 수거지시를 요청할 수 있습니다. 네이버페이나 카카오페이 구매 주문은 지원하지
+							않습니다.</li>
+					</ul>
+					<strong>일반주문</strong>
+					<ul class="description-list margin-bottom-xxxxl">
+						<li><strong>쇼핑몰 지정반품 택배</strong>: 구매자가 판매자의 주거래 택배로 반품 수거를 요청한 것입니다. 택배사에 직접 수거지시를 요청한 후 [수거지시
+							&gt; 직접 수거지시] 처리를 합니다. 굿스플로 자동 송장출력 서비스를 이용하고 계시다면, 별도의 택배사 연락이 필요없이 [수거지시 &gt; 자동 수거지시] 처리를
+							통해 송장출력과 수거지시를 한번에 수행할 수 있으며, 수거방법은 '쇼핑몰 자동수거 택배'로 변경됩니다. </li>
+						<li><strong>쇼핑몰 자동수거 택배</strong>: 판매자가 굿스플로 서비스를 통해 반품 운송장이 출력하여, 택배사에 수거지시가 진행되는 자동 수거방식을
+							의미합니다. 판매자가 택배사에 직접 요청을 하지 않아도 되며, 수거중으로 변경 후 실제 송장이 발송완료되면 수거완료로 주문상태가 자동 변경됩니다. </li>
+						<li><strong>수거실패</strong>: 판매자가 굿스플로 서비스를 통해 반품 운송장을 출력하는 과정에서 문제가 발생한 경우를 의미합니다. 자동으로 수거가 진행되지
+							않으며, 다른 방법으로 직접 반품수거를 진행해주셔야 합니다.
+							<p></p>
+							<p><strong class="text-danger">참고</strong>: 굿스플로 자동 송장출력 서비스를 이용하실 경우 다양한 사유로 인해 수거실패가 발생할 수
+								있습니다. 수거오류메시지를 통해 수거실패 여부를 표시하고 있으며, 수거실패된 주문은 직접 수거지시, 반품수거 완료, 반품완료 처리 등 주문상태 변경이
+								가능합니다. 자동으로 수거가 진행되지 않으므로 직접 수거지시를 진행하시기 바랍니다. </p>
+						</li>
+					</ul>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">반품수거 완료</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="/admin/img/order_return_img_03.png?2"
+							alt="반품승인 버튼 화면"></p>
+					<p>구매자가 보낸 반품 상품이 정상적으로 확인되면 반품수거 완료를 눌러 반품수거를 확인합니다.</p>
+					<p class="text-danger">네이버페이는 반품수거 완료를 지원하지 않으니 반품완료 처리 버튼을 이용해 주세요.</p>
+					<ul class="description-list">
+						<li>반품 배송비는 반품원인을 제공한자가 부담하는 것을 원칙으로 합니다.</li>
+						<li>구매자 귀책사유인 경우 반품 배송비용을 추가로 청구할 수 있으며 환불금에서 차감 처리됩니다.</li>
+						<li>구매자 변심으로 인한 반품 상품이 착불로 도착한 경우 왕복 배송비를 청구해 주시기 바랍니다.</li>
+					</ul>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">반품완료 처리</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="/admin/img/order_return_img_04.png?2"
+							alt="반품승인 버튼 화면"></p>
+					<p>반품 물품에 이상이 없고, 환불을 처리하려면 반품완료 처리를 합니다. 이 때 반품배송비를 포함한 기타비용을 청구할 수 있습니다.</p>
+					<ul class="description-list">
+						<li>반품 배송비는 반품원인을 제공한자가 부담하는 것을 원칙으로 합니다.</li>
+						<li>구매자 귀책사유인 경우 반품 배송비용을 추가로 청구할 수 있으며 환불금에서 차감 처리됩니다.</li>
+						<li>구매자 귀책사유로 인한 반품 상품이 착불로 도착한 경우 왕복 배송비를 청구해 주시기 바랍니다.</li>
+						<li><strong class="text-danger">참고</strong>: 자동환불이 지원되지 않는 결제수단은 반품완료 처리 후 <span
+								class="text-danger">환불진행중</span>상태가 됩니다. 기타비용을 제한 환불금을 수동 환불 후 <strong>기타 반품처리 &gt; 강제
+								반품(환불)완료 처리</strong>를 해주셔야 합니다.</li>
+					</ul>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">반품 거부</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="/admin/img/order_return_img_05.png?2"
+							alt="반품승인 버튼 화면"></p>
+					<p>구매자의 사용 흔적이 심하거나 반품 물품이 구매자 귀책으로 파손되는 경우 반품을 거부할 수 있습니다. 처리 전 구매자와 협의가 진행된 주문건에 한해 반품거부 기능을 사용해
+						주시기 바랍니다.</p>
+					<p style="margin-bottom:48px;">반품 수거가 시작된 상태에서 반품을 거부한 경우, 택배사엔 반품 수거 취소가 전달되지 않으니 택배사에 별도로 연락해 수거
+						취소 의사를 전달해 주세요.</p>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">반품 보류(네이버페이 전용)
+					</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="https://cdn.imweb.me/upload/2cc36b616d851.png"
+							alt="반품보류 버튼 화면"></p>
+					<p>네이버페이 반품신청건에 대해 반품배송비 미결제, 반품상품 파손 등의 사유로 즉시 환불처리가 불가한 경우 반품보류 설정을 해주세요.</p>
+					<ul class="description-list">
+						<li>반품보류 설정시 나타나는 팝업에서 청구 사유를 선택하고 청구할 비용(기타반품 비용)을 입력해 주세요.</li>
+						<li>판매자 귀책사유로 반품이 접수된 경우 반품비용을 청구하기 위해선 네이버페이센터에서 환불보류 설정시 구매자 귀책 사유로 변경해 처리해 주셔야 합니다.</li>
+					</ul>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">반품 보류 해제(네이버페이
+						전용)</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="https://cdn.imweb.me/upload/44155575fdcfc.png"
+							alt="반품보류해제 버튼 화면"></p>
+					<p>네이버페이 반품 보류중인 주문의 반품비용 납부가 확인되는 등 반품 보류 사유가 해결된 경우 사용합니다.</p>
+					<ul class="description-list">
+						<li>반품비용 판매자에게 송금: 구매자가 송금한 반품비용이 확인된 경우 반품 보류 해제합니다.</li>
+						<li>반품비용 박스에 동봉: 반품 수거 완료 후 보류 해제합니다. 보류 해제 후 반품완료처리해 주세요.</li>
+					</ul>
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">되돌리기 처리(네이버페이
+						주문은 미지원)</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="/admin/img/order_return_img_06.png?2"
+							alt="반품승인 버튼 화면"></p>
+					<p class="text-info">기타 주문처리의 ~되돌리기는 이전 단계로 되돌리는 기능입니다. 이후 단계로 처리는 불가합니다.(예: 환불처리중에서 반품수거완료로
+						되돌리기(가능) / 수거완료에서 수거중으로 되돌리기(불가)</p>
+					<ul class="description-list">
+						<li><strong>환불처리중으로 되돌리기</strong>: 반품 완료된 주문을 환불처리중으로 되돌립니다.</li>
+						<li><strong>반품요청으로 되돌리기</strong>: 수거중, 수거완료, 환불진행중, 반품완료 주문을 반품요청 상태로 되돌립니다.</li>
+						<li><strong>수거중으로 되돌리기</strong>: 수거완료, 환불진행중, 반품완료 주문을 수거중 상태로 되돌립니다.</li>
+						<li><strong>수거완료로 되돌리기</strong>: 환불진행중, 반품완료 주문을 수거완료 상태로 되돌립니다.</li>
+					</ul>
+					<p class="text-danger">단, 다음과 같이 결제수단에 따라 되돌리기가 불가합니다.</p>
+					<table class="table table-bordered table-sm-padding">
+						<tbody>
+							<tr>
+								<th style="padding-left: 8px;">결제수단</th>
+								<th>상태</th>
+							</tr>
+							<tr>
+								<td style="padding-left: 8px;">신용카드</td>
+								<td rowspan="3">모든 상태에서 되돌리기 불가. (단, 환불처리 실패일 때만 되돌리기 가능)</td>
+							</tr>
+							<tr>
+								<td style="padding-left: 8px;">PAYCO</td>
+							</tr>
+							<tr>
+								<td style="padding-left: 8px;">카카오페이</td>
+							</tr>
+							<tr>
+								<td style="padding-left: 8px;">네이버페이</td>
+								<td>모든 상태에서 되돌리기 불가.</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">자동환불 재시도</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="/admin/img/order_return_img_07.png?2"
+							alt="반품승인 버튼 화면"></p>
+					<p>네이버페이를 제외하고 자동환불이 가능한 주문의 취소승인시 PG사 또는 네트워크 오류 등으로 자동환불 처리가 되지 않을 수 있습니다.</p>
+					<p>자동환불 처리가 실패하면 <strong>환불처리실패</strong> 상태로 표시되며 이 때 자동환불 재시도 버튼을 사용할 수 있습니다.</p>
+					<p>만약 계속해서 자동환불 실패가 발생할 경우, 구매자와 환불 방법을 협의해 환불처리 후 <strong>기타 반품 처리 &gt; 강제 반품(환불) 완료 처리</strong>해
+						주시기 바랍니다.</p>
+					<p><strong>자동환불 실패가 발생할 수 있는 결제수단</strong></p>
+					<ul class="description-list">
+						<li>신용카드</li>
+						<li>PAYCO</li>
+						<li>카카오페이</li>
+					</ul>
+
+
+					<h4 style="border-bottom: 1px solid #e1e1e1; padding-bottom:10px; margin-top:24px;">강제 반품(환불) 처리
+					</h4>
+					<p><img class="margin-bottom-xxl img-responsive" src="/admin/img/order_return_img_08.png?2"
+							alt="반품승인 버튼 화면"></p>
+					<p>자동환불이 지원되지 않는 <strong>환불진행중 주문</strong> 또는 자동환불 실패가 발생한 주문을 강제로 취소완료 처리하는 기능입니다. 실제 환불이 되지 않으므로 이
+						작업 이전에 구매자에게 환불처리 이후 진행해 주시기 바랍니다.</p>
+					<p><strong>자동환불이 지원되지 않는 상황</strong></p>
+					<ul class="description-list">
+						<li>무통장입금 주문</li>
+						<li>가상계좌 주문 (KCP, 나이스페이 : 자동환불 불가) </li>
+						<li>휴대폰 결제 주문 (KCP, 이니시스, 나이스페이 : 현재월 결제에 한해 PG사 관리페이지에서 취소처리 가능)</li>
+						<li>카카오페이 구매 주문 (카카오페이 구매 파트너 센터에서 취소처리 가능)</li>
+						<li>PayPal 주문 (PayPal 판매자 페이지에서 취소처리 가능)</li>
+						<li>MOLPay 주문 (취소처리 불가. MOLPay에서 취소, 환불 처리 미지원. 말레이시아 통화 한정으로 고객이 직접 몰페이에 환불접수/처리 가능)</li>
+
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal-dialog ui- high">
+			<div class="modal-content">
+
+
+
+				<style>
+					.modal_admin_order_advanced_search .modal-dialog {
+						width: 800px;
+					}
+				</style>
+				<div class="modal-header">
+					<button type="button" class="close btn btn-flat" data-dismiss="modal" aria-label="Close"><i
+							class="btl bt-times"></i></button>
+					<h3 class="modal-title" id="myModalLabel">고급검색</h3>
+				</div>
+				<form id="advanced_search_form" class="form"
+					onsubmit="SHOP_ORDER_MANAGE.AdvancedSearch.startSubmit('/admin/shopping/return'); return false;">
+					<div class="modal-body">
+						<input type="hidden" name="advanced_type" value="return">
+						<input type="hidden" name="unit_code" value="u2022012761f22bda64d6e">
+						<div class="form-group">
+							<label>조회기간</label>
+							<div class="row row-7-gutter">
+								<div class="col-sm-3 mobile-margin-bottom">
+									<select class="form-control" name="range_type" aria-invalid="false">
+										<option value="return_request">반품요청일</option>
+										<option value="return_collect">반품수거완료일</option>
+										<option value="return_complete">반품완료일</option>
+										<option value="order">주문일</option>
+										<option value="pay">결제일</option>
+										<option value="delivery">발송처리일</option>
+										<option value="memo">메모작성일</option>
+									</select>
+								</div>
+								<div class="col-sm-4 auto-width-force mobile-margin-bottom">
+									<div class="btn-group" role="group" aria-label="...">
+										<button type="button" data-day="today"
+											class="_btn_range btn btn-sm-padding btn-default-bright">오늘</button>
+										<button type="button" data-day="week"
+											class="_btn_range btn btn-sm-padding btn-default-bright">1주일</button>
+										<button type="button" data-day="month"
+											class="_btn_range btn btn-sm-padding btn-primary">1개월</button>
+										<button type="button" data-day="3month"
+											class="_btn_range btn btn-sm-padding btn-default-bright">3개월</button>
+									</div>
+								</div>
+								<div class="col-sm-6 auto-width-force mobile-margin-bottom">
+									<div class="form-control-datepicker">
+										<input type="text" class="_start_time form-control" name="start_date" value="">
+										<i class="icon-calendar icons"></i>
+									</div>
+									<div class="inline-blocked xs-padding-x">~</div>
+									<div class="form-control-datepicker">
+										<input type="text" class="_end_time form-control" name="end_date" value="">
+										<i class="icon-calendar icons"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>상품정보</label>
+							<div class="row row-7-gutter">
+								<div class="col-sm-3 col-xs-4 mobile-margin-bottom">
+									<select class="form-control" name="prod_search_type" aria-invalid="false">
+										<option value="prod_no">상품번호</option>
+										<option value="prod_name">상품명</option>
+										<option value="option_name">옵션명</option>
+										<option value="option_value">옵션값</option>
+										<option value="custom_prod_code">자체 상품코드</option>
+										<option value="prod_sku">재고번호(SKU)</option>
+										<option value="maker">제조사</option>
+										<option value="origin">원산지</option>
+										<option value="brand">브랜드</option>
+									</select>
+								</div>
+								<div class="col-sm-8 col-xs-8 mobile-margin-bottom">
+									<input type="text" name="prod_search_value" value="" class="form-control"
+										placeholder="검색 키워드 입력(선택사항)">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>주문정보</label>
+							<div class="_detail_list_wrap">
+								<div class="_advanced_search_item form-group no-padding-top" data-no="0">
+									<div class="row row-7-gutter">
+										<div class="col-sm-3 col-xs-4 mobile-margin-bottom">
+											<select class="_select_detail form-control" name="detail[0][type]"
+												onchange="SHOP_ORDER_MANAGE.AdvancedSearch.changeAdvancedSearchDetailType(this);"
+												aria-invalid="false">
+												<option value="">항목선택</option>
+												<option value="order_no">주문번호</option>
+												<option value="prod_order_no">품목주문번호</option>
+												<option value="parcel_no">운송장번호</option>
+												<option value="orderer_name">주문자명</option>
+												<option value="orderer_id">주문자 ID</option>
+												<option value="orderer_email">주문자 E-Mail</option>
+												<option value="orderer_call">주문자 연락처</option>
+												<option value="collect_parcel_no">수거송장번호</option>
+												<option value="reason">반품사유</option>
+												<option value="detail_reason">반품상세사유</option>
+												<option value="pay_type">결제수단</option>
+												<option value="cash_receipt">현금영수증 신청여부</option>
+												<option value="virtual_name">입금자명</option>
+												<option value="virtual_bank">입금은행명</option>
+												<option value="deliv_name">수취인명</option>
+												<option value="deliv_call">수취인 연락처</option>
+												<option value="deliv_address">수취인 주소</option>
+												<option value="deliv_memo">배송메모</option>
+												<option value="etc1">주문자명 + 입금자명 + 수취인명</option>
+											</select>
+										</div>
+										<div class="col-sm-8 col-xs-7 mobile-margin-bottom _advanced_search_txt_wrap">
+											<input type="text" name="detail[0][value]" value="" class="form-control">
+										</div>
+										<div class="col-xs-1">
+											<a href="javascript: void(0);"
+												onclick="SHOP_ORDER_MANAGE.AdvancedSearch.addAdvancedSearchDetailItem();"
+												class="text-20"><i class="icon-plus icons"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+						<button type="submit" class="btn btn-primary btn-flat _submit">검색</button>
+					</div>
+				</form>
+
+				<script id="advanced_search_wrap_template" type="text/template">
+					<div class="_advanced_search_item form-group no-padding-top" data-no="{no}">
+						<div class="row row-7-gutter">
+							<div class="col-sm-3 col-xs-4 mobile-margin-bottom">
+								<select class="_select_detail form-control" name="detail[{no}][type]" onchange="SHOP_ORDER_MANAGE.AdvancedSearch.changeAdvancedSearchDetailType(this);" aria-invalid="false">
+									<option value="">항목선택</option>
+																<option value="order_no">주문번호</option>
+																<option value="prod_order_no">품목주문번호</option>
+																<option value="parcel_no">운송장번호</option>
+																<option value="orderer_name">주문자명</option>
+																<option value="orderer_id">주문자 ID</option>
+																<option value="orderer_email">주문자 E-Mail</option>
+																<option value="orderer_call">주문자 연락처</option>
+																<option value="collect_parcel_no">수거송장번호</option>
+																<option value="reason">반품사유</option>
+																<option value="detail_reason">반품상세사유</option>
+																<option value="pay_type">결제수단</option>
+																<option value="cash_receipt">현금영수증 신청여부</option>
+																<option value="virtual_name">입금자명</option>
+																<option value="virtual_bank">입금은행명</option>
+																<option value="deliv_name">수취인명</option>
+																<option value="deliv_call">수취인 연락처</option>
+																<option value="deliv_address">수취인 주소</option>
+																<option value="deliv_memo">배송메모</option>
+																<option value="etc1">주문자명 + 입금자명 + 수취인명</option>
+														</select>
+							</div>
+							<div class="_advanced_search_txt_wrap col-sm-8 col-xs-7 mobile-margin-bottom">
+								<input type="text" name="detail[{no}][value]" value="" class="form-control">
+							</div>
+							<div class="col-xs-1">
+								<a href="javascript: void(0);" onclick="SHOP_ORDER_MANAGE.AdvancedSearch.deleteAdvancedSearchDetailItem('{no}');" class="text-20"><i class="icon-minus icons"></i></a>
+							</div>
+						</div>
+					</div>
+				</script>
+
+				<script id="advanced_search_txt_template" type="text/template">
+					<input type="text" name="detail[{no}][value]" value="{value}" class="form-control">
+				</script>
+
+				<script id="advanced_search_pay_type_template" type="text/template">
+					<div class="row">
+						<div class="col-sm-6">
+							<select class="form-control" name="detail[{no}][value]">
+														<option value="npay">네이버페이</option>
+														<option value="free">무료결제</option>
+														<option value="cash">무통장입금</option>
+												</select>
+						</div>
+					</div>
+				</script>
+
+				<script id="advanced_search_reason_template" type="text/template">
+					<div class="row">
+						<div class="col-sm-12">
+							<select class="form-control" name="detail[{no}][value]">
+														<option value="INTENT_CHANGED">구매 의사 취소</option>
+														<option value="COLOR_AND_SIZE">색상 및 사이즈 변경</option>
+														<option value="WRONG_ORDER">다른 상품 잘못 주문</option>
+														<option value="PRODUCT_UNSATISFIED">서비스 및 상품 불만족</option>
+														<option value="DELAYED_DELIVERY">배송 지연</option>
+														<option value="DROPPED_DELIVERY">배송 누락</option>
+														<option value="SOLD_OUT">상품 품절</option>
+														<option value="BROKEN">상품 파손</option>
+														<option value="INCORRECT_INFO">상품 정보 상이</option>
+														<option value="WRONG_DELIVERY">오배송</option>
+														<option value="WRONG_OPTION">색상 등이 다른 상품을 잘못 배송</option>
+												</select>
+						</div>
+					</div>
+				</script>
+
+				<script id="advanced_search_cash_receipt_template" type="text/template">
+					<div style="padding-top: 4px;">
+						<div class="radio-inline radio-styled">
+							<label>
+								<input type="radio" name="detail[{no}][value]" value="Y" checked>
+								<span class="no-margin">신청</span>
+							</label>
+						</div>
+						<div class="radio-inline radio-styled">
+							<label>
+								<input type="radio" name="detail[{no}][value]" value="WAIT">
+								<span class="no-margin">발행요청</span>
+							</label>
+						</div>
+						<div class="radio-inline radio-styled">
+							<label>
+								<input type="radio" name="detail[{no}][value]" value="COMPLETE">
+								<span class="no-margin">발행완료</span>
+							</label>
+						</div>
+						<div class="radio-inline radio-styled">
+							<label>
+								<input type="radio" name="detail[{no}][value]" value="N">
+								<span class="no-margin">미발행</span>
+							</label>
+						</div>
+					</div>
+				</script>
+				<script>
+					SHOP_ORDER_MANAGE.AdvancedSearch.Init();
+				</script>
+			</div>
+		</div>
+
+		<div class="modal-dialog ui-draggable out">
+			<div class="modal-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<div id="dashboard_loader_sub" class="se-pre-con" style="display: none;">
+					<div class="page-loader-spinner">
+						<div class="double-bounce1"></div>
+						<div class="double-bounce2"></div>
+					</div>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width:70%">
+							<label>70%</label>
+						</div>
+					</div>
+				</div>
+				<div class="_step_wrap _step_01">
+					<div class="modal-header holder">
+						<h3 class="modal-title">주문 내보내기</h3>
+						<a href="javascript:" data-dismiss="modal" class="modal_close bt bt-flat bt-default"><i
+								class="btl bt-times"></i></a>
+					</div>
+					<div class="modal-body">
+						<form id="order_download_form">
+							<input type="hidden" name="type" value="return">
+							<input type="hidden" name="filter" value="YjowOw==">
+							<div class="form-group">
+								<label class="control-label">주문 내보내기 대상</label>
+								<div>
+									<label class="radio-inline radio-styled">
+										<input type="radio" class="" name="target" value="default" checked="checked"
+											onchange="SHOP_ORDER_MANAGE.changeOrderExcelDownloadTarget(this.value);">
+										<span>모든 반품 주문</span>
+									</label>
+									<label class="radio-inline radio-styled">
+										<input type="radio" class="" name="target" value="search"
+											onchange="SHOP_ORDER_MANAGE.changeOrderExcelDownloadTarget(this.value);"
+											disabled="">
+										<span>검색결과 내 주문</span>
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label">주문 파일 종류</label>
+								<div style="width: 180px;">
+									<select name="download_type" class="form-control _download_list_default">
+										<option value="RETURN_REQUEST">반품요청</option>
+										<option value="RETURN_COLLECTING">반품수거중</option>
+										<option value="RETURN_COLLECT_DONE">반품수거완료</option>
+										<option value="RETURN_REFUNDING">환불진행중</option>
+										<option value="RETURN_REFUND_FAILED">환불처리실패</option>
+										<option value="RETURN">반품완료</option>
+										<option value="TODAY">오늘</option>
+										<option value="LATELY_1_WEEK">최근 1주간</option>
+										<option value="THIS_MONTH">이번달</option>
+										<option value="LAST_MONTH">이전달</option>
+										<option value="LATELY_3_MONTH">최근 3개월</option>
+										<option value="LATELY_6_MONTH">최근 6개월</option>
+										<option value="LATELY_1_YEAR">최근 1년</option>
+										<option value="none">미처리</option>
+									</select>
+									<select name="download_type" disabled="" style="display: none;"
+										class="form-control _download_list_search">
+										<option value="SEARCH_ALL">모든 상태</option>
+										<option value="RETURN_REQUEST">반품요청</option>
+										<option value="RETURN_COLLECTING">반품수거중</option>
+										<option value="RETURN_COLLECT_DONE">반품수거완료</option>
+										<option value="RETURN_REFUNDING">환불진행중</option>
+										<option value="RETURN_REFUND_FAILED">환불처리실패</option>
+										<option value="RETURN">반품완료</option>
+										<option value="SEARCH_NONE">미처리</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="downloadFileForm">주문 파일 양식</label>
+								<div class="input-group">
+									<div class="input-group-content vertical-middle" style="width: 180px;">
+										<select id="downloadFileForm" name="download_file_form" class="form-control">
+											<option value="default">기본 주문 내보내기</option>
+										</select>
+									</div>
+
+								</div>
+							</div>
+						</form>
+						<div class="form-group">
+							<a href="javascript:;" onclick=""
+								class="btn btn-primary btn-sm btn-sm-padding request_btn _request_btn"
+								data-toggle="tooltip" data-placement="top" title=""
+								data-original-title="주문 파일을 요청합니다.">주문 파일 요청</a>
+						</div>
+						<div class="form-group">
+							<div class="table-responsive">
+								<table class="table table-order-excel-list full-width full-height">
+									<colgroup>
+										<col style="width: 120px; ">
+										<col style="">
+										<col style="width: 100px;">
+										<col style="width: 130px;">
+										<col style="width: 84px;">
+										<col style="width: 60px;">
+									</colgroup>
+									<thead class="subject">
+										<tr>
+											<th style="padding-left: 15px;">요청 항목</th>
+											<th>요청 양식</th>
+											<th>요청 일시</th>
+											<th>다운로드 가능기한</th>
+											<th class="text-right" style="padding-right: 20px;">다운로드</th>
+											<th class="text-right" style="padding-right: 20px;">삭제</th>
+										</tr>
+									</thead>
+									<tbody class="excel_list_body" id="_excel_list_body">
+										<tr>
+											<th style="padding-left: 15px;">요청 항목</th>
+											<th>요청 양식</th>
+											<th>요청 일시</th>
+											<th>다운로드 가능기한</th>
+											<th class="text-right" style="padding-right: 20px;">다운로드</th>
+											<th class="text-right" style="padding-right: 20px;">삭제</th>
+										</tr>
+										<tr class="alert" role="alert"  style="vertical-align: middle;">
+											<th scope="row"><label>
+													<input type="checkbox" value="" class="_prodListAllCheck"
+														onclick="SHOP_PROD_LIST.listSetAllSelect($(this).prop('checked'))"><span></span>
+												</label></th>
+											<td>
+												<p>2021041633227</p>
+												<p>홍길동</p>
+											</td>
+											
+											<td  colspan="2">
+												<img src="../image/_tmp_92d6c00fb6db23586e2f34dfa9e522421762thumbView.jpg"
+													alt="듀오백사진">
+											</td>
+											
+											<td>
+												<p>100,000원</p>
+											</td>
+											<td>
+												<p>1개</p>
+											</td>
+											<td>
+												<p>출고 대기</p>
+											</td>
+											<td>
+												<p>1234567654</p>
+											</td>
+											<td>
+												<p>2022/02/23</p>
+											</td>
+											<td>
+												<p>미배송</p>
+											</td>
+											<td>
+												<p>2022/02/23</p>
+											</td>
+											
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="text-center excel_empty_wrap _excel_empty_wrap" style="display: block;">
+								요청된 데이터가 없습니다. </div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+				<div class="_step_wrap _step_02" style="display: none;">
+				</div>
+				<script>
+					var ORDER_DOWNLOAD_MANAGER = new EXCEL_DOWNLOAD_MANAGER();
+
+					$(function () {
+						var $_wrap = $('.modal_admin_order_excel_download');
+
+						$_wrap.find('.btn-popover').popover();
+						SHOP_ORDER_MANAGE.loadExcelList('return');
+
+						$_wrap.find('._request_btn').off('click').on('click', function () {
+							SHOP_ORDER_MANAGE.runOrderExcelMake('return');
+						});
+
+						ORDER_DOWNLOAD_MANAGER.init({
+							type: 'return',
+							callback: {
+								init: function () {
+									/* init 이벤트 */
+									var that = this;
+
+									/* dom INIT */
+									var dom = that.getDom();
+									dom.main_wrap = $_wrap.find('._step_01');
+									dom.excel_wrap = $_wrap.find('._step_02');
+									that.setDom(dom);
+
+									/* Event Bind */
+									that.bindOpenEvent($_wrap.find('._btn_open_excel_form'));
+								},
+								open: function (res) {
+								},
+								close: function (evt) {
+									/* */
+									ORDER_DOWNLOAD_MANAGER.getFormItemList(function (res) {
+										var $_download_form_selectbox = $("#downloadFileForm");
+										var current_selected_code = $_download_form_selectbox.val();
+
+										var fragment = document.createDocumentFragment();
+										fragment.append($("<option value='default'>기본 주문 내보내기</option>")[0]);
+										if (res.list.length) {
+											res.list.forEach(function (v) {
+												fragment.append($("<option value='" + v.code + "'>" + v.name + "</option>")[0]);
+											});
+										}
+										$_download_form_selectbox.empty().append(fragment);
+										$_download_form_selectbox.val(current_selected_code);
+									});
+								}
+							}
+						});
+					});
+				</script>
+			</div>
+		</div>
+
+		<div class="modal-dialog ui-draggable refulse-return">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close btn btn-flat" data-dismiss="modal" aria-label="Close"><i class="btl bt-times"></i></button>
+					<h3 class="modal-title">반품거부처리</h3>
+				</div>
+				<div class="modal-body">
+					<div class="modal-notice-text">선택하신 2개의 주문 중 처리 가능한 주문은 2건입니다.</div>
+					<p style="margin:15px auto;">반품 요청 주문에 대해 반품 거부하거나 교환으로 변경합니다</p>
+                   
+
+					<div class="table-responsive  shop-table order">
+						<div class="form-group">
+							<form action="#" >
+											<table>
+												<tbody><tr>
+												<td>주문번호</td>
+												<td>품목주문번호</td>
+												<td>주문상태</td>
+												<td>상품명</td>
+												<td>판매취소사유</td></tr>
+												<tr><td>2021041633227</td>
+													<td>202205067777777</td>
+													<td>결제완료</td>
+													<td><p>듀오백의자</p><p>색상:검정 / 수량:1개</p></td>
+													<td><select name="" id="sellCancel"><option value="">반품거부사유</option>
+													<option value="">반품기한지남</option>
+													<option value="">반품거부사유</option>
+													<option value="">반품거부사유</option></select></td></tr>
+												<tr><td>2021041633227</td>
+													<td>202205067777777</td>
+													<td>결제완료</td>
+													<td><p>듀오백의자</p><p>색상:검정 / 수량:1개</p></td>
+													<td><select name="" id="sellCancel"><option value="">반품거부사유</option>
+														<option value="">반품기한지남</option>
+														<option value="">반품거부사유</option>
+														<option value="">반품거부사유</option></select></td></tr>
+											</tbody></table>
+							
+						</form>
+						</div></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">확인</button>
+					<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal-dialog ui-draggable pickup">
+			<div class="modal-content" style="width:750px;">
+				<div class="modal-header">
+					<button type="button" class="close btn btn-flat" data-dismiss="modal" aria-label="Close"><i class="btl bt-times"></i></button>
+					<h3 class="modal-title">수거지시요청</h3>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive  shop-table order">
+						<div class="form-group">
+							<form action="#" >
+							<table>
+								<tbody>
+								<tr class="pickupRequset"><td>주문번호</td>
+								<td class="pickupRequset">2022050677777</td>
+								</tr>
+								<tr class="pickupRequset"><td class="pickupRequset">품목주문번호</td>
+								<td class="pickupRequset">2022050677777</td></tr>
+								<tr class="pickupRequset"><td class="pickupRequset">택배방문수거설정</td>
+								<td class="pickupRequset">
+									<input type="radio" name="chk_info" value="택배방문수거 사용" checked="checked">택배방문수거사용
+									<input type="radio" name="chk_info" value="택배방문수거 사용 안 함">택배방문수거 사용 안 함
+								</td></tr>
+								<tr class="pickupRequset"><td class="pickupRequset">택배사 선택</td>
+								<td class="pickupRequset"><select name="" id="">  <option value="">우체국택배</option>
+									<option value="">CJ대한통운</option>
+									<option value="">롯데택배</option>
+									<option value="">로젠택배</option></select></td></tr>
+								<tr class="pickupRequset"><td class="pickupRequset">운송장번호</td>
+								<td class="pickupRequset"><input type="text"></td></tr>
+								<tr class="pickupRequset"><td class="pickupRequset">반품수화인명</td><td class="pickupRequset">듀오백</td></tr>
+								<tr class="pickupRequset"><td class="pickupRequset">반품주소</td>
+								<td class="pickupRequset">서울 강남구 역삼동 코리아아이티아카데미</td></tr>
+								<tr class="pickupRequset"><td class="pickupRequset">반품연락처</td>
+								<td class="pickupRequset">010-1111-1111</td></tr>
+								<tr class="pickupRequset"><td class="pickupRequset">반품수거요청시점</td>
+								<td class="pickupRequset"><select name="" id=""><option value="">고객이 반품수거 요청 시 지정된 택배사로 바로 수거 요청됨</option>
+								<option value="">관리자가 접수 완료시에만 지정된 택배사로 수거요청 됨</option></select></td></tr>
+	
+							</tbody>
+						</table>
+							
+						</form>
+						</div></div>
+				   
+					
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">확인</button>
+					<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+	
+		</div>
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+	<div style="position: absolute; width: 1px; height: 1px; left: -10000px;" data-ip="123.109.60.221" data-ip2=""
+		data-ip3="123.109.60.221, 130.176.125.75"><input id="dummy_input" type="text"></div>
+
+	<div class="modal submodal" role="dialog" id="cocoaSubModal" style="z-index: 17001">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+
+	<script>
+		$(".btn-out").click(function () {
+			$(".out").css("display", "inline-block");
+			$(".high").css("display", "none");
+			$(".help").css("display", "none");
+			$(".refulse-return").css("display", "none");
+			$(".pickup").css("display", "none");
+			$("#cocoaModal").removeClass("modal_admin_order_advanced_search");
+			$("#cocoaModal").removeClass("modal_admin");
+			$('#cocoaModal').addClass("in");
+			$("#cocoaModal").addClass("modal_admin_order_excel_download")
+			if ($('#cocoaModal').css('display') == 'block') {
+				$('#cocoaModal').css('display', 'none');
+			} else {
+				$('#cocoaModal').css('display', 'block');
+			}
+		})
+		$(document).on("click", '.bt-times', function () {
+			$("#cocoaModal").css("display", "none");
+			$("#cocoaModal").toggleClass("in");
+		})
+
+		$(document).on("click", '.btn.btn-default.btn-flat', function () {
+			$("#cocoaModal").css("display", "none");
+			$("#cocoaModal").toggleClass("in");
+		})
+
+		$(".btn-high").click(function () {
+			$(".high").css("display", "inline-block");
+			$(".out").css("display", "none");
+			$(".help").css("display", "none");
+			$(".refulse-return").css("display", "none");
+			$(".pickup").css("display", "none");
+			$("#cocoaModal").removeClass("modal_admin_order_excel_download");
+			$("#cocoaModal").removeClass("modal_admin");
+			$('#cocoaModal').addClass("in");
+			$("#cocoaModal").addClass("modal_admin_order_advanced_search");
+			if ($('#cocoaModal').css('display') == 'block') {
+				$('#cocoaModal').css('display', 'none');
+			} else {
+				$('#cocoaModal').css('display', 'block');
+			}
+		})
+
+		let Now = new Date();
+
+		let NowTime = Now.getFullYear()
+		NowTime += '.' + Now.getMonth() + 1;
+		NowTime += '.' + Now.getDate();
+		NowTime += ' ' + Now.getHours();
+		NowTime += ':' + Now.getMinutes();
+
+		let Future = Now.getHours() + 6;
+		let FutureTime = Now.getFullYear()
+		FutureTime += '.' + Now.getMonth() + 1;
+		FutureTime += '.' + Now.getDate();
+		FutureTime += ' ' + Future
+		FutureTime += ':' + Now.getMinutes();
+
+		let str = "<tr><input type='hidden' name='excel_status' class='excel_status' value='download'><th>교환요청</th><th>기본 주문 내보내기/th><th>" + NowTime + "</th><th>" + FutureTime + "</th><th class='text-right' style='padding-right: 20px;'><a href='/admin/ajax/member/download_excel_member_list.cm?idx=1146723' class=' text-primary make_complete '>다운로드</a></th><th class='text-right' style='padding-right: 20px;'><span class='text-danger' style='cursor: pointer;' onclick='MEMBER_EXCEL.deleteMemberExcel('1146723');'>삭제</span></th></tr>"
+
+		$(".btn-help").click(function () {
+			$(".help").css("display", "inline-block");
+			$(".high").css("display", "none");
+			$(".out").css("display", "none");
+			$(".refulse-return").css("display", "none");
+			$(".pickup").css("display", "none");
+			$("#cocoaModal").removeClass("modal_admin_order_excel_download");
+			$("#cocoaModal").removeClass("modal_admin_order_advanced_search");
+			$('#cocoaModal').addClass("in");
+			$("#cocoaModal").addClass("modal_admin");
+			if ($('#cocoaModal').css('display') == 'block') {
+				$('#cocoaModal').css('display', 'none');
+			} else {
+				$('#cocoaModal').css('display', 'block');
+			}
+		})
+
+		$(".btn-refulse-return").click(function () {
+			$(".refulse-return").css("display", "inline-block");
+			$(".high").css("display", "none");
+			$(".out").css("display", "none");
+			$(".help").css("display", "none");
+			$(".pickup").css("display", "none");
+			$("#cocoaModal").removeClass("modal_admin_order_excel_download");
+			$("#cocoaModal").removeClass("modal_admin");
+			$('#cocoaModal').addClass("in");
+			$("#cocoaModal").addClass("modal_admin_order_advanced_search");
+			if ($('#cocoaModal').css('display') == 'block') {
+				$('#cocoaModal').css('display', 'none');
+			} else {
+				$('#cocoaModal').css('display', 'block');
+			}
+		})
+
+		$(".btn-pickup").click(function () {
+			$(".pickup").css("display", "inline-block");
+			$(".high").css("display", "none");
+			$(".out").css("display", "none");
+			$(".help").css("display", "none");
+			$(".refulse-return").css("display", "none");
+			$("#cocoaModal").removeClass("modal_admin_order_excel_download");
+			$("#cocoaModal").removeClass("modal_admin");
+			$('#cocoaModal').addClass("in");
+			$("#cocoaModal").addClass("modal_admin_order_advanced_search");
+			if ($('#cocoaModal').css('display') == 'block') {
+				$('#cocoaModal').css('display', 'none');
+			} else {
+				$('#cocoaModal').css('display', 'block');
+			}
+		})
+
+
+
+		$(".btn.btn-primary.btn-sm.btn-sm-padding").click(function () {
+			$("#_excel_list_body").append(str);
+		});
+
+		$(document).ready(function () {
+			$(document).on("click", '.text-danger', function () {
+				let result = confirm("삭제하시겠습니까?")
+				if (result) {
+					$(this).parent().parent().remove();
+				}
+			})
+		})
+
+
+		$(document).on("click", '.dropdown-menu li:first-child', function () {
+			let result = confirm("삭제하시겠습니까?")
+			if (result) {
+				$(this).parent().parent().parent().parent().remove();
+			}
+		}) 	
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="https://code.jquery.com/jquery-1.12.3.js" type="text/javascript"></script>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script src="javascript/script.js" type="text/javascript" defer></script>
+
+
+
+	<!--stylesheet cdn-->
+
+
+	<title>취소승인</title>
+
+	<style>
+		/* th, td //{
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }*/
+		/*.sh_notice{
+	text-align: left;
+}*/
+
+		.contents.admin-modal {
+			padding: 5px;
+			margin: 10px;
+		}
+
+		.modal_head {
+			width: 1100px;
+			height: 28.56px;
+			font-size: 24px;
+			font-weight: 500;
+			margin: 25px;
+		}
+
+		.modal_notice {
+			margin: 30px 25px 30px 25px;
+			background-color: #fafafa;
+	
+			border-color: #ff4345;
+
+		}
+
+		#tbCancelHeading {
+			
+			height:40px;
+			padding: 10px 5px;
+			font-size: 12px;
+		}
+
+		.tbHeading {
+			text-align: center;
+			font-size: 13px;
+			font-weight: 400;
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+
+		@charset "utf-8";
+/* CSS Document */
+/* #0066ad #30a3f3 #ffffff #333333 로고컬러변경 개별메뉴 탭 슬라이드fade 푸터로고회색 */
+
+/* 전체 페이지 초기화 영역*/
+*{margin:0 auto; color:#333333; font-family:"맑은 고딕"}
+html,body{width:1200px; background:#ffffff}
+ul,li{list-style:none; padding:0; margin:0;}
+a{text-decoration:none; color:inherit; cursor:pointer;}
+
+
+
+
+
+/* 모달 레이어 팝업창 */
+.mlp{
+	display:none; position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.8); top:0; left:0;
+}
+
+
+
+.mlp .popup{ position:fixed; width:720px; height:646.54px; 
+	left: 50%;
+top: 50%;
+
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+-moz-transform: translate(-50%, -50%);
+-o-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+	background:white;
+	z-index:100; 
+	   box-shadow:0 0 10px gray; }
+.mlp .popup .heading{
+	width:1100px; margin:10px; padding:3px;
+	
+};
+
+/*모달 콘텐츠*/
+
+
+.mlp .popup .contents{
+	width:1100px; height:290px; border:1px solid gray;text-align:center;
+}
+.mlp .popup .contents p{ 
+	width:1100px; height:60px; padding:0 10px 10px 10px;text-align:left; 
+}
+
+
+.cscBtnArea{
+	position:absolute, bottom:0, right:0
+				border:1px solid gray; border:3px;
+			 }
+.mlp .popup .close:hover{
+	 font-weight:bold; color:red; 
+	}
+
+
+	th, td {
+		border-bottom: 1px solid #ced4da;
+		padding: 10px;
+	  }
+	.sh_notice{
+		text-align: left;
+	}
+
+	td{
+		font-size:13px;
+	}
+
+
+
+		
+	</style>
+
+	<script>
+		// Javascript Document
+		$(document).ready(function () {
+
+			/* 팝업창 */
+			$('.close_btn').click(function () {
+				$('.mlp').show();
+			});
+			$('.close').click(function () {
+				$('.mlp').hide();
+			});
+
+
+		});
+	</script>
+</head>
+
+<body>
+
+	<div class="btn">클릭</div>
+
+	<div class="mlp">
+		<div class="popup">
+			<div class="popup_box">
+
+
+				<!---->
+				<div class="modal_head">
+					<h3>취소승인처리</h3>
+				</div>
+				<div class="modal_notice">
+					<p>선택하신 2개의 주문 중 처리 가능한 주문은 2건 입니다.
+					</p>
+					<p>취소승인 후 결제수단 등에 따라 자동환불이 불가할 수 있습니다.</p>
+				</div>
+			</div>
+			<div class="contents admin-modal">
+				<div class="tb_orderNum">
+					<ul>
+						<li>주문번호</li>
+						<li>1234567891111</li>
+					</ul>
+				</div>
+				<div class="tb_notice">
+					이 부분은 부분취소 인해 취소 비용 입력이 필요할 수 있습니다.</div>
+
+			</div>
+			<table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+				<tbody>
+					<tr class="tbHead">
+						<td class="tbHeading">상품명</td>
+						<td class="tbHeading">주문상태</td>
+						<td class="column2 style1 s">사유</td>
+						<td class="tbHeading">원금액</td>
+						<td class="tbHeading">취소비용</td>
+						<td class="tbHeading">환불금액</td>
+						<td class="tbHeading">환불적립금</td>
+						<td class="tbHeading">적용쿠폰/회원할인혜택</td>
+					</tr>
+
+					<tr class="row4">
+						<td class="cancelpd">듀오백 의자 <br>
+							색상: 검정 / 수량 1개<br>
+							<br>
+							20210416865680
+						</td>
+						<td class="cancelpd">결제완료<br>
+							2021-02-22</td>
+						<td class="cancelpd">상품 품절</td>
+						<td class="cancelpd">150000</td>
+						<td class="cancelpd"><input type="text" value="취소비용" style="width:100px;"></td>
+						<td class="cancelpd">150000</td>
+						<td class="cancelpd"><input type="text" value="환불적립금" style="width:100px;font-size: 12px;"></td>
+						<td class="cancelpd"></td>
+					</tr>
+
+					<tr class="row5">
+						<td class="cancelpd">듀오백 의자 <br>
+							색상: 검정 / 수량 1개<br>
+							<br>
+							20210416865680
+						</td>
+						<td class="cancelpd">결제완료<br>
+							2021-02-22</td>
+						<td class="cancelpd">상품 품절</td>
+						<td class="cancelpd">150000</td>
+						<td class="cancelpd"><input type="text" value="취소비용" style="width:100px;"></td>
+						<td class="cancelpd">150000</td>
+						<td class="cancelpd"><input type="text" value="환불적립금" style="width:100px;font-size: 12px;"></td>
+						<td class="cancelpd"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="csc_Btn_Area">
+				<div class="csclineBtnArea" style="display:inline-block"><button type="submit"style="display:inline-block">취소</button></div>
+				<div class="csclineBtnArea" style="display:inline-block">
+					<button type="button" class="close" data-dismiss="modal" style="display:inline-block">닫기</button>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+
+
+</body>
+
+</html>

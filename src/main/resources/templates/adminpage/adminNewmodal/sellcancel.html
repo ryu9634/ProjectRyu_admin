@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+.frame{
+position: relative;
+width:800px;
+height:700px;
+background-color: aqua;
+
+
+}
+
+.modalContent{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    width:720px;
+    height: 450px;
+    background-color:blue;
+   
+   
+}
+
+.one{
+
+top:25px;    
+width: 720px;
+height:150px;
+background-color: green;
+
+
+}
+
+.two{
+
+
+width: 720px;
+height:150px;
+background-color: pink;
+
+}
+
+.three{
+ 
+width: 720px;
+height:150px;
+background-color: blueviolet;
+
+}
+.heading{
+    display:flex;
+    justify-content: center;
+}
+.nOne{
+    width:144px;
+    text-align:center;
+}
+
+.tb_content{
+    display: flex;
+    justify-content: center;
+}
+.nTwo{
+    width:144px;
+    text-align: ceneter;
+}
+
+
+
+</style>
+</head>
+<body>
+
+
+    <div class="frame">
+        <h2>
+            판매 취소 처리
+            </h2>
+
+            <div class="modalContent">
+
+                <div class="one">
+선택하신 1개의 주문 중 처리 가능한 주문은 1건입니다
+
+                </div>
+    
+                <div class="two">
+                    네이버페이 주문 판매 취소의 경우 판매 취소 사유를 입력하셔야 합니다. 
+                    KCP, 이니시스PG 가맹점은 신용카드 주문 자동 취소가 지원됩니다.  자동 환불이 불가한 주문의 경우(무통장 입금, 가상계좌, 휴대폰 결제 등) 취소완료가 되더라도 환불이 되지 않으므로 구매자와 협의하여 환불해 주셔야 합니다.
+    
+                </div>
+                <div class="three">
+ <div class="heading">
+     <div class="nOne">주문번호</div>
+     <div class="nOne">주문번호</div>
+     <div class="nOne">주문번호</div>
+     <div class="nOne">주문번호</div>
+     <div class="nOne">주문번호</div>
+ </div>
+ <div class="tb_content">
+<div class="nTwo">2021012736344</div>
+<div class="nTwo">20210127455310</div>
+<div class="nTwo">결제완료</div>
+<div class="nTwo">듀오백 의자
+    색상: 블랙/ 수량 1개
+</div>
+<div class="nTwo">
+    <select name="sellcancelreason" id="">
+        <option value="">판매취소사유</option>
+        <option value="">상품품절</option>
+        <option value="">고객변심</option>
+        <option value="">상품불량</option>
+        <option value="">취소후재구매</option></select>
+</div>
+ </div>
+                
+                </div>
+
+            </div>
+
+
+    </div>
+</body>
+</html>

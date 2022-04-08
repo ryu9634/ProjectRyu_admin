@@ -1,0 +1,2639 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="robots" content="noindex">
+	<!--<link href="http://cocoaphp.com/publish/bootstrap/css/material-design-iconic-font.min.css" rel="stylesheet">-->
+	<script type="text/javascript" async=""   charset="UTF-8"></script><script>
+	var TEST_SERVER = false;
+	var VENDOR_DOMAIN = 'https://vendor-cdn.imweb.me';
+	var UPLOAD_URL = '/upload/';
+	var CDN_UPLOAD_URL = 'https://cdn.imweb.me/upload/';
+	var IS_MAIN = false;
+	var IS_MOBILE = false;
+	var ADMIN_URL = '/admin/';
+	var THUMBNAIL_URL= '/thumbnail/';
+	var CDN_THUMBNAIL_URL= 'https://cdn.imweb.me/thumbnail/';
+	var SITE_CODE = 'S20220127c9945b26c87e8';
+	var UNIT_CODE = 'u2022012761f228e111b38';
+	var SITE_NO = 'S20220127c9945b26c87e8';
+	var UNIT_NO = 'u2022012761f228e111b38';
+	var MAIN_DOMAIN = 'test112244.imweb.me';
+	var CURRENT_DOMAIN = 'test112244.imweb.me';
+	var CURRENT_PROTOCOL = 'https://';
+	var GOOGLE_API_KEY = 'AIzaSyA8CCexf9XTJcH09mStr-HRW4nin4k8J7w';
+	var FROALA_VERSION = 311;
+	var FROALA_KEY = '6LF5g1B3D3F3C6C3E2F-11SLJCKHXOSLMc1YGSGb1ZXHSe1CgB5A4D4C3E3C2A13A19B7B2==';
+	var ADOBE_AVIARY_KEY = '94bd22b5cc05424494c5e7aeabab8466';
+	var LIMIT_API_LIST = [];
+	var NO_IMAGE_URL = '/img/no-image.png';
+	var ADMIN_LANG_CODE = 'KR';
+	var SITE_COUNTRY_CODE = 'kr';
+	var KOREA_COUNTRY_CODE = 'kr';
+	var TAIWAN_COUNTRY_CODE = 'tw';
+	var IS_GUEST = false;
+	var MEMBER_HASH = '2ffd5bea640c9973baae318318d4618cb5956107';
+	var CHECK_OFFICE = false;
+
+	/****************************************************************/
+	/* m_Completepayment  설명                                      */
+	/****************************************************************/
+	/* 인증완료시 재귀 함수                                         */
+	/* 해당 함수명은 절대 변경하면 안됩니다.                        */
+	/* 해당 함수의 위치는 payplus.js 보다먼저 선언되어여 합니다.    */
+	/* Web 방식의 경우 리턴 값이 form 으로 넘어옴                   */
+	/* EXE 방식의 경우 리턴 값이 json 으로 넘어옴                   */
+	/****************************************************************/
+	function m_Completepayment( FormOrJson, closeEvent )
+	{
+		var frm = document.order_info;
+
+		/********************************************************************/
+		/* FormOrJson은 가맹점 임의 활용 금지                               */
+		/* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다.  */
+		/* FormOrJson 값을 활용 하시려면 기술지원팀으로 문의바랍니다.       */
+		/********************************************************************/
+		GetField( frm, FormOrJson );
+
+
+		if( frm.res_cd.value == "0000" )
+		{
+			/*
+             가맹점 리턴값 처리 영역
+             */
+
+			frm.submit();
+		}
+		else
+		{
+			alert( "[" + frm.res_cd.value + "] " + frm.res_msg.value );
+
+			closeEvent();
+		}
+	}
+</script>
+
+
+	<!--KR.js 시작-->
+	<script src="../js/KR.js"></script>
+	<script src="../js/KR_KRW_currency.js"></script>
+	<!--KR.js 끝-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!--cdn 시작-->
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap.css?1630317764">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/jquery-ui.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/ii.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/db-icons.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		  href="https://vendor-cdn.imweb.me/css/material-design-iconic-font.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-datepicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/black-tie.css?1608189400">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/simple-line-icons.css?1608179394">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im-icon.css?1643097867">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/preloader.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/owl.carousel2.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/slick.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/animate.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/nprogress.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		  href="https://vendor-cdn.imweb.me/css/trackpad-scroll-emulator.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome.min.css?1626931454">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome5.min.css?1608189400">
+	<link rel="stylesheet" type="text/css"
+		  href="https://vendor-cdn.imweb.me/froala_311/css/froala_editor.pkgd.css?1607673118">
+	<link rel="stylesheet" type="text/css"
+		  href="https://vendor-cdn.imweb.me/froala_311/css/froala_style.min.css?1607673118">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/froala/custom-theme-v3.css?1614049551">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/colorpicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/codemirror.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-spinner.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/chosen.css?1617331870">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/fullcalendar.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/morris.core.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.min.css?1596596378">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im_component.css?1636689958">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/admin.css?1590627710">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/toastr.css?1593569516">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/alarm_menu.css?1643150804">
+	<link rel="stylesheet" type="text/css" href="../style/bootstrap-theme-dashboard.css">
+	<link rel="stylesheet" type="text/css" href="../style/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/select2.css?1590627710">
+	<script src="https://vendor-cdn.imweb.me/js/jquery.js?1627517460"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.browser.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-ui.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap.min.js?1630317768"></script>
+	<script src="https://vendor-cdn.imweb.me/js/tinycolor-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/common.js?1643089417"></script>
+	<script src="https://vendor-cdn.imweb.me/js/im_component.js?1636940317"></script>
+	<script src="https://vendor-cdn.imweb.me/js/admin_common.js?1637641047"></script>
+	<script src="https://vendor-cdn.imweb.me/js/table_list.js?1633057104"></script>
+	<script src="https://vendor-cdn.imweb.me/js/data.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/owl.carousel2.js?1638150602"></script>
+	<script src="https://vendor-cdn.imweb.me/js/slick.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/preloader.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.lazyload.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.trackpad-scroll-emulator.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.fileupload.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/nprogress.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/froala_editor.min.js?1608673099"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/align.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/char_counter.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_beautifier.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_view.min.js?1608643124"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/colors.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/draggable.min.js?1607673168"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/emoticons.min.js?1607673169"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/entities.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/file.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_family.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_size.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/forms.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/fullscreen.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image_manager.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/inline_style.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_breaker.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/link.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/lists.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_format.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_style.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/quote.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/save.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/table.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/url.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/video.min.js?1625125569"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_height.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/third_party/font_awesome.min.js?1607673192"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/ko.js?1607680617"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/zh_tw.js?1608685913"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-scrolltofixed-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/colorpicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.chosen.js?1619084781"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.timepicker.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.print.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autolinker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ThreeCanvas.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/snow.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/lightgallery-all.min.js?1596595980"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autosize.js?1577682292"></script>
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.css?1577682282">
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nestable.doznut.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.number.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/masonry.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/Chart.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.autosize.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/codemirror.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/xml/xml.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/javascript/javascript.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/css/css.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/htmlmixed/htmlmixed.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2_ko.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/imagesloaded.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nanoscroller.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/html5shiv.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.validate.js?1621218311"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.inputmask.bundle.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-with-locales.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-timezone.js?1581998425"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap-datepicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ie-checker-min.js?1577682292"></script>
+
+
+	<!--cdn 끝-->
+
+
+	<!--script src 시작-->
+	<script src="../js/admin.js"></script>
+	<script src="../js/admin_search.js"></script>
+	<script src="../js/alarm_menu.js"></script>
+	<script src="../js/config.js"></script>
+	<script src="../js/contents.js"></script>
+	<script src="../js/contents_list.js"></script>
+	<script src="../js/coupon.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="../js/doz_post.js"></script>
+	<script src="../js/doznut.js"></script>
+	<script src="../js/event_check.js"></script>
+	<script src="../js/imweb_analytics.js"></script>
+	<script src="../js/member.js"></script>
+	<script src="../js/payment.js"></script>
+	<script src="../js/permission.js"></script>
+	<script src="../js/shop.js"></script>
+	<script src="../js/shop_order.js"></script>
+	<script src="../js/shop_point.js"></script>
+	<script src="../js/site_manage.js"></script>
+	<script src="../js/site_member.js"></script>
+	<script src="../js/toastr.js"></script>
+
+	<!--plugin js 시작-->
+	<script src="../js/ch-plugin-core-20220121013102.3308b1a6.bundle.js"></script>
+	<script src="../js/ch-plugin-core-20220121013102.87f92793.bundle.js"></script>
+	<script src="../js/ch-plugin-core-20220121013102.aabc5937.bundle.js"></script>
+	<script src="../js/ch-plugin-core-20220121013102.js"></script>
+	<script src="../js/ch-plugin-core.06f13b0a.vendor.js"></script>
+	<!--plugin js 끝-->
+	<!--script src 끝-->
+	<!--css stylesheet 시작-->
+	<link rel="stylesheet" href="../style/css1.css">
+	<link rel="stylesheet" href="../style/css2.css">
+
+	<!--css stylesheet 끝-->
+
+
+	<script>var IS_ANDROID_APP = 'N';
+	(function(){
+		var customTooltipAllowList = $.fn.tooltip.Constructor.DEFAULTS.whiteList;
+		customTooltipAllowList.table = [];
+		customTooltipAllowList.thead = [];
+		customTooltipAllowList.tbody = [];
+		customTooltipAllowList.tr = [];
+		customTooltipAllowList.td = ["rowspan", "colspan"];
+		customTooltipAllowList.th = [];
+		customTooltipAllowList.caption = [];
+		customTooltipAllowList["*"].push("style");
+	})();
+
+	function determineDropDirection(){
+		$(".dropdown-menu").each( function(){
+			$(this).css({
+				visibility: "hidden",
+				display: "block"
+			});
+
+			$(this).parent().removeClass("dropup");
+
+			if ($(this).offset().top + $(this).outerHeight() + 60 > $(window).innerHeight() + $(window).scrollTop()){
+				$(this).parent().addClass("dropup");
+			}
+			$(this).removeAttr("style");
+		});
+	}
+
+	determineDropDirection();
+
+	$(window).scroll(determineDropDirection);
+	</script></head>
+<body class="menubar-hoverable header-fixed menubar-pin">
+<!-- BEGIN BASE-->
+<div id="dashboard_loader" class="se-pre-con" style="display: none">
+	<div class="page-loader-spinner">
+		<div class="double-bounce1"></div>
+		<div class="double-bounce2"></div>
+	</div>
+	<div class="progress">
+		<div class="progress-bar" role="progressbar" style="width:70%">
+			<label>70%</label>
+		</div>
+	</div>
+</div>
+<div id="base">
+	<!-- END OFFCANVAS LEFT --><script type="text/javascript">
+	$(function(){
+		SADMIN_MENU_ALERT.openAlert();
+	});
+</script><script>
+	$(function(){
+		MEMBER_GROUP.init('', '/mgweb/adminpage/memberList.html/?', true,'list');
+	});
+</script>
+	<header class="top_header" id="default_header">
+		<div class="headerbar">
+			<div class="headerbar-left">
+				<ul class="header-nav header-nav-options">
+					<li class="hidden-lg hidden-md">
+						<a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+							<i class="btl bt-bars"></i>
+						</a>
+					</li>
+					<li class="header-nav-brand">
+						<div class="brand-holder">
+								<span class="location_text">
+									<a th:href="@{/admin/memberlist}">사용자 목록</a>						</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="headerbar-right">
+				<ul class="header-nav header-nav-options">
+					<li class="hidden-md hidden-lg hidden-sm">
+						<button class="btn btn-flat" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" id="dLabel" style="padding: 4px 8px;">
+							<i class="icon icon-options"></i>
+						</button>
+						<ul aria-labelledby="dLabel" role="menu" class="dropdown-menu animation-dock">
+							<li>
+								<a th:href="@{/admin/memberjoin}">사용자 추가</a>
+							</li>
+
+							<li>
+								<a href="javascript:;" onclick="MEMBER_EXCEL.openModalMemberExcelDownload('')">내보내기</a>
+							</li>
+						</ul>
+					</li>
+					<li class="hidden-xs">
+						<a class="btn btn-primary" th:href="@{/admin/memberjoin}">사용자 추가</a>
+					</li>
+				</ul><!--end .header-nav-options -->
+			</div><!--끝 #header-navbar-collapse -->
+			<!--끝 #header-navbar-collapse -->
+		</div>
+	</header>
+	<header class="top_header control-fixed" id="select_header" style="display: none;">
+		<div class="headerbar">
+			<div class="headerbar-left">
+				<ul class="header-nav">
+					<li class="header-nav-brand">
+						<div class="brand-holder ">
+							<a class="btn btn-flat btn-default-white no-padding-x margin-right-xl" href="javascript:;" onclick="TABLE_LIST.cancelCheckItem(function(idxs){MEMBER_GROUP.checkMember(idxs);})"><i class="btm bt-arrow-left"></i></a>
+						</div>
+						<div class="brand-holder">
+							<div class="dropdown">
+								<button class="btn btn-flat btn-default-white no-padding-x margin-right-xl text-lg" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" id="dLabel">
+									<span id="select_cnt"></span>명 선택됨								<i class="zmdi zmdi-caret-down"></i>
+								</button>
+								<ul aria-labelledby="dLabel" role="menu" class="dropdown-menu animation-dock">
+									<li>
+										<a href="javascript:;" onclick="TABLE_LIST.allCheckItem(function(idxs){MEMBER_GROUP.checkMember(idxs);})">모두 선택</a>
+									</li>
+									<li>
+										<a href="javascript:;" onclick="TABLE_LIST.cancelCheckItem(function(idxs){MEMBER_GROUP.checkMember(idxs);})">선택 안함</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="headerbar-right">
+				<ul class="header-nav header-nav-options">
+					<li>
+						<div class="btn-group">
+							<div class="btn-group">
+								<a data-toggle="dropdown" class="btn btn-default-bright">그룹<span class="hidden-xs">지정</span>								<i class="zmdi zmdi-caret-down"></i></a>
+								<ul aria-labelledby="dLabel" role="menu" class="dropdown-menu animation-dock check">
+									<div class="select_group _check_drop_group_list"></div>
+									<div class="footer">
+										<li class="divider"></li>
+										<li><a href="javascript:;" onclick="MEMBER_GROUP.openGroupForm()">새 그룹</a></li>
+									</div>
+								</ul>
+							</div>
+
+
+							<a class="btn btn-default-bright" onclick="TABLE_LIST.checkAction(function(codes){adminMember.openUpdateMemberConfirm(codes,'list');})">
+								<span class="hidden-xs">가입</span> 승인						</a>
+							<!--<a class="btn btn-default-bright"">적립금 관리</a>-->
+							<div class="btn-group">
+								<a data-toggle="dropdown" class="btn btn-default-bright border-radius-right">메세지								<i class="zmdi zmdi-caret-down"></i></a>
+								<ul aria-labelledby="dLabel" role="menu" class="dropdown-menu animation-dock check">
+									<!--								<li><a data-target="#send_mail" data-toggle="modal" href="#">이메일</a></li>-->
+									<li>
+										<a href="#" onclick="TABLE_LIST.checkAction(function(codes){adminMember.openMemberSmsForm(codes);})">SMS</a>
+									</li>
+									<li>
+										<a href="#" onclick="TABLE_LIST.checkAction(function(codes){adminMember.openMemberPushForm(codes);})">알림</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group">
+								<a data-toggle="dropdown" class="btn btn-default-bright border-radius-right">기타								<i class="zmdi zmdi-caret-down"></i></a>
+								<ul aria-labelledby="dLabel" role="menu" class="dropdown-menu animation-dock check">
+									<li>
+										<a href="#" onclick="TABLE_LIST.checkAction(function(codes){adminMember.openManageMemberPoint(codes);})">적립금 지급/차감</a>
+									</li>
+									<li>
+										<a href="#" onclick="TABLE_LIST.checkActionWithIsDeleteAuthLog(function(data){adminMember.openDeleteMember(data);})">사용자 삭제</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<!-- BEGIN CONTENT-->
+	<div id="content">
+		<section>
+
+			<link rel="stylesheet" type="text/css"
+				  href="https://cdn.datatables.net/v/dt/dt-1.11.5/sl-1.3.4/datatables.min.css" />
+			<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/sl-1.3.4/datatables.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+			<script type="text/javascript" charset="utf8"
+					src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+			<script>
+				$(document).ready(function () {
+					$('#table_id').DataTable();
+				});
+			</script>
+			<table class="table display no-margin" id="table_id">
+				<thead>
+				<tr>
+					<th>유저 고유번호</th>
+					<th>이름</th>
+					<th>아이디</th>
+					<th>전화번호</th>
+					<th>이메일</th>
+					<th>우편번호</th>
+					<th>상세주소(1)</th>
+					<th>상세주소(2)</th>
+					<th>가입날짜</th>
+				</tr>
+				</thead>
+
+				<tbody>
+<!--				"window.open('@{|/admin/memberview/${m.getUserIdx()}|}', '정보수정','width=1000px, height=1000px'); return false"-->
+
+
+
+
+<!--				<tr th:each="m : ${UserList}" th:onclick="|location.href='@{|/admin/memberview/${m.getUserIdx()}|}'|">-->
+				<tr th:each="m : ${UserList}" th:onclick="|window.open('@{|/admin/memberview/${m.getUserIdx()}|}', '@{정보수정}','@{width=700px, height=700px}'); return false|">
+					<td th:text="${m.userIdx}"></td>
+					<td th:text="${m.userName}">x</td>
+					<td th:text="${m.userUserid}">x</td>
+					<td th:text="${m.userHp}">x</td>
+					<td th:text="${m.userEmail}">x</td>
+					<td th:text="${m.userZipcode}">x</td>
+					<td th:text="${m.userAddress1}">x</td>
+					<td th:text="${m.userAddress2}">x</td>
+					<td th:text="${#temporals.format(m.userRegdate, 'yyyy-MM-dd')}">x</td>
+				</tr>
+				</tbody>
+			</table>
+		</section>
+
+	</div><!--end #content-->
+	<!-- END CONTENT -->
+	<script>
+		$(function(){
+			TABLE_LIST.init($('#UI_TABLE'));
+		});
+
+		function searchUser(){
+			var user_search = $('#userSearch');
+			user_search.submit();
+		}
+	</script><script>
+	$(window).on("keyup", function(e){
+		if ( $.cocoaDialog.isOpen() ) {
+			$.cocoaDialog.modalControl(e);
+		}
+		return false;
+	});</script>
+	<!-- BEGIN MENUBAR-->
+	<button type="button" class="hidden-lg hidden-md toggle-btn" data-dismiss="menubar">
+		<span class="sr-only">Toggle navigation</span>
+		<i class="btl bt-times"></i>
+	</button>
+
+
+	<div id="menubar" class="animate">
+		<div class="nano has-scrollbar" style="height: 719px;"><div class="nano-content" tabindex="0" style="right: -15px;"><div class="menubar-scroll-panel" style="padding-bottom: 50px;">
+			<div class="tabled full-width">
+
+				<div>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/logout"><img th:src="@{/image/power-off.png}" style="margin-left: 5px"><span style="font-size: 13px;">&nbsp; &nbsp;&nbsp;관리자 로그아웃</span></a></div>
+				<ul class="dropdown-menu global_setting animation-dock menu-card-styling">					<li class="holder ">
+					<a href="/admin/?type=page&amp;_ga=2.254642240.996359343.1645365816-1966519718.1645110617">
+						<div class="tabled">
+							<div class="table-cell vertical-middle width-1">
+								<img width="30" height="30" src="/common/img/flag_shapes/flag_kr_circle.png">
+							</div>
+							<div class="table-cell vertical-middle domain">
+
+								<span data-original-title="일반 방문자의 접속이 제한됩니다. 글로벌 버전으로 업그레이드 해주세요" data-toggle="tooltip" class="badge" data-placement="top" style="margin-left: 5px; vertical-align: top;">미결제</span>
+								<div class="text-gray-bright text-12">hyunwoo1001.imweb.me</div>
+							</div>
+						</div>
+					</a>
+					<div class="tools">
+					</div>
+				</li>
+					<li class="border-top"><a href="javascript:;" onclick="SITE_MANAGE.openAddUnit('S20220127201b2696461e8')" class="text-primary" style="padding-top: 15px;"></a></li></ul>		</div>
+			<ul id="main-menu" class="gui-controls"><li class="  " data-title="preview"><a href="https://www.duoback.co.kr/duobacke" target="_blank"><div class="gui-icon"><i class="db-preview"></i></div><span class="title title_controls">사이트 바로가기</span></a></li><li class="spacer"></li>
+<!--				<li class=" " data-title="dashboard"><a th:href="@{/admin/dashboard}" class="sidebar-nav-menu">-->
+<!--					<div class="gui-icon"><i class="db-dashboard"></i></div>-->
+<!--					<span class="title title_controls">대시보드</span></a></li>-->
+
+
+				<li class="gui-folder expanded" data-title="member"><a href="/admin/member" class="sidebar-nav-menu active" onclick="return false;">
+					<div class="gui-icon"><i class="db-user"></i></div>
+					<span class="title title_controls">사용자 관리</span></a>
+					<ul>
+						<li class="active expanded" data-title="member_list"><a th:href="@{/admin/memberlist}" class=" active"><span class="title title_controls">사용자 목록</span></a></li>
+<!--						<li class=" " data-title="member_mail"><a th:href="@{/admin/membermail}"><span class="title title_controls">메일 발송 설정</span></a></li>-->
+					</ul>
+				</li>
+				<li class="gui-folder" data-title="shopping"><a href="/admin/shopping" class="sidebar-nav-menu" onclick="return false;">
+
+					<div class="gui-icon"><i class="db-shopping-bag"></i></div>
+					<span class="title title_controls">쇼핑 관리</span></a>
+					<ul>
+						<li class="  " data-title="shopping_product"><a th:href="@{/admin/management}">
+							<span class="title title_controls">상품관리</span></a></li>
+						<li class="  " data-title="shopping_order"><a th:href="@{/admin/order}"><span class="title title_controls">주문관리</span></a></li>
+						<li class="  " data-title="shopping_cancel"><a th:href="@{/admin/cancel}"><span class="title title_controls">취소관리</span></a></li>
+						<li class="  " data-title="shopping_return"><a th:href="@{/admin/return}"><span class="title title_controls">반품관리</span></a></li>
+						<li class="  " data-title="shopping_exchange"><a th:href="@{/admin/exchange}"><span class="title title_controls">교환관리</span></a></li>
+						<li class="  " data-title="shopping_regularly"><a th:href="@{/admin/dpoint}"><span class="title title_controls">D포인트 관리</span></a></li>
+						<li class="  " data-title="booking_config"><a th:href="@{/admin/coupon}"><span class="title title_controls">쿠폰관리</span></a></li>
+					</ul>
+				</li>
+				<li class="gui-folder" data-title="contents"><a href="/admin/contents" class="sidebar-nav-menu" onclick="return false;">
+
+					<div class="gui-icon"><i class="db-pencil"></i></div>
+					<span class="title title_controls">컨텐츠 관리</span></a>
+					<ul>
+						<li class="  " data-title="contents_post"><a th:href="@{/admin/review}"><span class="title title_controls">구매평
+                                    관리</span></a></li>
+						<li class="  " data-title="contents_comment"><a th:href="@{/admin/answer}"><span class="title title_controls">문의
+                                    관리</span></a></li>
+						<li class="  " data-title="contents_comment"><a th:href="@{/admin/notice}"><span class="title title_controls">공지 관리</span></a></li></ul>
+
+			</ul>
+
+		</div></div><div class="nano-pane"><div class="nano-slider" style="height: 516px; top: 46.2052px;"></div></div></div>
+	</div>
+
+	<div class="fold_area tabled animate" style="padding-left: 24px;">
+		<div class="table-cell vertical-middle" style="padding-right: 45px;">
+			<a href="#" class="logo_icon_menu">
+				<h4 style="font-family: 'TmoneyRoundWindExtraBold' !important; text-align: center;">(주)듀오백<br>DUOBACK</h4></a>
+		</div>
+	</div>
+
+	<script>
+
+		$(function(){
+			var $body = $('body');
+			var $btn = $('#toggle_button');
+			var sidebar_mini_class = 'sidebar-mini';
+			var current_sidebar_mini_class = "";
+			var $menubar_toggle = $body.find('#header .menubar-toggle');
+			var $close_btn = $('._close_btn');
+			$btn.off('click touch').on('click touch', function(){
+				if ( $body.hasClass(sidebar_mini_class) ) {
+					setSideMenu('show');
+				} else {
+					setSideMenu('hide');
+				}
+			});
+			if(current_sidebar_mini_class === sidebar_mini_class) $body.addClass(sidebar_mini_class);
+			else $body.removeClass(sidebar_mini_class);
+			function setSideMenu(show){
+				$.ajax({
+					type : 'POST',
+					data : {'status' : show},
+					url : ('/admin/ajax/inc/set_side_menu.cm'),
+					dataType : 'json',
+					async : false,
+					cache : false,
+					success : function(res){
+						if(res.msg === "show"){
+							$body.removeClass(sidebar_mini_class);
+						}else{
+							$body.addClass(sidebar_mini_class);
+						}
+					}
+				});
+			}
+		});
+
+	</script>
+</div> <!-- END BASE -->
+
+<script>
+</script><div style="position: absolute; width: 1px; height: 1px; left: -10000px;" data-ip="61.74.255.158" data-ip2="" data-ip3="61.74.255.158, 130.176.125.116"><input id="dummy_input" type="text"></div>
+
+<div id="cocoaModal" role="dialog" data-backdrop="true" data-keyboard="true" style="display: none;" class="modal modal_admin_member_excel_download">
+	<div class="modal-dialog ui-draggable memo">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="btm bt-times"></i></button>
+				<h3 class="modal-title" id="formModalLabel">회원 관리자 메모</h3>
+			</div>
+
+			<form role="form" class="form form-validate" novalidate="novalidate" id="groupf">
+				<div class="modal-body">
+					<div class="alert alert-info">
+						회원별로 기록하실 사항이 있다면 메모해 주세요.<br>회원에겐 표시되지 않습니다.
+					</div>
+					<textarea rows="10" required="" name="admin_memo" id="admin_memo" maxlength="500" class="form-control" placeholder="내용입력(최대 500자)"></textarea>
+					<p class="text-right">
+						<span class="help-block chars" id="admin_memo_chars_title">0/500</span>
+					</p>
+				</div>
+			</form>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-primary btn-flat" id="btn_admin_memo">저장</button>
+			</div></div>
+	</div>
+
+	<div class="modal-dialog ui-draggable excel">
+		<div class="modal-content">
+
+
+
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+
+
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+
+
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+			<div id="dashboard_loader_sub" class="se-pre-con" style="display: none;">
+				<div class="page-loader-spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" style="width:70%">
+						<label>70%</label>
+					</div>
+				</div>
+			</div>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="btm bt-times"></i></button>
+				<h3 class="modal-title">사용자 목록 내보내기</h3>
+			</div>
+			<div class="modal-body">
+
+
+				<div class="form-group">
+					<label class="control-label">사용자 정보 보호 <a href="javascript:;" class="text-gray" role="button" data-toggle="popover" data-placement="auto" title="" data-content="개인정보 취급시 계정, 이메일, 주소정보 등을 특정할 수 없도록 마스킹 처리하는 기능입니다. 개인정보를 열람하거나 처리하면 안 되는 담당자 또는 외부 기관에 전달용으로 사용하면 개인정보 유출에 대한 위험을 줄일 수 있습니다." data-original-title="사용자 정보 보호"><i class="btm bt-question-circle"></i></a></label>
+					<div class="checkbox checkbox-styled">
+						<label>
+							<input type="checkbox" id="member_privacy" name="member_privacy" value="N">
+							<span>사용</span>
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<select id="join_type" name="join_type" class="form-control inline-blocked" style="width: 200px">
+						<option value="t2022012647528791dbb90">일반회원</option>		</select>
+					<a href="javascript:;" class="btn btn-primary btn-sm btn-sm-padding request_btn _request_btn" data-toggle="tooltip" data-placement="top" data-original-title="" title="">엑셀 파일 생성</a>
+				</div>
+				<div class="form-group">
+					<table class="table table-order-excel-list full-width full-height">
+						<colgroup>
+							<col style="width: 100px;">
+							<col style="width: 100px;">
+							<col style="width: 100px;">
+							<col>
+							<col style="width: 130px;">
+							<col style="width: 60px;">
+						</colgroup>
+						<thead class="subject">
+						<tr>
+							<th>유형</th>
+							<th>그룹</th>
+							<th>요청 일시</th>
+							<th>다운로드 가능기한</th>
+							<th class="text-right" style="padding-right: 20px;">다운로드</th>
+							<th class="text-right" style="padding-right: 20px;">삭제</th>
+						</tr>
+						</thead>
+						<tbody class="excel_list_body" id="_excel_list_body"></tbody>
+					</table>
+					<div class="text-center excel_empty_wrap _excel_empty_wrap">
+						요청된 데이터가 없습니다.		</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+			</div>
+
+			<script>
+				$(function(){
+					$('.btn-popover').popover();
+					MEMBER_EXCEL.loadExcelList();
+				});
+
+				$('._request_btn').off('click').on('click', function(){
+					MEMBER_EXCEL.runMemberExcelMake('');
+				});
+
+			</script>
+		</div>
+	</div>
+	<div class="modal-dialog ui-draggable group">
+		<div class="modal-content">
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+
+
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="btm bt-times"></i></button>
+				<h3 class="modal-title" id="formModalLabel">새 그룹 만들기</h3>
+			</div>
+			<form role="form" class="form-validate" novalidate="novalidate" id="groupf">
+				<input type="hidden" name="idx" value="0">
+				<input type="hidden" name="mode" value="add">
+				<div class="modal-body">
+					<div class="form-group">
+						<label>그룹명</label>
+						<input type="text" name="title" data-toggle="tooltip" value="" class="form-control" onkeydown="if(checkEnter(event)){ MEMBER_GROUP_SETTING_MODAL.saveGroupForm(); return false; }" data-original-title="" title="">
+					</div>
+					<div class="form-group">
+						<label>그룹 유형 선택					<a href="javascript:" class="text-gray-light html-popover" role="button" data-toggle="popover" data-trigger="focus" tabindex="0" data-placement="top" title="" data-content="운영진 그룹 선택시 권한을 부여할 수 있습니다. 믿을만한 사용자에게 권한을 부여하세요." data-original-title="운영진 그룹">
+							<i class="btm bt-question-circle"></i>
+						</a>
+						</label>
+						<select name="group_type" class="form-control" id="group_type">
+							<option value="member" selected="">일반 회원 그룹</option><option value="admin">운영진 그룹</option>				</select>
+						<div class="group_setting shopping_group_setting" style="padding-top: 10px;display:none;">
+							<div class="checkbox checkbox-styled">
+								<label>
+									<input type="checkbox" id="shopping_auto_grouping_not_used" name="no_use_auto_change" value="ok">
+									<span>자동 등급 사용 안함</span>
+								</label>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="form-group group_setting admin_group_setting" style="padding-top: 30px;display: none">
+						<label>메뉴별 권한설정</label>
+						<div class="custom-table">
+							<div class="ct-header">
+								<ul class="list-style clearfix">
+									<li class="ct-title">항목</li>
+									<li>조회 권한</li>
+									<li>편집 권한</li>
+								</ul>
+							</div>
+							<div class="ct-body">
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										디자인모드								</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_design_view_allToggle_modal" name="admin_design" class="_modal_view_admin_design" onclick="PERMISSION_GROUP.allCheckToggle('admin_design','view','modal')" disabled="" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_design_edit_allToggle_modal" name="admin_design" class="_modal_edit_admin_design" onclick="PERMISSION_GROUP.allCheckToggle('admin_design','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										<a href="#admin_member_modal" data-toggle="collapse" aria-expanded="false">사용자 관리</a>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_member_view_allToggle_modal" name="admin_member" class="_modal_view_admin_member" onclick="PERMISSION_GROUP.allCheckToggle('admin_member','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_member_edit_allToggle_modal" name="admin_member" class="_modal_edit_admin_member" onclick="PERMISSION_GROUP.allCheckToggle('admin_member','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<div id="admin_member_modal" class="collapse ct-sub">
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											사용자 목록 권한											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_list" class="_modal_view_admin_member_list" onclick="PERMISSION_GROUP.CheckToggle('admin_member','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_list" class="_modal_edit_admin_member_list" onclick="PERMISSION_GROUP.CheckToggle('admin_member','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_member', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_member', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											메시지 보내기 권한											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_msg" class="_modal_view_admin_member_msg" onclick="PERMISSION_GROUP.CheckToggle('admin_member','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_msg" class="_modal_edit_admin_member_msg" onclick="PERMISSION_GROUP.CheckToggle('admin_member','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_member', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_member', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											운영진 설정 권한											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_manager" class="_modal_view_admin_member_manager" onclick="PERMISSION_GROUP.CheckToggle('admin_member','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_manager" class="_modal_edit_admin_member_manager" onclick="PERMISSION_GROUP.CheckToggle('admin_member','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_member', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_member', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											메일 발송 설정 권한											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_mail" class="_modal_view_admin_member_mail" onclick="PERMISSION_GROUP.CheckToggle('admin_member','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_mail" class="_modal_edit_admin_member_mail" onclick="PERMISSION_GROUP.CheckToggle('admin_member','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_member', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_member', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											SMS 발송 설정 권한											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_sms" class="_modal_view_admin_member_sms" onclick="PERMISSION_GROUP.CheckToggle('admin_member','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_member_sms" class="_modal_edit_admin_member_sms" onclick="PERMISSION_GROUP.CheckToggle('admin_member','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_member', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_member', 'edit', 'modal');
+									</script>
+								</div>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										<a href="#admin_shopping_modal" data-toggle="collapse" aria-expanded="false">쇼핑</a>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_shopping_view_allToggle_modal" name="admin_shopping" class="_modal_view_admin_shopping" onclick="PERMISSION_GROUP.allCheckToggle('admin_shopping','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_shopping_edit_allToggle_modal" name="admin_shopping" class="_modal_edit_admin_shopping" onclick="PERMISSION_GROUP.allCheckToggle('admin_shopping','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<div id="admin_shopping_modal" class="collapse ct-sub">
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											상품관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_product" class="_modal_view_admin_shopping_product" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_product" class="_modal_edit_admin_shopping_product" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											주문관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_order" class="_modal_view_admin_shopping_order" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_order" class="_modal_edit_admin_shopping_order" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											취소관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_cancel" class="_modal_view_admin_shopping_cancel" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_cancel" class="_modal_edit_admin_shopping_cancel" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											반품관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_return" class="_modal_view_admin_shopping_return" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_return" class="_modal_edit_admin_shopping_return" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											교환관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_exchange" class="_modal_view_admin_shopping_exchange" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_exchange" class="_modal_edit_admin_shopping_exchange" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											정기구독 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_regularly" class="_modal_view_admin_shopping_regularly" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_regularly" class="_modal_edit_admin_shopping_regularly" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											구매평 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_review" class="_modal_view_admin_shopping_review" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_review" class="_modal_edit_admin_shopping_review" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											문의관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_answers" class="_modal_view_admin_shopping_answers" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_answers" class="_modal_edit_admin_shopping_answers" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											적립금 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_mileage" class="_modal_view_admin_shopping_mileage" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_mileage" class="_modal_edit_admin_shopping_mileage" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											쿠폰											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_coupon" class="_modal_view_admin_shopping_coupon" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_coupon" class="_modal_edit_admin_shopping_coupon" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											네이버/카카오 쇼핑											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_naver" class="_modal_view_admin_shopping_naver" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_naver" class="_modal_edit_admin_shopping_naver" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											쇼핑 환경설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_config" class="_modal_view_admin_shopping_config" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_shopping_config" class="_modal_edit_admin_shopping_config" onclick="PERMISSION_GROUP.CheckToggle('admin_shopping','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_shopping', 'edit', 'modal');
+									</script>
+								</div>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										<a href="#admin_contents_modal" data-toggle="collapse" aria-expanded="false">컨텐츠 관리</a>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_contents_view_allToggle_modal" name="admin_contents" class="_modal_view_admin_contents" onclick="PERMISSION_GROUP.allCheckToggle('admin_contents','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_contents_edit_allToggle_modal" name="admin_contents" class="_modal_edit_admin_contents" onclick="PERMISSION_GROUP.allCheckToggle('admin_contents','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<div id="admin_contents_modal" class="collapse ct-sub">
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											게시물 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_post" class="_modal_view_admin_contents_post" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_post" class="_modal_edit_admin_contents_post" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											댓글 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_comment" class="_modal_view_admin_contents_comment" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_comment" class="_modal_edit_admin_contents_comment" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											입력폼 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_form" class="_modal_view_admin_contents_form" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_form" class="_modal_edit_admin_contents_form" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											지도 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_map" class="_modal_view_admin_contents_map" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_map" class="_modal_edit_admin_contents_map" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											일정 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_calendar" class="_modal_view_admin_contents_calendar" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_calendar" class="_modal_edit_admin_contents_calendar" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											갤러리 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_gallery" class="_modal_view_admin_contents_gallery" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_gallery" class="_modal_edit_admin_contents_gallery" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											신고/차단 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_report" class="_modal_view_admin_contents_report" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_contents_report" class="_modal_edit_admin_contents_report" onclick="PERMISSION_GROUP.CheckToggle('admin_contents','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_contents', 'edit', 'modal');
+									</script>
+								</div>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										<a href="#admin_marketing_modal" data-toggle="collapse" aria-expanded="false">마케팅 관리</a>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_marketing_view_allToggle_modal" name="admin_marketing" class="_modal_view_admin_marketing" onclick="PERMISSION_GROUP.allCheckToggle('admin_marketing','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_marketing_edit_allToggle_modal" name="admin_marketing" class="_modal_edit_admin_marketing" onclick="PERMISSION_GROUP.allCheckToggle('admin_marketing','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<div id="admin_marketing_modal" class="collapse ct-sub">
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											전환추적/리타게팅 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_marketing_trace" class="_modal_view_admin_marketing_trace" onclick="PERMISSION_GROUP.CheckToggle('admin_marketing','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_marketing_trace" class="_modal_edit_admin_marketing_trace" onclick="PERMISSION_GROUP.CheckToggle('admin_marketing','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_marketing', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_marketing', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											페이스북 마케팅(FBE)											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_marketing_fbe" class="_modal_view_admin_marketing_fbe" onclick="PERMISSION_GROUP.CheckToggle('admin_marketing','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_marketing_fbe" class="_modal_edit_admin_marketing_fbe" onclick="PERMISSION_GROUP.CheckToggle('admin_marketing','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_marketing', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_marketing', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											에이스카운터											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_marketing_acecounter" class="_modal_view_admin_marketing_acecounter" onclick="PERMISSION_GROUP.CheckToggle('admin_marketing','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_marketing_acecounter" class="_modal_edit_admin_marketing_acecounter" onclick="PERMISSION_GROUP.CheckToggle('admin_marketing','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_marketing', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_marketing', 'edit', 'modal');
+									</script>
+								</div>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										<a href="#admin_app_modal" data-toggle="collapse" aria-expanded="false">App 신청 및 관리</a>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_app_view_allToggle_modal" name="admin_app" class="_modal_view_admin_app" onclick="PERMISSION_GROUP.allCheckToggle('admin_app','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_app_edit_allToggle_modal" name="admin_app" class="_modal_edit_admin_app" onclick="PERMISSION_GROUP.allCheckToggle('admin_app','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<div id="admin_app_modal" class="collapse ct-sub">
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											Android 앱											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_app_android" class="_modal_view_admin_app_android" onclick="PERMISSION_GROUP.CheckToggle('admin_app','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_app_android" class="_modal_edit_admin_app_android" onclick="PERMISSION_GROUP.CheckToggle('admin_app','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_app', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_app', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											iOS 앱											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_app_ios" class="_modal_view_admin_app_ios" onclick="PERMISSION_GROUP.CheckToggle('admin_app','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_app_ios" class="_modal_edit_admin_app_ios" onclick="PERMISSION_GROUP.CheckToggle('admin_app','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_app', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_app', 'edit', 'modal');
+									</script>
+								</div>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										<a href="#admin_stat_modal" data-toggle="collapse" aria-expanded="false">통계</a>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_stat_view_allToggle_modal" name="admin_stat" class="_modal_view_admin_stat" onclick="PERMISSION_GROUP.allCheckToggle('admin_stat','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_stat_edit_allToggle_modal" name="admin_stat" class="_modal_edit_admin_stat" onclick="PERMISSION_GROUP.allCheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<div id="admin_stat_modal" class="collapse ct-sub">
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											개요											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_summary" class="_modal_view_admin_stat_summary" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_summary" class="_modal_edit_admin_stat_summary" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											기간별 분석											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_analytics" class="_modal_view_admin_stat_analytics" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_analytics" class="_modal_edit_admin_stat_analytics" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											매출											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_shopping" class="_modal_view_admin_stat_shopping" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_shopping" class="_modal_edit_admin_stat_shopping" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											컨텐츠 반응											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_feedback" class="_modal_view_admin_stat_feedback" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_feedback" class="_modal_edit_admin_stat_feedback" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											방문자 통계											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_visitor" class="_modal_view_admin_stat_visitor" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_visitor" class="_modal_edit_admin_stat_visitor" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											유입 사이트											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_site" class="_modal_view_admin_stat_site" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_site" class="_modal_edit_admin_stat_site" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											유입 검색어											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_keyword" class="_modal_view_admin_stat_keyword" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_keyword" class="_modal_edit_admin_stat_keyword" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											많이 방문한 페이지											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_page" class="_modal_view_admin_stat_page" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_page" class="_modal_edit_admin_stat_page" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											저장공간											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_storage" class="_modal_view_admin_stat_storage" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_storage" class="_modal_edit_admin_stat_storage" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											트래픽											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_traffic" class="_modal_view_admin_stat_traffic" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_stat_traffic" class="_modal_edit_admin_stat_traffic" onclick="PERMISSION_GROUP.CheckToggle('admin_stat','edit','modal')" disabled="" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_stat', 'edit', 'modal');
+									</script>
+								</div>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										결제/부가서비스								</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_payment_view_allToggle_modal" name="admin_payment" class="_modal_view_admin_payment" onclick="PERMISSION_GROUP.allCheckToggle('admin_payment','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_payment_edit_allToggle_modal" name="admin_payment" class="_modal_edit_admin_payment" onclick="PERMISSION_GROUP.allCheckToggle('admin_payment','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										<a href="#admin_config_modal" data-toggle="collapse" aria-expanded="false">환경설정</a>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_config_view_allToggle_modal" name="admin_config" class="_modal_view_admin_config" onclick="PERMISSION_GROUP.allCheckToggle('admin_config','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_config_edit_allToggle_modal" name="admin_config" class="_modal_edit_admin_config" onclick="PERMISSION_GROUP.allCheckToggle('admin_config','edit','modal')" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+								<div id="admin_config_modal" class="collapse ct-sub">
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											기본 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_default" class="_modal_view_admin_config_default" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_default" class="_modal_edit_admin_config_default" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											언어/지역/통화											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_localize" class="_modal_view_admin_config_localize" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_localize" class="_modal_edit_admin_config_localize" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											전자결제(PG) 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_pg" class="_modal_view_admin_config_pg" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_pg" class="_modal_edit_admin_config_pg" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											도메인 구입 및 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_domain" class="_modal_view_admin_config_domain" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_domain" class="_modal_edit_admin_config_domain" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											SSL(보안서버) 구입 및 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_ssl" class="_modal_view_admin_config_ssl" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_ssl" class="_modal_edit_admin_config_ssl" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											보안 및 개인정보 보호											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_security" class="_modal_view_admin_config_security" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_security" class="_modal_edit_admin_config_security" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											가입 및 그룹 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_membership" class="_modal_view_admin_config_membership" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_membership" class="_modal_edit_admin_config_membership" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											SEO, 헤더설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_seo" class="_modal_view_admin_config_seo" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_seo" class="_modal_edit_admin_config_seo" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											약관 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_etc" class="_modal_view_admin_config_etc" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_etc" class="_modal_edit_admin_config_etc" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											팝업/배너 관리											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_popup" class="_modal_view_admin_config_popup" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_popup" class="_modal_edit_admin_config_popup" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											본인인증/성인인증											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_adult" class="_modal_view_admin_config_adult" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_adult" class="_modal_edit_admin_config_adult" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											소셜 로그인 / API 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_oauth" class="_modal_view_admin_config_oauth" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_oauth" class="_modal_edit_admin_config_oauth" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											실시간 상담 설정											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_chat" class="_modal_view_admin_config_chat" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_chat" class="_modal_edit_admin_config_chat" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											디자이너/리셀러 찾기											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_find_designer" class="_modal_view_admin_config_find_designer" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_find_designer" class="_modal_edit_admin_config_find_designer" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+									<ul class="list-style clearfix">
+										<li class="ct-title">
+											외부 서비스 연동 (API)											</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_api" class="_modal_view_admin_config_api" onclick="PERMISSION_GROUP.CheckToggle('admin_config','view','modal')" value="view">
+													<span></span>
+												</label>
+											</div>
+										</li>
+										<li>
+											<div class="checkbox checkbox-styled no-margin">
+												<label>
+													<input type="checkbox" name="admin_config_api" class="_modal_edit_admin_config_api" onclick="PERMISSION_GROUP.CheckToggle('admin_config','edit','modal')" value="edit">
+													<span></span>
+												</label>
+											</div>
+										</li>
+									</ul>
+									<script>
+										PERMISSION_GROUP.CheckToggle('admin_config', 'view', 'modal');
+										PERMISSION_GROUP.CheckToggle('admin_config', 'edit', 'modal');
+									</script>
+								</div>
+								<ul class="list-style clearfix">
+									<li class="ct-title">
+										고객지원								</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_support_view_allToggle_modal" name="admin_support" class="_modal_view_admin_support" onclick="PERMISSION_GROUP.allCheckToggle('admin_support','view','modal')" value="view">
+												<span></span>
+											</label>
+										</div>
+									</li>
+									<li>
+										<div class="checkbox checkbox-styled no-margin">
+											<label>
+												<input type="checkbox" id="admin_support_edit_allToggle_modal" name="admin_support" class="_modal_edit_admin_support" onclick="PERMISSION_GROUP.allCheckToggle('admin_support','edit','modal')" disabled="" value="edit">
+												<span></span>
+											</label>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="form-group group_setting admin_group_setting" style="padding-top: 30px;display: none">
+						<label class="margin-bottom-xxl">세부 설정</label>
+						<div class="checkbox checkbox-styled">
+							<label>
+								<input name="shopping_order_print_permission" type="checkbox" value="Y">
+								<span>쇼핑 주문서 출력 권한</span>
+							</label>
+						</div>
+						<div class="checkbox checkbox-styled">
+							<label>
+								<input name="member_excel_download_permission" type="checkbox" value="Y">
+								<span>사용자 목록 엑셀 다운로드 권한</span>
+							</label>
+						</div>
+						<div class="checkbox checkbox-styled">
+							<label>
+								<input name="shopping_excel_download_permission" type="checkbox" value="Y">
+								<span>쇼핑 엑셀 다운로드 권한</span>
+							</label>
+						</div>
+						<div class="checkbox checkbox-styled">
+							<label>
+								<input name="booking_excel_download_permission" type="checkbox" value="Y">
+								<span>예약 엑셀 다운로드 권한</span>
+							</label>
+						</div>
+						<div class="checkbox checkbox-styled">
+							<label>
+								<input name="booking_order_print_permission" type="checkbox" value="Y">
+								<span>예약 주문서 출력 권한</span>
+							</label>
+						</div>
+						<div class="checkbox checkbox-styled">
+							<label>
+								<input name="contents_excel_download_permission" type="checkbox" value="Y">
+								<span>컨텐츠 엑셀 다운로드 권한</span>
+							</label>
+						</div>
+						<div class="checkbox checkbox-styled">
+							<label>
+								<input name="stat_excel_download_permission" type="checkbox" value="Y">
+								<span>통계 엑셀 다운로드 권한</span>
+							</label>
+						</div>
+					</div>
+
+
+
+
+
+				</div>
+			</form>
+			<!-- 변경사항이 생기면 추가 버튼의 btn-default가 btn-primary로 변경되어야 합니다. -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-primary btn-flat _submit" onclick="MEMBER_GROUP_SETTING_MODAL.saveGroupForm()">그룹 만들기</button>
+			</div>
+			<script>
+				window.doznutadmin.AppForm.initialize();
+				MEMBER_GROUP_SETTING_MODAL.init('u2022012661f14f8d7bca0', '', 'member');
+			</script>
+		</div>
+	</div>
+
+	<script>
+		let Now = new Date();
+
+		let NowTime = Now.getFullYear()
+		NowTime += '.' + Now.getMonth() + 1 ;
+		NowTime += '.' + Now.getDate();
+		NowTime += ' ' + Now.getHours();
+		NowTime += ':' + Now.getMinutes();
+
+		let Future = Now.getHours() + 6;
+		let FutureTime = Now.getFullYear()
+		FutureTime += '.' + Now.getMonth() + 1 ;
+		FutureTime += '.' + Now.getDate();
+		FutureTime += ' ' + Future
+		FutureTime += ':' + Now.getMinutes();
+
+		let str = "<tr><input type='hidden' name='excel_status' class='excel_status' value='download'><th>일반회원</th><th>전체회원_KR</th><th>"+NowTime+"</th><th>"+FutureTime+"</th><th class='text-right' style='padding-right: 20px;'><a href='/admin/ajax/member/download_excel_member_list.cm?idx=1146723' class=' text-primary make_complete '>다운로드</a></th><th class='text-right' style='padding-right: 20px;'><span class='text-danger' style='cursor: pointer;' onclick='MEMBER_EXCEL.deleteMemberExcel('1146723');'>삭제</span></th></tr>"
+		$(function(){
+			$('.btn-popover').popover();
+			MEMBER_EXCEL.loadExcelList();
+		});
+
+		$('._request_btn').off('click').on('click', function(){
+			MEMBER_EXCEL.runMemberExcelMake('');
+		});
+		$(".btm.bt-times").click(function(){
+			$('#cocoaModal').css('display', 'none');
+			$('#cocoaModal').toggleClass("in");
+		})
+		$(".btn.btn-default.btn-flat").click(function(){
+			$('#cocoaModal').css('display', 'none');
+			$('#cocoaModal').toggleClass("in");
+		});
+
+		$(".btn.btn-primary.btn-sm.btn-sm-padding").click(function() {
+			$("#_excel_list_body").append(str);
+		});
+
+		$("#new_group_btn").click(function(){
+			$(".excel").css("display","none");
+			$(".memo").css("display","none");
+			$(".group").css("display","inline-block");
+			$("#cocoaModal").removeClass("modal_admin_member_excel_download");
+			$('#cocoaModal').toggleClass("in");
+			$("#cocoaModal").addClass("modal_admin_group_form")
+			if ($('#cocoaModal').css('display') == 'block') {
+				$('#cocoaModal').css('display', 'none');
+			} else {
+				$('#cocoaModal').css('display', 'block');
+			}
+
+
+		})
+		$(".excel-down").click(function(){
+			$(".group").css("display","none");
+			$(".memo").css("display","none");
+			$(".excel").css("display","inline-block");
+			$("#cocoaModal").removeClass("modal_admin_group_form")
+			$('#cocoaModal').toggleClass("in");
+			$("#cocoaModal").addClass("modal_admin_member_excel_download");
+			if ($('#cocoaModal').css('display') == 'block') {
+				$('#cocoaModal').css('display', 'none');
+			} else {
+				$('#cocoaModal').css('display', 'block');
+			}
+		})
+
+		$(document).ready(function ()
+		{
+			$(document).on("click", '.text-danger', function(){
+				let result = confirm("삭제하시겠습니까?")
+				if(result){
+					$(this).parent().parent().remove();
+				}
+			})
+		})
+
+
+		$(document).on("click", '.dropdown-menu li:first-child', function(){
+			let result = confirm("삭제하시겠습니까?")
+			if(result){
+				$(this).parent().parent().parent().parent().remove();
+			}
+		})
+
+
+		$(document).ready(function ()
+		{
+			$(document).on("click", '.icon-note', function(){
+				$(".group").css("display","none");
+				$(".excel").css("display","none");
+				$(".memo").css("display","inline-block");
+				$("#cocoaModal").removeClass("modal_admin_group_form");
+				$('#cocoaModal').toggleClass("in");
+				$("#cocoaModal").addClass("modal_admin_member_excel_download");
+				if ($('#cocoaModal').css('display') == 'block') {
+					$('#cocoaModal').css('display', 'none');
+				} else {
+					$('#cocoaModal').css('display', 'block');
+				}
+			})
+		})
+
+		document.querySelector("#cocoaModal > div > div > div.modal-footer > button.btn.btn-primary.btn-flat._submit")
+
+	</script>
+
+	<div class="modal submodal" role="dialog" id="cocoaSubModal" style="z-index: 17001">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<iframe name="hidden_frame" id="hidden_frame" style="position: absolute; left: -9999px; width: 1px; height: 1px; top:-9999px;"></iframe>
+
+
+
+
+	<script>
+	</script>
+<!--	<script>-->
+<!--		let today = new Date();-->
+<!--		'use strict'-->
+<!--		let index = {-->
+<!--			init: function() {-->
+<!--				$("#btn-modify").on("click", () => { //this를 바인딩하기 위해 화샬표 함수 사용-->
+<!--					this.save();-->
+<!--				});-->
+<!--			},-->
+<!--			save: function() {-->
+
+<!--				let data = { //JavaScript Object-->
+<!--					"transaction_time": today,-->
+<!--					"resultCode": "ok",-->
+<!--					"description": "ok",-->
+<!--					"data": {-->
+<!--						userIdx: $("#userIdx").val(),-->
+<!--					}-->
+<!--				}-->
+<!--				$.ajax({-->
+<!--					type: "PUT", //Http method-->
+<!--					url: "/duoback/update", //API 주소-->
+<!--					data: JSON.stringify(data), //JSON으로 변환-->
+<!--					contentType: "application/json; charset=utf-8", //MIME 타입-->
+<!--					dataType: "json" //응답 데이터-->
+<!--				}).done(function(res) {-->
+<!--					alert("수정 성공");-->
+<!--					location.href = "/admin/memberlist";-->
+<!--				}).fail(function(err) {-->
+<!--					alert(JSON.stringify(err));-->
+<!--				});-->
+<!--			}-->
+<!--		}-->
+<!--		index.init();-->
+<!--	</script>-->
+<!--	<script>-->
+<!--		let today = new Date();-->
+<!--		'use strict'-->
+<!--		let index = {-->
+<!--			init: function() {-->
+<!--				$("#btn-delete").on("click", () => { //this를 바인딩하기 위해 화샬표 함수 사용-->
+<!--					this.save();-->
+<!--				});-->
+<!--			},-->
+<!--			save: function() {-->
+
+<!--				let data = {-->
+<!--						userIdx: $("#delete_idx").val(),-->
+<!--				}-->
+<!--				$.ajax({-->
+<!--					type: "DELETE", //Http method-->
+<!--					url: "/duoback/delete/"+data.userIdx, //API 주소-->
+<!--					data: JSON.stringify(data), //JSON으로 변환-->
+<!--					contentType: "application/json; charset=utf-8", //MIME 타입-->
+<!--					dataType: "json" //응답 데이터-->
+<!--				}).done(function(res) {-->
+<!--					alert("삭제 성공");-->
+<!--					location.href = "/admin/memberlist";-->
+<!--				}).fail(function(err) {-->
+<!--					alert(JSON.stringify(err));-->
+<!--				});-->
+<!--			}-->
+<!--		}-->
+<!--		index.init();-->
+<!--	</script>-->
+	<div id="device-breakpoints"><div class="device-xs visible-xs" data-breakpoint="xs"></div><div class="device-sm visible-sm" data-breakpoint="sm"></div><div class="device-md visible-md" data-breakpoint="md"></div><div class="device-lg visible-lg" data-breakpoint="lg"></div></div></body>

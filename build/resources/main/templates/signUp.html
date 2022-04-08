@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<form class="signup-form" action="" method="POST" id="join_form">
+<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="user_name" name="userName" type="text" class="validate"/>
+            <label for="user_name">이름</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="email" name="userUserid" type="email" class="validate"/>
+            <label for="email">아이디</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="password" name="userUserpw" type="password" class="validate"/>
+            <label for="password">비밀번호</label>
+        </div>
+    </div>
+    <input class="join_button signup-btn waves-effect waves-light btn" type="submit" value="가입하기"/>
+</form>
+
+<script>
+
+    $(document).ready(function(){
+        //회원가입 버튼(회원가입 기능 작동)
+        $(".join_button").click(function(){
+            $("#join_form").attr("action", "/user/join.do");
+            $("#join_form").submit();
+        });
+    });
+
+</script>
+</body>
+</html>

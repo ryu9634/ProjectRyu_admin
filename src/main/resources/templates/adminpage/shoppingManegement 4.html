@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="robots" content="noindex">
+
+	<script>
+		var TEST_SERVER = false;
+		var VENDOR_DOMAIN = 'https://vendor-cdn.imweb.me';
+		var UPLOAD_URL = '/upload/';
+		var CDN_UPLOAD_URL = 'https://cdn.imweb.me/upload/';
+		var IS_MAIN = false;
+		var IS_MOBILE = false;
+		var ADMIN_URL = '/admin/';
+		var THUMBNAIL_URL = '/thumbnail/';
+		var CDN_THUMBNAIL_URL = 'https://cdn.imweb.me/thumbnail/';
+		var SITE_CODE = 'S20220127c9945b26c87e8';
+		var UNIT_CODE = 'u2022012761f228e111b38';
+		var SITE_NO = 'S20220127c9945b26c87e8';
+		var UNIT_NO = 'u2022012761f228e111b38';
+		var MAIN_DOMAIN = 'test112244.imweb.me';
+		var CURRENT_DOMAIN = 'test112244.imweb.me';
+		var CURRENT_PROTOCOL = 'https://';
+		var GOOGLE_API_KEY = 'AIzaSyA8CCexf9XTJcH09mStr-HRW4nin4k8J7w';
+		var FROALA_VERSION = 311;
+		var FROALA_KEY = '6LF5g1B3D3F3C6C3E2F-11SLJCKHXOSLMc1YGSGb1ZXHSe1CgB5A4D4C3E3C2A13A19B7B2==';
+		var ADOBE_AVIARY_KEY = '94bd22b5cc05424494c5e7aeabab8466';
+		var LIMIT_API_LIST = [];
+		var NO_IMAGE_URL = '/img/no-image.png';
+		var ADMIN_LANG_CODE = 'KR';
+		var SITE_COUNTRY_CODE = 'kr';
+		var KOREA_COUNTRY_CODE = 'kr';
+		var TAIWAN_COUNTRY_CODE = 'tw';
+		var IS_GUEST = false;
+		var MEMBER_HASH = '2ffd5bea640c9973baae318318d4618cb5956107';
+		var CHECK_OFFICE = false;
+
+		/****************************************************************/
+		/* m_Completepayment  설명                                      */
+		/****************************************************************/
+		/* 인증완료시 재귀 함수                                         */
+		/* 해당 함수명은 절대 변경하면 안됩니다.                        */
+		/* 해당 함수의 위치는 payplus.js 보다먼저 선언되어여 합니다.    */
+		/* Web 방식의 경우 리턴 값이 form 으로 넘어옴                   */
+		/* EXE 방식의 경우 리턴 값이 json 으로 넘어옴                   */
+		/****************************************************************/
+		function m_Completepayment(FormOrJson, closeEvent) {
+			var frm = document.order_info;
+
+			/********************************************************************/
+			/* FormOrJson은 가맹점 임의 활용 금지                               */
+			/* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다.  */
+			/* FormOrJson 값을 활용 하시려면 기술지원팀으로 문의바랍니다.       */
+			/********************************************************************/
+			GetField(frm, FormOrJson);
+
+
+			if (frm.res_cd.value == "0000") {
+				/*
+				 가맹점 리턴값 처리 영역
+				 */
+
+				frm.submit();
+			}
+			else {
+				alert("[" + frm.res_cd.value + "] " + frm.res_msg.value);
+
+				closeEvent();
+			}
+		}
+	</script>
+
+	<!--KR.js시작-->
+	<script src="../js/KR_KRW_currency.js?1643094288"></script>
+	<script src="../js/KR.js?1643094288"></script>
+	<!--KR.js 끝-->
+	<!--Management.css 시작-->
+	<link rel="stylesheet" href="./style/Management.css">
+	<!--Management.css 끝-->
+	<!--css vendor cdn 시작-->
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap.css?1630317764">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/jquery-ui.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/ii.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/db-icons.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/css/material-design-iconic-font.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-datepicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/black-tie.css?1608189400">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/simple-line-icons.css?1608179394">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im-icon.css?1643097867">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/preloader.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/owl.carousel2.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/slick.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/animate.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/nprogress.css?1577682282">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/css/trackpad-scroll-emulator.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome.min.css?1626931454">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/font-awesome5.min.css?1608189400">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/froala_311/css/froala_editor.pkgd.css?1607673118">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/froala_311/css/froala_style.min.css?1607673118">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/froala/custom-theme-v3.css?1614049551">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/colorpicker.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/codemirror.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/bootstrap-spinner.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/chosen.css?1617331870">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/fullcalendar.min.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/morris.core.css?1577682282">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.min.css?1596596378">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/im_component.css?1636689958">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/admin.css?1590627710">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/toastr.css?1593569516">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/alarm_menu.css?1643150804">
+	<link rel="stylesheet" type="text/css"
+		href="https://vendor-cdn.imweb.me/css/site/admin/bootstrap-theme-dashboard.css?1618365623">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/dashboard.css?1644393529">
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/site/admin/select2.css?1590627710">
+
+	<!--css vendor cdn 끝-->
+
+	<!--vendor-cdn js 시작-->
+	<script src="https://vendor-cdn.imweb.me/js/jquery.js?1627517460"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.browser.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-ui.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap.min.js?1630317768"></script>
+	<script src="https://vendor-cdn.imweb.me/js/tinycolor-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/common.js?1643089417"></script>
+	<script src="https://vendor-cdn.imweb.me/js/im_component.js?1636940317"></script>
+	<script src="https://vendor-cdn.imweb.me/js/admin_common.js?1637641047"></script>
+	<script src="https://vendor-cdn.imweb.me/js/table_list.js?1633057104"></script>
+	<script src="https://vendor-cdn.imweb.me/js/data.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/owl.carousel2.js?1638150602"></script>
+	<script src="https://vendor-cdn.imweb.me/js/slick.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/preloader.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.lazyload.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.trackpad-scroll-emulator.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.fileupload.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/nprogress.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/froala_editor.min.js?1608673099"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/align.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/char_counter.min.js?1607673165"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_beautifier.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/code_view.min.js?1608643124"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/colors.min.js?1607673167"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/draggable.min.js?1607673168"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/emoticons.min.js?1607673169"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/entities.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/file.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_family.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/font_size.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/forms.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/fullscreen.min.js?1607673170"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/image_manager.min.js?1607673172"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/inline_style.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_breaker.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/link.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/lists.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_format.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/paragraph_style.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/quote.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/save.min.js?1607673174"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/table.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/url.min.js?1607673177"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/video.min.js?1625125569"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/plugins/line_height.min.js?1607673173"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/third_party/font_awesome.min.js?1607673192"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/ko.js?1607680617"></script>
+	<script src="https://vendor-cdn.imweb.me/froala_311/js/languages/zh_tw.js?1608685913"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery-scrolltofixed-min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/colorpicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.chosen.js?1619084781"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.timepicker.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.print.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autolinker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ThreeCanvas.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/snow.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/lightgallery-all.min.js?1596595980"></script>
+	<script src="https://vendor-cdn.imweb.me/js/autosize.js?1577682292"></script>
+	<link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/css/lightgallery.css?1577682282">
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nestable.doznut.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.number.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/masonry.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/Chart.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.autosize.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/codemirror.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/xml/xml.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/javascript/javascript.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/css/css.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/mode/htmlmixed/htmlmixed.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.select2_ko.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/imagesloaded.pkgd.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.nanoscroller.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/html5shiv.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.validate.js?1621218311"></script>
+	<script src="https://vendor-cdn.imweb.me/js/jquery.inputmask.bundle.min.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-with-locales.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/moment-timezone.js?1581998425"></script>
+	<script src="https://vendor-cdn.imweb.me/js/bootstrap-datepicker.js?1577682292"></script>
+	<script src="https://vendor-cdn.imweb.me/js/ie-checker-min.js?1577682292"></script>
+	<!--vendor-cdn js 끝-->
+
+	<!--js파일 시작-->
+	<script src="../js/doz_post.js?1577682293"></script>
+	<script src="../js/admin.js?1640738292"></script>
+	<script src="../js/coupon.js?1638164114"></script>
+	<script src="../js/doznut.js?1614036939"></script>
+	<script src="../js/event_check.js?1585896056"></script>
+	<script src="../js/site_member.js?1641367814"></script>
+	<script src="../js/alarm_menu.js?1603862128"></script>
+	<script src="../js/imweb_analytics.js?1604543771"></script>
+	<script src="../js/site_manage.js?1587087650"></script>
+	<script src="../js/admin_search.js?1639983006"></script>
+	<script src="../js/dashboard.js?1640738292"></script>
+	<script src="../js/config.js?1644196516"></script>
+	<script src="../js/member.js?1639447256"></script>
+	<script src="../js/permission.js?1633057103"></script>
+	<script src="../js/contents.js?1640137207"></script>
+	<script src="../js/payment.js?1637302294"></script>
+	<script src="../js/toastr.js?1577682293"></script>
+	<script src="../js/contents_list.js?1638842547"></script>
+	<script src="../js/shop.js?1643091624"></script>
+	<script src="../js/shop_point.js?1577682293"></script>
+	<script src="../js/shop_order.js?1641253472"></script>
+
+	<script>
+		/*var IS_ANDROID_APP = 'N';
+		(function () {
+			var customTooltipAllowList = $.fn.tooltip.Constructor.DEFAULTS.whiteList;
+			customTooltipAllowList.table = [];
+			customTooltipAllowList.thead = [];
+			customTooltipAllowList.tbody = [];
+			customTooltipAllowList.tr = [];
+			customTooltipAllowList.td = ["rowspan", "colspan"];
+			customTooltipAllowList.th = [];
+			customTooltipAllowList.caption = [];
+			customTooltipAllowList["*"].push("style");
+		})();
+	
+		function determineDropDirection() {
+			$(".dropdown-menu").each(function () {
+				$(this).css({
+					visibility: "hidden",
+					display: "block"
+				});
+	
+				$(this).parent().removeClass("dropup");
+	
+				if ($(this).offset().top + $(this).outerHeight() + 60 > $(window).innerHeight() + $(window).scrollTop()) {
+					$(this).parent().addClass("dropup");
+				}
+				$(this).removeAttr("style");
+			});
+		}
+	
+		determineDropDirection();
+	
+		$(window).scroll(determineDropDirection);*/
+	</script>
+</head>
+
+<body class="menubar-hoverable header-fixed menubar-pin">
+	<!-- BEGIN BASE-->
+	<div id="dashboard_loader" class="se-pre-con" style="display: none">
+		<div class="page-loader-spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+		<div class="progress">
+			<div class="progress-bar" role="progressbar" style="width:70%">
+				<label>70%</label>
+			</div>
+		</div>
+	</div>
+	<div id="base">
+		<!-- END OFFCANVAS LEFT -->
+		<script type="text/javascript">
+			$(function () {
+				SADMIN_MENU_ALERT.openAlert();
+			});
+		</script>
+		<header class="top_header" id="header">
+			<div class="headerbar">
+				<div class="headerbar-left">
+					<ul class="header-nav header-nav-options">
+						<li class="hidden-lg hidden-md">
+							<a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar"
+								href="javascript:void(0);">
+								<i class="btl bt-bars"></i>
+							</a>
+						</li>
+						<li class="header-nav-brand">
+							<div class="brand-holder">
+								<span class="location_text">
+									<a th:href="@{/admin/management}">상품관리</a></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="headerbar-right">
+					<ul class="header-nav header-nav-options _option_list">
+						<li class="hidden-xs"><a class="btn btn-default-bright" href="javascript:;"
+								onclick="alert('상품 일괄 추가 기능은 Pro, Global 버전에서만 사용 가능합니다.')">상품 일괄 추가</a></li>
+
+						<li class="hidden-xs"><a class="btn btn-primary" href="javascript:;"
+								onclick="alert('Free 버전에서 사용할 수 있는 상품 등록은 최대 5개 입니다.')">상품 추가</a></li>
+						<li class="hidden-md hidden-lg hidden-sm">
+							<button class="btn btn-flat" aria-expanded="false" aria-haspopup="true"
+								data-toggle="dropdown" type="button" id="dLabel" style="padding: 4px 8px;">
+								<i class="icon icon-options"></i>
+							</button>
+							<ul aria-labelledby="dLabel" role="menu" class="dropdown-menu animation-dock">
+								<li><a href="javascript:;" onclick="alert('Free 버전에서 사용할 수 있는 상품 등록은 최대 5개 입니다.')">상품
+										추가</a></li>
+								<li><a href="javascript:;"
+										onclick="alert('상품 일괄 추가 기능은 Pro, Global 버전에서만 사용 가능합니다.')">상품 일괄 추가</a></li>
+							</ul>
+						</li>
+					</ul>
+					<!--end .header-nav-options -->
+				</div>
+				<!--끝 #header-navbar-collapse -->
+				<!--끝 #header-navbar-collapse -->
+			</div>
+		</header>
+		<!-- BEGIN CONTENT-->
+		<div id="content">
+			<section class="no-padding-bottom">
+				<div class="section-body">
+					<div class="row">
+						<div class="col-md-3 col-lg-2 col-xl-2 hidden-xs hidden-sm">
+							<div class="card">
+								<div class="card-body no-padding">
+									<ul class="nav nav-pills nav-stacked">
+										<li class="no-hover" id="new_group_btn"
+											data-base_url="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czozOiJhbGwiO30%3D">
+											<a href="javascript:;" class="text-primary"
+												onclick="SHOP_PROD_MANAGE.openCategoryManage('prod_list')">카테고리 관리 <i
+													class="icon-settings"
+													style="font-size: 15px; vertical-align: middle; margin-left: 4px;  position: relative;  top: -1px;"></i></a>
+										</li>
+									</ul>
+
+									<div class="nav nav-pills nav-stacked nav-category">
+										<div id="prod_list_category_" class="dropdown-handle dd-handle  active">
+											<a href="javascript:;" onclick="SHOP_PROD_LIST.startCategorySearch('')">전체
+												카테고리</a>
+										</div>
+										<div id="prod_category_list" class="prod_category_list">
+											<div class="holder">
+												<div class="dropdown-handle dd-handle _menu_item"
+													data-code="s201712135a3093c67f5a7"
+													id="prod_list_category_s201712135a3093c67f5a7"
+													onclick="SHOP_PROD_LIST.startCategorySearch('s201712135a3093c67f5a7')">
+													<span class="_name">Necklace</span>
+												</div>
+											</div>
+											<div class="holder">
+												<div class="dropdown-handle dd-handle _menu_item"
+													data-code="s201803055a9c9db427c28"
+													id="prod_list_category_s201803055a9c9db427c28"
+													onclick="SHOP_PROD_LIST.startCategorySearch('s201803055a9c9db427c28')">
+													<span class="_name">Earring</span>
+												</div>
+											</div>
+											<div class="holder">
+												<div class="dropdown-handle dd-handle _menu_item"
+													data-code="s201803055a9c9dc87361c"
+													id="prod_list_category_s201803055a9c9dc87361c"
+													onclick="SHOP_PROD_LIST.startCategorySearch('s201803055a9c9dc87361c')">
+													<span class="_name">Ring</span>
+												</div>
+											</div>
+											<div class="holder">
+												<div class="dropdown-handle dd-handle _menu_item"
+													data-code="s201803055a9c9dcd252f0"
+													id="prod_list_category_s201803055a9c9dcd252f0"
+													onclick="SHOP_PROD_LIST.startCategorySearch('s201803055a9c9dcd252f0')">
+													<span class="_name">Bracelet</span>
+												</div>
+											</div>
+											<div class="holder">
+												<div class="dropdown-handle dd-handle _menu_item"
+													data-code="s201803055a9c9dd33b0c4"
+													id="prod_list_category_s201803055a9c9dd33b0c4"
+													onclick="SHOP_PROD_LIST.startCategorySearch('s201803055a9c9dd33b0c4')">
+													<span class="_name">Watch</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--end.card-body-->
+							</div>
+							<!--end.card-->
+
+							<div class="card">
+								<div class="card-body no-padding">
+									<ul class="nav nav-pills nav-stacked">
+										<li class="no-hover " id="new_group_btn"
+											data-base_url="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czozOiJhbGwiO30%3D">
+											<a href="javascript:;" class="text-primary"
+												onclick="SHOP_PROD_LIST.openShowcaseForm()">기획전 추가 <i class="icon-plus"
+													style="font-size: 15px; vertical-align: middle; margin-left: 4px; position: relative; top: -1px;"></i></a>
+										</li>
+									</ul>
+									<ul class="nav nav-pills nav-stacked nav-sm" id="showcase_list">
+										<li class="_showcase_item" id="showcase_item_c201806215b2b5cff5998b"><a
+												href="/admin/shopping/product/?&amp;showcase=c201806215b2b5cff5998b"><span
+													id="showcase_item_title_c201806215b2b5cff5998b">MD'S PICK</span>
+												<small class="margin-left-lg text-bold opacity-75">13</small><button
+													onclick="SHOP_PROD_LIST.openShowcaseForm('c201806215b2b5cff5998b');return false;"
+													class="pull-right btn btn-flat no-padding hover-visible"><i
+														class="zmdi zmdi-settings"></i></button></a></li>
+										<li class="_showcase_item" id="showcase_item_c201806215b2b5d3f1dc23"><a
+												href="/admin/shopping/product/?&amp;showcase=c201806215b2b5d3f1dc23"><span
+													id="showcase_item_title_c201806215b2b5d3f1dc23">SALE</span> <small
+													class="margin-left-lg text-bold opacity-75">9</small><button
+													onclick="SHOP_PROD_LIST.openShowcaseForm('c201806215b2b5d3f1dc23');return false;"
+													class="pull-right btn btn-flat no-padding hover-visible"><i
+														class="zmdi zmdi-settings"></i></button></a></li>
+										<li class="_showcase_item" id="showcase_item_c201806225b2c4f7a83ba5"><a
+												href="/admin/shopping/product/?&amp;showcase=c201806225b2c4f7a83ba5"><span
+													id="showcase_item_title_c201806225b2c4f7a83ba5">Rose Gold
+													Collection</span> <small
+													class="margin-left-lg text-bold opacity-75">10</small><button
+													onclick="SHOP_PROD_LIST.openShowcaseForm('c201806225b2c4f7a83ba5');return false;"
+													class="pull-right btn btn-flat no-padding hover-visible"><i
+														class="zmdi zmdi-settings"></i></button></a></li>
+										<li class="_showcase_item" id="showcase_item_c201806225b2c4f9ae2da8"><a
+												href="/admin/shopping/product/?&amp;showcase=c201806225b2c4f9ae2da8"><span
+													id="showcase_item_title_c201806225b2c4f9ae2da8">The New Summer
+													Collection</span> <small
+													class="margin-left-lg text-bold opacity-75">15</small><button
+													onclick="SHOP_PROD_LIST.openShowcaseForm('c201806225b2c4f9ae2da8');return false;"
+													class="pull-right btn btn-flat no-padding hover-visible"><i
+														class="zmdi zmdi-settings"></i></button></a></li>
+									</ul>
+								</div>
+								<!--end.card-body-->
+							</div>
+							<!--end.card-->
+						</div>
+						<!--end.col-->
+						<div class="col-md-9 col-lg-10 col-xl-10">
+							<ul class="nav nav-tabs" data-toggle="tabs" style="margin-bottom: 24px;"
+								id="prod_status_tab">
+								<li class="owl_dashboard _owl_dashboard owl-carousel owl-theme owl-loaded">
+									<div class="owl-stage-outer">
+										<div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 281px;"><div class="owl-item active" style="width: auto; margin-right: 0px;"><ul class="owl-nav-tabs"><li class=" _all"><a href="javascript:;" onclick="location.href='./?status=all&amp;q_enc=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D'">전체 <span class="_count text-primary">5</span></a></li></ul></div><div class="owl-item active" style="width: auto; margin-right: 0px;"><ul class="owl-nav-tabs"><li class=" _sale"><a href="javascript:;" onclick="location.href='./?status=sale&amp;q_enc=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D'">판매중 <span class="_count text-primary">0</span></a></li></ul></div><div class="owl-item active" style="width: auto; margin-right: 0px;"><ul class="owl-nav-tabs"><li class=" _soldout"><a href="javascript:;" onclick="location.href='./?status=soldout&amp;q_enc=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D'">품절 <span class="_count text-primary">0</span></a></li></ul></div><div class="owl-item active" style="width: auto; margin-right: 0px;"><ul class="owl-nav-tabs"><li class="active _nosale"><a href="javascript:;" onclick="location.href='./?status=nosale&amp;q_enc=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D'">숨김 <span class="_count text-primary">5</span></a></li></ul></div></div>
+									</div>
+									<div class="owl-controls">
+										<div class="owl-nav">
+											<div class="owl-prev" style="display: none;">prev</div>
+											<div class="owl-next" style="display: none;">next</div>
+										</div>
+										<div class="owl-dots" style="">
+											<div class="owl-dot active"><span></span></div>
+											<div class="owl-dot"><span></span></div>
+											<div class="owl-dot"><span></span></div>
+											<div class="owl-dot"><span></span></div>
+										</div>
+									</div>
+								</li>
+								<li class="list-view-size hidden-xs hidden-sm">
+									<select
+										onchange="location.href='./?q_enc=YToxOntzOjY6InN0YXR1cyI7czozOiJhbGwiO30%3D&amp;pagesize=' + $(this).val()+'&amp;category=&amp;showcase=&amp;status=all'">
+										<option value="10">10개씩 보기</option>
+										<option value="20" selected="">20개씩 보기</option>
+										<option value="50">50개씩 보기</option>
+										<option value="100">100개씩 보기</option>
+									</select>
+								</li>
+							</ul>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="clearfix search_form">
+										<div class="card form_left">
+											<div class="card-body no-padding">
+												<form role="search" class="prod-search" id="prod_search_form"
+													onsubmit="return false;">
+													<div class="twitter_wrap">
+														<span class="twitter-typeahead"
+															style="position: relative; display: inline-block;">
+															<input type="text"
+																class="_keyword_search form-control typeahead tt-input"
+																placeholder="상품명/SKU 검색" autocomplete="off"
+																spellcheck="false" dir="auto"
+																style="position: relative; vertical-align: top; border: none; background-color: transparent; padding-left: 0"
+																onkeydown="if (event.keyCode==13) SHOP_PROD_LIST.startKeywordSearch()"
+																value="">
+														</span>
+													</div>
+
+													<div class="serach_wrap big_search">
+														<div class="dd-filter-serach">
+															<label class="icon_set">
+																<i class="btl bt-search"
+																	onclick="SHOP_PROD_LIST.startKeywordSearch()"></i>
+															</label>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+
+										<!--내보내기 버튼 시작 onclick="SHOP_PROD_MANAGE.openModalProdExcelDownload('')" -->
+										<div class="card form_right" role="group">
+											<button type="button" id="pdOutModalBtn" onclick="pdModalBtn()"
+												class="btn btn-default-bright dropdown-toggle btn-card-height full-width"
+												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="btl bt-download"></i> 내보내기 <span class="caret"></span>
+											</button>
+
+											<!--내보내기 버튼 끝-->
+										</div>
+
+									</div>
+									<div class="col-md-12">
+										<div class="card style-transparent card-top no-tab" style="display: none"
+											id="prod_list_no_prod">
+											<div class="card-head">
+												<header class="style-price-header force-padding">
+													<h2>판매 시작을 위해 상품을 추가해 주세요</h2>
+													<div class="sub-title text-gray-bright text-center"
+														style="font-size: 18px;">의류, 전자제품, 식품 등 무엇이든 판매할 수 있습니다.</div>
+												</header>
+											</div>
+											<div class="card-body no-padding-y">
+												<div class="text-center text-gray force-padding">
+													<button type="button"
+														class="btn ink-reaction btn-lg btn-primary margin-bottom-xl"
+														onclick="alert('Free 버전에서 사용할 수 있는 상품 등록은 최대 5개 입니다.')">상품추가</button>
+
+													<p><a href="javascript:;" class="text-primary"
+															onclick="alert('상품 일괄 추가 기능은 Pro, Global 버전에서만 사용 가능합니다.')">대량
+															상품 등록</a></p>
+												</div>
+											</div>
+										</div>
+										<div class="card style-transparent card-top no-tab" style="display: none"
+											id="showcase_list_no_prod">
+											<div class="card-head">
+												<header class="style-price-header force-padding">
+													<h2>이 기획전에 포함된 상품이 없습니다.</h2>
+													<div class="sub-title text-gray-bright text-center"
+														style="font-size: 18px;">카테고리에서 기획전에 추가할 상품을 추가할 수 있습니다.</div>
+												</header>
+											</div>
+											<div class="card-body">
+												<div class="text-center">
+													<img src="/admin/img/imweb-category.gif" style="max-width: 100%">
+												</div>
+											</div>
+										</div>
+										<div class="card style-transparent card-top no-tab" style="display: none"
+											id="prod_list_no_search">
+											<div class="card-head">
+												<header class="style-price-header force-padding">
+													<h2>검색된 상품이 없습니다</h2>
+												</header>
+											</div>
+										</div>
+										<div class="card">
+											<div class="table-responsive shop-table check" id="prod_list" style="">
+												<table class="table no-margin">
+
+													<thead class="subject _prodListHeaderDeselected"
+														style="display: table-header-group"
+														id="prod_list_header_deselected">
+														<tr>
+															<th class="check">
+																<div class="checkbox checkbox-styled no-margin">
+																	<label>
+																		<input type="checkbox" value=""
+																			class="_prodListAllCheck"
+																			onclick="SHOP_PROD_LIST.listSetAllSelect($(this).prop('checked'),function(codes){SHOP_PROD_LIST.checkProd(codes)})"><span></span>
+																	</label>
+																</div>
+															</th>
+															<th class="no">No</th>
+															<th class="title image">상품명</th>
+															<th></th>
+															<th class="pay text-right">판매가</th>
+															<th class="group">카테고리</th>
+															<th class="showcase">기획전</th>
+															<th class="state">상태</th>
+															<th class="stock">재고</th>
+															<th class="r_date">등록일</th>
+															<th class="e_date ">수정일</th>
+															<th class="more"></th>
+														</tr>
+													</thead>
+													<thead class="select-thead _prodListHeaderSelected"
+														style="display: none" id="prod_list_header_selected">
+														<tr>
+															<th>
+																<div class="checkbox checkbox-styled no-margin">
+																	<label>
+																		<input type="checkbox" value=""
+																			class="_prodListAllCheck"
+																			onclick="SHOP_PROD_LIST.listSetAllSelect($(this).prop('checked'))"><span></span>
+																	</label>
+																</div>
+															</th>
+															<th>
+															</th>
+															<th colspan="12" style="padding: 0;">
+																<a class="btn btn-default-bright" href="javascript:;"
+																	style="margin-right: 10px"
+																	onclick="SHOP_PROD_LIST.copyProdMulti()">복제</a>
+																<a class="btn btn-default-bright" href="javascript:;"
+																	style="margin-right: 10px"
+																	onclick="SHOP_PROD_LIST.deleteProdMulti()">삭제</a>
+																<div class="btn-group" role="group"
+																	style="margin-right: 10px">
+																	<a class="btn btn-default-bright"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"
+																		style="margin-right: -1px;">상태 변경 <span
+																			class="caret"></span>
+																	</a>
+																	<ul class="dropdown-menu"
+																		aria-labelledby="btnGroupVerticalDrop1">
+																		<li><a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.updateStatusMulti('sale')">판매중</a>
+																		</li>
+																		<li><a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.updateStatusMulti('soldout')">품절</a>
+																		</li>
+																		<li><a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.updateStatusMulti('nosale')">숨김</a>
+																		</li>
+																	</ul>
+																	<a class="btn btn-default-bright"
+																		href="javascript:;"
+																		onclick="SHOP_PROD_LIST.openProdListModifyManage('category')">카테고리
+																		변경</a>
+																	<a class="btn btn-default-bright"
+																		href="javascript:;"
+																		onclick="SHOP_PROD_LIST.openProdListModifyManage('showcase')">기획전
+																		변경</a>
+																	<a class="btn btn-default-bright"
+																		href="javascript:;"
+																		onclick="SHOP_PROD_LIST.openModifyProdPriceMulti();">판매가
+																		변경</a>
+																	<a class="btn btn-default-bright"
+																		href="javascript:;"
+																		onclick="SHOP_PROD_LIST.openModifyDiscount();">할인
+																		설정</a>
+																	<a class="btn btn-default-bright"
+																		href="javascript:;"
+																		onclick="SHOP_PROD_LIST.openModifyPreSale();">판매기간
+																		변경</a>
+																	<a class="btn btn-default-bright"
+																		href="javascript:;"
+																		onclick="SHOP_PROD_LIST.openIconManageMulti()">뱃지
+																		변경</a>
+																	<a class="btn btn-default-bright"
+																		href="javascript:;"
+																		onclick="SHOP_PROD_LIST.openProdDetailMulti('header')">상품
+																		상세 공통 변경</a>
+
+																</div>
+															</th>
+														</tr>
+														<tr id="prod_page_all_selected" style="display: none">
+															<!--                                        <tr id="prod_page_all_selected">-->
+															<th colspan="12"
+																style="padding: 0; background-color: #FAFAFA; height: 50px; text-align: center">
+																<div id="prod_page_selected">
+																	<a class="" href="javascript:;">
+																		<span
+																			id="changeable_prod_selected_message"></span>
+																		<!--                                                        이 페이지에 있는 상품 <span id="prod_page_selected_count" class="text-bold"></span>개가 모두 선택되었습니다.-->
+																		<span id="changeable_prod_all_selected"
+																			class="text-primary">
+																			<!--                                                            <span onclick="SHOP_PROD_LIST.prodAllSelect(true);">-->
+																			<!--                                                                <span id="prod_page_status"></span> 상품 <span id="prod_page_total_count" class="text-bold"></span>개 모두 선택-->
+																			<!--                                                            </span>-->
+																		</span>
+																	</a>
+																</div>
+															</th>
+														</tr>
+													</thead>
+													<tbody id="prod_list_body" class="_prod_list_body">
+														<!--<tr class='content on">-->
+														<tr class="content _prodListItem"
+															id="prod_list_s20220222d59bf0f4a6233"
+															data-code="s20220222d59bf0f4a6233">
+															<td class="check">
+																<div class="drag _showcase_handle"></div>
+																<div class="checkbox checkbox-styled no-margin">
+																	<label>
+																		<input type="checkbox"
+																			value="s20220222d59bf0f4a6233"
+																			class="_prodListCheck" onclick="SHOP_PROD_LIST.listSetSelect('s20220222d59bf0f4a6233',function(codes){
+											SHOP_PROD_LIST.checkProd(codes);
+											})"><span></span>
+																	</label>
+																</div>
+															</td>
+															<td class="no text-12">4</td>
+															<td class="image">
+																<a
+																	href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=4"><img
+																		src="https://cdn.imweb.me/thumbnail/20190509/5cd3c7e4bb1c4.png"
+																		width="49" height="49" class="item-thumb"></a>
+															</td>
+															<td class="title">
+																<div>
+
+																	<div class="item-tit inline-blocked">
+																		<a
+																			href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=4">Commodo
+																			odio</a>
+																		<a href="https://testtt17.imweb.me/PRODUCT/?idx=4"
+																			target="_blank"
+																			class="btl bt-search vertical-middle"
+																			style="margin-left: 5px;"></a>
+
+																	</div>
+
+																	<span class="btn-sm text-gray-bright"></span>
+																</div>
+															</td>
+															<!--	<td class="sku"><a href="javascript:;">3847-112</a></td>-->
+															<td class="pay text-right">
+																47,000원<br> </td>
+															<!--	<td class="stock">100</td>-->
+															<!--	<td class="lately">100</td>-->
+															<td class="group">ALL</td>
+															<!--	<td class="diplay"><img src="../img/doz-icon.png" style="margin: 0 5px 3px 0;"><img src="../img/naver-icon.png"></td>-->
+															<td class="showcase">
+																<div class="dropdown">
+																	<button id="dLabel" type="button"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"
+																		class="btn btn-flat no-padding _drop_showcase_btn_s20220222d59bf0f4a6233">-</button>
+																	<ul class="dropdown-menu animation-dock check"
+																		role="menu" aria-labelledby="dLabel">
+																		<div class="select_group _drop_showcase_list _drop_showcase_list_s20220222d59bf0f4a6233"
+																			data-showcase=""
+																			data-prod="s20220222d59bf0f4a6233"
+																			data-noshowcase="Y">
+																		</div>
+																		<div class="footer">
+																			<li class="divider"></li>
+																			<li><a href="javascript:;"
+																					onclick="SHOP_PROD_LIST.openShowcaseForm()">새
+																					기획전</a></li>
+																		</div>
+																	</ul>
+																</div>
+															</td>
+															<td class="state on-click">
+																<a data-toggle="dropdown" style="margin-right: -1px;">
+																	<span>숨김</span>
+																</a>
+																<ul class="dropdown-menu" style="top: 50px;">
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s20220222d59bf0f4a6233', 'sale')">판매중</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s20220222d59bf0f4a6233', 'soldout')">품절</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s20220222d59bf0f4a6233', 'nosale')">숨김</a>
+																	</li>
+																</ul>
+															</td>
+															<td class="text-12" style="padding-left: 20px">
+																- </td>
+															<td class="r_date text-12">2019-05-02</td>
+															<td class="e_date text-12">방금</td>
+															<td class="more">
+																<div class="dropdown">
+																	<button class="btn btn-flat" aria-expanded="true"
+																		data-toggle="dropdown" type="button"
+																		id="dLabel">
+																		<i class="zmdi zmdi-more"></i>
+																	</button>
+																	<ul aria-labelledby="dLabel" role="menu"
+																		class="dropdown-menu animation-dock right">
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('top','s20220222d59bf0f4a6233', '');">맨
+																				위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('pre','s20220222d59bf0f4a6233', '');">위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('next','s20220222d59bf0f4a6233', '');">아래로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('bottom','s20220222d59bf0f4a6233', '');">맨
+																				아래로</a>
+																		</li>
+																	</ul>
+																</div>
+															</td>
+														</tr>
+														<!--<tr class='content on">-->
+														<tr class="content _prodListItem"
+															id="prod_list_s2022022244846dbea066c"
+															data-code="s2022022244846dbea066c">
+															<td class="check">
+																<div class="drag _showcase_handle"></div>
+																<div class="checkbox checkbox-styled no-margin">
+																	<label>
+																		<input type="checkbox"
+																			value="s2022022244846dbea066c"
+																			class="_prodListCheck" onclick="SHOP_PROD_LIST.listSetSelect('s2022022244846dbea066c',function(codes){
+											SHOP_PROD_LIST.checkProd(codes);
+											})"><span></span>
+																	</label>
+																</div>
+															</td>
+															<td class="no text-12">3</td>
+															<td class="image">
+																<a
+																	href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=3"><img
+																		src="https://cdn.imweb.me/thumbnail/20190509/5cd3c4d7c9ae8.png"
+																		width="49" height="49" class="item-thumb"></a>
+															</td>
+															<td class="title">
+																<div>
+
+																	<div class="item-tit inline-blocked">
+																		<a
+																			href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=3">In
+																			tellus integer</a>
+																		<a href="https://testtt17.imweb.me/PRODUCT/?idx=3"
+																			target="_blank"
+																			class="btl bt-search vertical-middle"
+																			style="margin-left: 5px;"></a>
+
+																	</div>
+
+																	<span class="btn-sm text-gray-bright"></span>
+																</div>
+															</td>
+															<!--	<td class="sku"><a href="javascript:;">3847-112</a></td>-->
+															<td class="pay text-right">
+																38,000원<br> </td>
+															<!--	<td class="stock">100</td>-->
+															<!--	<td class="lately">100</td>-->
+															<td class="group">ALL</td>
+															<!--	<td class="diplay"><img src="../img/doz-icon.png" style="margin: 0 5px 3px 0;"><img src="../img/naver-icon.png"></td>-->
+															<td class="showcase">
+																<div class="dropdown">
+																	<button id="dLabel" type="button"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"
+																		class="btn btn-flat no-padding _drop_showcase_btn_s2022022244846dbea066c">-</button>
+																	<ul class="dropdown-menu animation-dock check"
+																		role="menu" aria-labelledby="dLabel">
+																		<div class="select_group _drop_showcase_list _drop_showcase_list_s2022022244846dbea066c"
+																			data-showcase=""
+																			data-prod="s2022022244846dbea066c"
+																			data-noshowcase="Y">
+																		</div>
+																		<div class="footer">
+																			<li class="divider"></li>
+																			<li><a href="javascript:;"
+																					onclick="SHOP_PROD_LIST.openShowcaseForm()">새
+																					기획전</a></li>
+																		</div>
+																	</ul>
+																</div>
+															</td>
+															<td class="state on-click">
+																<a data-toggle="dropdown" style="margin-right: -1px;">
+																	<span>숨김</span>
+																</a>
+																<ul class="dropdown-menu" style="top: 50px;">
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022244846dbea066c', 'sale')">판매중</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022244846dbea066c', 'soldout')">품절</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022244846dbea066c', 'nosale')">숨김</a>
+																	</li>
+																</ul>
+															</td>
+															<td class="text-12" style="padding-left: 20px">
+																- </td>
+															<td class="r_date text-12">2019-05-02</td>
+															<td class="e_date text-12">방금</td>
+															<td class="more">
+																<div class="dropdown">
+																	<button class="btn btn-flat" aria-expanded="true"
+																		data-toggle="dropdown" type="button"
+																		id="dLabel">
+																		<i class="zmdi zmdi-more"></i>
+																	</button>
+																	<ul aria-labelledby="dLabel" role="menu"
+																		class="dropdown-menu animation-dock right">
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('top','s2022022244846dbea066c', '');">맨
+																				위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('pre','s2022022244846dbea066c', '');">위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('next','s2022022244846dbea066c', '');">아래로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('bottom','s2022022244846dbea066c', '');">맨
+																				아래로</a>
+																		</li>
+																	</ul>
+																</div>
+															</td>
+														</tr>
+														<!--<tr class='content on">-->
+														<tr class="content _prodListItem"
+															id="prod_list_s2022022276405fee9ad46"
+															data-code="s2022022276405fee9ad46">
+															<td class="check">
+																<div class="drag _showcase_handle"></div>
+																<div class="checkbox checkbox-styled no-margin">
+																	<label>
+																		<input type="checkbox"
+																			value="s2022022276405fee9ad46"
+																			class="_prodListCheck" onclick="SHOP_PROD_LIST.listSetSelect('s2022022276405fee9ad46',function(codes){
+											SHOP_PROD_LIST.checkProd(codes);
+											})"><span></span>
+																	</label>
+																</div>
+															</td>
+															<td class="no text-12">5</td>
+															<td class="image">
+																<a
+																	href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=5"><img
+																		src="https://cdn.imweb.me/thumbnail/20190509/5cd3c527ae3e5.png"
+																		width="49" height="49" class="item-thumb"></a>
+															</td>
+															<td class="title">
+																<div>
+
+																	<div class="item-tit inline-blocked">
+																		<a
+																			href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=5">vintage
+																			book set</a>
+																		<a href="https://testtt17.imweb.me/PRODUCT/?idx=5"
+																			target="_blank"
+																			class="btl bt-search vertical-middle"
+																			style="margin-left: 5px;"></a>
+
+																	</div>
+
+																	<span class="btn-sm text-gray-bright"></span>
+																</div>
+															</td>
+															<!--	<td class="sku"><a href="javascript:;">3847-112</a></td>-->
+															<td class="pay text-right">
+																58,000원<br> </td>
+															<!--	<td class="stock">100</td>-->
+															<!--	<td class="lately">100</td>-->
+															<td class="group">ALL</td>
+															<!--	<td class="diplay"><img src="../img/doz-icon.png" style="margin: 0 5px 3px 0;"><img src="../img/naver-icon.png"></td>-->
+															<td class="showcase">
+																<div class="dropdown">
+																	<button id="dLabel" type="button"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"
+																		class="btn btn-flat no-padding _drop_showcase_btn_s2022022276405fee9ad46">-</button>
+																	<ul class="dropdown-menu animation-dock check"
+																		role="menu" aria-labelledby="dLabel">
+																		<div class="select_group _drop_showcase_list _drop_showcase_list_s2022022276405fee9ad46"
+																			data-showcase=""
+																			data-prod="s2022022276405fee9ad46"
+																			data-noshowcase="Y">
+																		</div>
+																		<div class="footer">
+																			<li class="divider"></li>
+																			<li><a href="javascript:;"
+																					onclick="SHOP_PROD_LIST.openShowcaseForm()">새
+																					기획전</a></li>
+																		</div>
+																	</ul>
+																</div>
+															</td>
+															<td class="state on-click">
+																<a data-toggle="dropdown" style="margin-right: -1px;">
+																	<span>숨김</span>
+																</a>
+																<ul class="dropdown-menu" style="top: 50px;">
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022276405fee9ad46', 'sale')">판매중</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022276405fee9ad46', 'soldout')">품절</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022276405fee9ad46', 'nosale')">숨김</a>
+																	</li>
+																</ul>
+															</td>
+															<td class="text-12" style="padding-left: 20px">
+																- </td>
+															<td class="r_date text-12">2019-05-08</td>
+															<td class="e_date text-12">방금</td>
+															<td class="more">
+																<div class="dropdown">
+																	<button class="btn btn-flat" aria-expanded="true"
+																		data-toggle="dropdown" type="button"
+																		id="dLabel">
+																		<i class="zmdi zmdi-more"></i>
+																	</button>
+																	<ul aria-labelledby="dLabel" role="menu"
+																		class="dropdown-menu animation-dock right">
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('top','s2022022276405fee9ad46', '');">맨
+																				위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('pre','s2022022276405fee9ad46', '');">위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('next','s2022022276405fee9ad46', '');">아래로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('bottom','s2022022276405fee9ad46', '');">맨
+																				아래로</a>
+																		</li>
+																	</ul>
+																</div>
+															</td>
+														</tr>
+														<!--<tr class='content on">-->
+														<tr class="content _prodListItem"
+															id="prod_list_s2022022214f0a7b8bad6e"
+															data-code="s2022022214f0a7b8bad6e">
+															<td class="check">
+																<div class="drag _showcase_handle"></div>
+																<div class="checkbox checkbox-styled no-margin">
+																	<label>
+																		<input type="checkbox"
+																			value="s2022022214f0a7b8bad6e"
+																			class="_prodListCheck" onclick="SHOP_PROD_LIST.listSetSelect('s2022022214f0a7b8bad6e',function(codes){
+											SHOP_PROD_LIST.checkProd(codes);
+											})"><span></span>
+																	</label>
+																</div>
+															</td>
+															<td class="no text-12">2</td>
+															<td class="image">
+																<a
+																	href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=2"><img
+																		src="https://cdn.imweb.me/thumbnail/20190509/5cd3c5a6a634f.png"
+																		width="49" height="49" class="item-thumb"></a>
+															</td>
+															<td class="title">
+																<div>
+
+																	<div class="item-tit inline-blocked">
+																		<a
+																			href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=2">dolor
+																			magna eget</a>
+																		<a href="https://testtt17.imweb.me/PRODUCT/?idx=2"
+																			target="_blank"
+																			class="btl bt-search vertical-middle"
+																			style="margin-left: 5px;"></a>
+
+																	</div>
+
+																	<span class="btn-sm text-gray-bright"></span>
+																</div>
+															</td>
+															<!--	<td class="sku"><a href="javascript:;">3847-112</a></td>-->
+															<td class="pay text-right">
+																48,000원<br> </td>
+															<!--	<td class="stock">100</td>-->
+															<!--	<td class="lately">100</td>-->
+															<td class="group">ALL</td>
+															<!--	<td class="diplay"><img src="../img/doz-icon.png" style="margin: 0 5px 3px 0;"><img src="../img/naver-icon.png"></td>-->
+															<td class="showcase">
+																<div class="dropdown">
+																	<button id="dLabel" type="button"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"
+																		class="btn btn-flat no-padding _drop_showcase_btn_s2022022214f0a7b8bad6e">-</button>
+																	<ul class="dropdown-menu animation-dock check"
+																		role="menu" aria-labelledby="dLabel">
+																		<div class="select_group _drop_showcase_list _drop_showcase_list_s2022022214f0a7b8bad6e"
+																			data-showcase=""
+																			data-prod="s2022022214f0a7b8bad6e"
+																			data-noshowcase="Y">
+																		</div>
+																		<div class="footer">
+																			<li class="divider"></li>
+																			<li><a href="javascript:;"
+																					onclick="SHOP_PROD_LIST.openShowcaseForm()">새
+																					기획전</a></li>
+																		</div>
+																	</ul>
+																</div>
+															</td>
+															<td class="state on-click">
+																<a data-toggle="dropdown" style="margin-right: -1px;">
+																	<span>숨김</span>
+																</a>
+																<ul class="dropdown-menu" style="top: 50px;">
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022214f0a7b8bad6e', 'sale')">판매중</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022214f0a7b8bad6e', 'soldout')">품절</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s2022022214f0a7b8bad6e', 'nosale')">숨김</a>
+																	</li>
+																</ul>
+															</td>
+															<td class="text-12" style="padding-left: 20px">
+																- </td>
+															<td class="r_date text-12">2019-05-02</td>
+															<td class="e_date text-12">방금</td>
+															<td class="more">
+																<div class="dropdown">
+																	<button class="btn btn-flat" aria-expanded="true"
+																		data-toggle="dropdown" type="button"
+																		id="dLabel">
+																		<i class="zmdi zmdi-more"></i>
+																	</button>
+																	<ul aria-labelledby="dLabel" role="menu"
+																		class="dropdown-menu animation-dock right">
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('top','s2022022214f0a7b8bad6e', '');">맨
+																				위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('pre','s2022022214f0a7b8bad6e', '');">위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('next','s2022022214f0a7b8bad6e', '');">아래로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('bottom','s2022022214f0a7b8bad6e', '');">맨
+																				아래로</a>
+																		</li>
+																	</ul>
+																</div>
+															</td>
+														</tr>
+														<!--<tr class='content on">-->
+														<tr class="content _prodListItem"
+															id="prod_list_s20220222a1a9163bbd216"
+															data-code="s20220222a1a9163bbd216">
+															<td class="check">
+																<div class="drag _showcase_handle"></div>
+																<div class="checkbox checkbox-styled no-margin">
+																	<label>
+																		<input type="checkbox"
+																			value="s20220222a1a9163bbd216"
+																			class="_prodListCheck" onclick="SHOP_PROD_LIST.listSetSelect('s20220222a1a9163bbd216',function(codes){
+											SHOP_PROD_LIST.checkProd(codes);
+											})"><span></span>
+																	</label>
+																</div>
+															</td>
+															<td class="no text-12">1</td>
+															<td class="image">
+																<a
+																	href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=1"><img
+																		src="https://cdn.imweb.me/thumbnail/20190509/5cd3c8c9ec35b.png"
+																		width="49" height="49" class="item-thumb"></a>
+															</td>
+															<td class="title">
+																<div>
+
+																	<div class="item-tit inline-blocked">
+																		<a
+																			href="/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czo2OiJub3NhbGUiO30%3D&amp;mode=add&amp;idx=1">dolor
+																			sit</a>
+																		<a href="https://testtt17.imweb.me/PRODUCT/?idx=1"
+																			target="_blank"
+																			class="btl bt-search vertical-middle"
+																			style="margin-left: 5px;"></a>
+
+																	</div>
+
+																	<span class="btn-sm text-gray-bright"></span>
+																</div>
+															</td>
+															<!--	<td class="sku"><a href="javascript:;">3847-112</a></td>-->
+															<td class="pay text-right">
+																58,000원<br> </td>
+															<!--	<td class="stock">100</td>-->
+															<!--	<td class="lately">100</td>-->
+															<td class="group">ALL</td>
+															<!--	<td class="diplay"><img src="../img/doz-icon.png" style="margin: 0 5px 3px 0;"><img src="../img/naver-icon.png"></td>-->
+															<td class="showcase">
+																<div class="dropdown">
+																	<button id="dLabel" type="button"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"
+																		class="btn btn-flat no-padding _drop_showcase_btn_s20220222a1a9163bbd216">-</button>
+																	<ul class="dropdown-menu animation-dock check"
+																		role="menu" aria-labelledby="dLabel">
+																		<div class="select_group _drop_showcase_list _drop_showcase_list_s20220222a1a9163bbd216"
+																			data-showcase=""
+																			data-prod="s20220222a1a9163bbd216"
+																			data-noshowcase="Y">
+																		</div>
+																		<div class="footer">
+																			<li class="divider"></li>
+																			<li><a href="javascript:;"
+																					onclick="SHOP_PROD_LIST.openShowcaseForm()">새
+																					기획전</a></li>
+																		</div>
+																	</ul>
+																</div>
+															</td>
+															<td class="state on-click">
+																<a data-toggle="dropdown" style="margin-right: -1px;">
+																	<span>숨김</span>
+																</a>
+																<ul class="dropdown-menu" style="top: 50px;">
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s20220222a1a9163bbd216', 'sale')">판매중</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s20220222a1a9163bbd216', 'soldout')">품절</a>
+																	</li>
+																	<li><a href="javascript:;"
+																			onclick="SHOP_PROD_LIST.updateStatus('s20220222a1a9163bbd216', 'nosale')">숨김</a>
+																	</li>
+																</ul>
+															</td>
+															<td class="text-12" style="padding-left: 20px">
+																- </td>
+															<td class="r_date text-12">2019-05-02</td>
+															<td class="e_date text-12">방금</td>
+															<td class="more">
+																<div class="dropdown">
+																	<button class="btn btn-flat" aria-expanded="true"
+																		data-toggle="dropdown" type="button"
+																		id="dLabel">
+																		<i class="zmdi zmdi-more"></i>
+																	</button>
+																	<ul aria-labelledby="dLabel" role="menu"
+																		class="dropdown-menu animation-dock right">
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('top','s20220222a1a9163bbd216', '');">맨
+																				위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('pre','s20220222a1a9163bbd216', '');">위로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('next','s20220222a1a9163bbd216', '');">아래로</a>
+																		</li>
+																		<li>
+																			<a href="javascript:;"
+																				onclick="SHOP_PROD_LIST.changeProdOrder('bottom','s20220222a1a9163bbd216', '');">맨
+																				아래로</a>
+																		</li>
+																	</ul>
+																</div>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<nav class="text-center order_paging" id="prod_list_paging" style="">
+											<ul class="pagination">
+												<li class="prev disabled"><a href="javascript:;"><i
+															class="icon-arrow-left" aria-hidden="true"></i><span
+															class="sr-only">Previous</span></a></li>
+												<li class="active"><a th:href="@{/admin/management}">1</a></li>
+												<li><a th:href="@{/admin/management}">2</a></li>
+												<li><a th:href="@{/admin/management}">3</a></li>
+												<li class="next disabled"><a href="javascript:;"><i
+															class="icon-arrow-right" aria-hidden="true"></i><span
+															class="sr-only">Next</span></a></li>
+											</ul>
+										</nav>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</section>
+			<!--섹션 끝 -->
+		</div>
+		<!--end #content-->
+		<!-- END CONTENT -->
+
+		<!-- 
+	pagination 수정 전
+
+			<nav class="text-center order_paging" id="prod_list_paging" style=""><ul class="pagination"><li class="prev disabled"><a href="javascript:;"><i class="icon-arrow-left" aria-hidden="true"></i><span class="sr-only">Previous</span></a></li><li class="active"><a th:href="@{/admin/management}/?q=YToxOntzOjY6InN0YXR1cyI7czozOiJhbGwiO30%3D&amp;page=1">1</a></li><li><a th:href="@{/admin/management}/?q=YToxOntzOjY6InN0YXR1cyI7czozOiJhbGwiO30%3D&amp;page=2">2</a></li><li><a th:href="@{/admin/management}/?q=YToxOntzOjY6InN0YXR1cyI7czozOiJhbGwiO30%3D&amp;page=3">3</a></li><li class="next disabled"><a href="javascript:;"><i class="icon-arrow-right" aria-hidden="true"></i><span class="sr-only">Next</span></a></li></ul></nav>
+						</div>
+-->
+
+		<script>
+			var load_prod_list = function () {
+				SHOP_PROD_LIST.loadList('1', { 'status': 'all', 'prod_name': '', 'category': '', 'showcase': '', 'pagesize': 20 }, "/admin/shopping/product/?q=YToxOntzOjY6InN0YXR1cyI7czozOiJhbGwiO30%3D");
+			};
+
+			$(function () {
+				SHOP_PROD_LIST.init();
+				SHOP_PROD_MANAGE.addUnitData('u2022012761f228e111b38', 'KR', '₩', ',', '.', 0);
+				SHOP_PROD_MANAGE.setDefaultUnitCode('u2022012761f228e111b38');
+				SHOP_PROD_MANAGE.setCurrentUnitCode('u2022012761f228e111b38');
+				load_prod_list();
+				SHOP_PROD_MANAGE.loadCategoryList(function () {
+					$('#prod_list_category_').addClass('active');
+				}, true, 'prod_list');
+			});
+			$(document).ready(function () {
+				$("._owl_dashboard").owlCarousel({
+					autoWidth: true
+				});
+			});
+		</script>
+		<style>
+			.dd {
+				position: relative;
+				display: block;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.dd-list {
+				display: block;
+				position: relative;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.dd-list .dd-list {
+				padding-left: 0px;
+			}
+
+			.dd-collapsed .dd-list {
+				display: none;
+			}
+
+			.dd-item,
+			.dd-empty {
+				display: block;
+				position: relative;
+				margin: 0;
+				padding: 0;
+				min-height: 20px;
+				line-height: 20px;
+			}
+
+			.dd-placeholder {
+				display: block;
+				position: relative;
+				z-index: 9999;
+				margin: 0;
+				padding: 0;
+				height: 3px;
+				width: 100%;
+				background: #ff0000;
+			}
+
+			.dd-placeholder .line {
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				height: 3px;
+				background: #6F6F73;
+				z-index: 999;
+			}
+
+			.dd-handle {
+				display: block;
+				text-decoration: none;
+				height: 30px;
+				line-height: 31px;
+				padding-left: 26px;
+				font-size: 13px;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				cursor: -moz-grab;
+				cursor: -webkit-grab;
+				cursor: grab;
+			}
+
+			.dd-handle:hover {
+				background: #f2f3f5;
+			}
+
+			.dd-handle.disable {
+				opacity: .3;
+			}
+
+			.dd-handle.disable:hover i {
+				display: none;
+			}
+
+			.dd-handle.active.ico {
+				color: #fff;
+			}
+
+			.dd-handle.ico:after {
+				display: inline-block;
+				font: normal normal normal 14px/1 "Black Tie";
+				vertical-align: -14.28571429%;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				transform: translate(0, 0);
+				font-size: 15px;
+				padding-left: 5px;
+				font-weight: 200;
+				opacity: .7;
+			}
+
+			.dd-handle.ico.shopping:after {
+				content: "\f03b";
+			}
+
+			.dd-handle.ico.link:after {
+				content: "\f0b0";
+			}
+
+			.dd-handle.ico.lock:after {
+				content: "\f039"
+			}
+
+			.draging .dd-handle:hover {
+				background: #fff;
+			}
+
+			.dd-handle {
+				position: relative;
+			}
+
+			.dd-dragel .dd-handle {
+				position: relative;
+			}
+
+			.dd-dragel .dd-handle i {
+				display: none
+			}
+
+			.dd-dragel .dd-handle {
+				background: #f2f3f5;
+			}
+
+			.dd-handle.active {
+				background: rgba(26, 109, 255, 0.1) !important;
+				color: #1A6DFF !important;
+				font-weight: bold;
+			}
+
+			.clone-item .dd-handle {
+				opacity: 0.5;
+			}
+
+			.dd-item>button {
+				cursor: pointer;
+				float: left;
+				width: 20px;
+				height: 26px;
+				padding: 0;
+				text-indent: 100%;
+				white-space: nowrap;
+				overflow: hidden;
+				border: 0;
+				background: transparent;
+				line-height: 1;
+				text-align: center;
+				font-weight: bold;
+				z-index: 50;
+				left: 15px;
+			}
+
+			.dd-list .dd-list .dd-item>button {
+				left: 25px;
+			}
+
+			.dd-list .dd-list .dd-list .dd-item>button {
+				left: 35px;
+			}
+
+			.dd-list .dd-list .dd-handle {
+				padding-left: 36px;
+			}
+
+			.dd-list .dd-list .dd-list .dd-handle {
+				padding-left: 46px;
+			}
+
+			.dd-list .dd-list .dd-list .dd-list .dd-handle {
+				padding-left: 56px;
+			}
+
+			.dd-item>button:before {
+				content: '\f2f2';
+				font-family: Material-Design-Iconic-Font !important;
+				vertical-align: -14.28571429%;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				-webkit-transform: rotate(270deg);
+				-ms-transform: rotate(270deg);
+				-o-transform: rotate(270deg);
+				transform: rotate(270deg);
+				display: block;
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				text-indent: 0;
+				font-weight: normal;
+				font-size: 16px;
+				top: 7px;
+
+			}
+
+			.dd-item>button[data-action="collapse"]:before {
+				-webkit-transform: rotate(0deg);
+				-ms-transform: rotate(0deg);
+				-o-transform: rotate(0deg);
+				transform: rotate(0deg);
+			}
+
+			.category-body .dropdown-item>button:before {
+				color: #333;
+			}
+
+			.dd-empty {
+				padding: 0;
+				min-height: 26px;
+				background: #f9f9f9;
+				border: 1px dashed #dddddd;
+			}
+
+			.dd-empty {
+				border: 1px dashed #dddddd;
+				min-height: 26px;
+				background-color: #f9f9f9;
+				background-size: 60px 60px;
+				background-position: 0 0, 30px 30px;
+			}
+
+			.dd-dummy {
+				min-height: 20px;
+				background-color: #fff;
+			}
+
+			.dd-dragel {
+				position: absolute;
+				pointer-events: none;
+				z-index: 9999;
+			}
+
+			.dd-dragel>.dd-item .dd-handle {
+				margin-top: 0;
+			}
+
+			.dd-dragel .dd-handle {
+				-webkit-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, .1);
+				box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, .1);
+				cursor: grabbing;
+				cursor: -moz-grabbing;
+				cursor: -webkit-grabbing;
+			}
+
+			.dd-inverse .dd-handle {
+				color: #ffffff;
+				background: #999999;
+			}
+
+			.dd-inverse .dd-handle:hover {
+				background: #aaaaaa;
+			}
+
+			.dd-inverse .dd-item>button:before {
+				color: #ffffff;
+			}
+
+			.category-body .dropdown-handle>span {
+				pointer-events: none;
+			}
+
+			.nav-category .dd-list .dd-handle span:before {
+				display: none;
+			}
+
+			.collapse_btn {
+				position: absolute;
+				left: 6px;
+				top: 0;
+				font-size: 18px;
+				line-height: 30px;
+				height: 30px;
+				background: transparent;
+				z-index: 10;
+			}
+
+			.collapse_btn:before {
+				content: '\f2f2';
+				font-family: Material-Design-Iconic-Font !important;
+				display: block;
+			}
+
+			.collapse_btn.collapsed:before {
+				margin-left: 0;
+				-webkit-transform: rotate(270deg);
+				-ms-transform: rotate(270deg);
+				-o-transform: rotate(270deg);
+				transform: rotate(270deg);
+			}
+
+			.nav-category .dd-list .dd-handle~.collapse_btn {
+				left: 19px;
+			}
+
+			.prod_category_list {
+				padding-bottom: 24px;
+			}
+
+			.nav>li>a {
+				padding: 15px 24px 15px 26px;
+			}
+
+			.nav #prod_list_category_>a {
+				padding-left: 26px;
+			}
+
+			.nav-category .dd-handle span {
+				padding-left: 27px;
+			}
+
+			.nav-category .dd-list .dd-handle span {
+				padding-left: 40px;
+			}
+
+			.nav-category .dd-list .dd-list .dd-handle span {
+				padding-left: 50px;
+			}
+
+			.bg-gray {
+				padding: 11px 16px 8px;
+				background: #FAFAFA;
+				border-radius: 4px;
+			}
+		</style>
+		<script>
+			$(window).on("keyup", function (e) {
+				if ($.cocoaDialog.isOpen()) {
+					$.cocoaDialog.modalControl(e);
+				}
+				return false;
+			});</script>
+		<!-- BEGIN MENUBAR-->
+		<button type="button" class="hidden-lg hidden-md toggle-btn" data-dismiss="menubar">
+			<span class="sr-only">Toggle navigation</span>
+			<i class="btl bt-times"></i>
+		</button>
+
+
+		<div id="menubar" class="animate">
+			<div class="nano has-scrollbar" style="height: 719px;">
+				<div class="nano-content" tabindex="0" style="right: -15px;">
+					<div class="menubar-scroll-panel" style="padding-bottom: 50px;">
+						<div class="tabled full-width">
+							<div>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/logout"><img th:src="@{/image/power-off.png}"><span style="font-size: 14px;">&nbsp;&nbsp;관리자 로그아웃</span></a></div>
+							<a href="javascript:" class="holder global_icon_menu dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="true">
+								<div style="position: absolute; left: 22px; top: 0; line-height: 36px;">
+									<img src="/common/img/flag_shapes/flag_kr_circle.png" width="20" height="20">
+								</div>
+								<div class="brand-holder">
+									<span class="title_controls">shopp</span>
+								</div>
+							</a>
+							<ul class="dropdown-menu global_setting animation-dock menu-card-styling">
+								<li class="holder ">
+									<a
+										href="/admin/?type=page&amp;_ga=2.254642240.996359343.1645365816-1966519718.1645110617">
+										<div class="tabled">
+											<div class="table-cell vertical-middle width-1">
+												<img width="30" height="30"
+													src="/common/img/flag_shapes/flag_kr_circle.png">
+											</div>
+											<div class="table-cell vertical-middle domain">
+												<div class="inline-blocked">
+													<span class="domain_name">shopp</span>
+												</div>
+												<span data-original-title="일반 방문자의 접속이 제한됩니다. 글로벌 버전으로 업그레이드 해주세요"
+													data-toggle="tooltip" class="badge" data-placement="top"
+													style="margin-left: 5px; vertical-align: top;">미결제</span>
+												<div class="text-gray-bright text-12">hyunwoo1001.imweb.me</div>
+											</div>
+										</div>
+									</a>
+									<div class="tools">
+									</div>
+								</li>
+								<li class="border-top"><a href="javascript:;"
+										onclick="SITE_MANAGE.openAddUnit('S20220127201b2696461e8')" class="text-primary"
+										style="padding-top: 15px;"></a></li>
+							</ul>
+						</div>
+						<ul id="main-menu" class="gui-controls">
+							<li class="  " data-title="design_mode"><a href="/admin/design">
+									<div class="gui-icon"><i class="db-wand"></i></div><span
+										class="title title_controls">디자인모드</span>
+								</a></li>
+							<li class="  " data-title="preview"><a href="//hyunwoo1001.imweb.me" target="_blank">
+									<div class="gui-icon"><i class="db-preview"></i></div><span
+										class="title title_controls">사이트 바로가기</span>
+								</a></li>
+							<li class="spacer"></li>
+							<li class="top-menu"><a href="javascript:;"
+									onclick="DASHBOARD.openSiteManagementDialog(this);"><span>사이트 관리</span><i
+										class="btm bt-plus-circle"></i></a></li>
+<!--							<li class="active expanded expanding" data-title="dashboard"><a-->
+<!--									href="/adminpage/dashboard.html" class=" active">-->
+
+<!--									<div class="gui-icon"><i class="db-dashboard"></i></div>-->
+<!--									<span class="title title_controls">대시보드</span>-->
+<!--								</a></li>-->
+							<li class="gui-folder expanded" data-title="member"><a href="/admin/member"
+									class="sidebar-nav-menu" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-user"></i></div>
+									<span class="title title_controls">사용자 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="member_list"><a th:href="@{/admin/memberlist}"><span
+												class="title title_controls">사용자 목록</span></a></li>
+									<li class="  " data-title="member_mail"><a th:href="@{/admin/membermail}"><span
+												class="title title_controls">메일 발송 설정</span></a></li>
+								</ul>
+							</li>
+							<li class="gui-folder" data-title="shopping"><a href="/admin/shopping"
+									class="sidebar-nav-menu" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-shopping-bag"></i></div>
+									<span class="title title_controls">쇼핑 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="shopping_product"><a href="#">
+											<span class="title title_controls">상품관리</span></a></li>
+									<li class="  " data-title="shopping_order"><a
+											href="/adminpage/shoppingOrder.html"><span
+												class="title title_controls">주문관리</span></a></li>
+									<li class="  " data-title="shopping_cancel"><a
+											th:href="@{/admin/cancel}"><span
+												class="title title_controls">취소관리</span></a></li>
+									<li class="  " data-title="shopping_return"><a
+											th:href="@{/admin/return}"><span
+												class="title title_controls">반품관리</span></a></li>
+									<li class="  " data-title="shopping_exchange"><a
+											th:href="@{/admin/exchange}"><span
+												class="title title_controls">교환관리</span></a></li>
+									<li class="  " data-title="shopping_regularly"><a
+											th:href="@{/admin/dpoint}"><span
+												class="title title_controls">D포인트 관리</span></a></li>
+									<li class="  " data-title="booking_config"><a
+											th:href="@{/admin/coupon}"><span class="title title_controls">쿠폰
+												관리</span></a></li>
+								</ul>
+							</li>
+							<li class="gui-folder" data-title="contents"><a href="/admin/contents"
+									class="sidebar-nav-menu" onclick="return false;">
+
+									<div class="gui-icon"><i class="db-pencil"></i></div>
+									<span class="title title_controls">컨텐츠 관리</span>
+								</a>
+								<ul>
+									<li class="  " data-title="contents_post"><a
+											th:href="@{/admin/review}"><span class="title title_controls">구매평
+												관리</span></a></li>
+									<li class="  " data-title="contents_comment"><a
+											th:href="@{/admin/answer}"><span class="title title_controls">문의
+												관리</span></a></li>
+								</ul>
+
+						</ul>
+						<div class="height-1"></div>
+						<div class="menubar-foot-panel">
+							<div class="full-height">
+								<a href="javascript:" class="dropdown-toggle block _lang_button" data-toggle="dropdown"
+									tabindex="-1" aria-expanded="false">
+									<i class="icon-globe"></i>
+									<span class="panel-text">한국어</span>
+								</a>
+								<ul class="dropdown-menu pull-right">
+									<li><a href="javascript:;" onclick="ADMIN.changeAdminLang('KR')">한국어</a></li>
+									<li><a href="javascript:;" onclick="ADMIN.changeAdminLang('EN')">English (Beta)</a>
+									</li>
+									<li><a href="javascript:;" onclick="ADMIN.changeAdminLang('zh-TW')">中文 (繁體)</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="nano-pane">
+					<div class="nano-slider" style="height: 516px; top: 46.2052px;"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fold_area tabled animate" style="padding-left: 24px;">
+			<div class="table-cell vertical-middle" style="padding-right: 45px;">
+				<a href="/admin/" class="logo_icon_menu">
+					<h5 style="font-family: 'TmoneyRoundWindExtraBold' !important; text-align: center;">(주)듀오백<br>DUOBACK</h5></a>
+			</div>
+			<a class="_tooltip_btn side_bar_btn" href="javascript:" role="button" id="toggle_button">
+				<span class="fold_button left" data-original-title="사이드바 접어두기" data-toggle="tooltip"
+					data-placement="bottom">
+					<i class="icons fa fa-chevron-left" style="opacity: 0.6"></i>
+					<i class="icons fa fa-chevron-left"></i>
+				</span>
+				<span class="fold_button right" data-original-title="사이드바 펼쳐두기" data-toggle="tooltip"
+					data-placement="bottom">
+					<i class="icons fa fa-chevron-right"></i>
+					<i class="icons fa fa-chevron-right" style="opacity: 0.6"></i>
+				</span>
+			</a>
+		</div>
+		<script>
+
+			/*야매로 modal팝업창 뜨게 하기*/
+			/*$("#pdOutModalBtn").click(function(){
+				
+				$("#cocoaModal").show();
+			});*/
+
+
+
+			function pdModalBtn() {
+				if ($('#cocoaModal').css('display') == 'block') {
+					$('#cocoaModal').hide();
+				} else {
+					$('#cocoaModal').show();
+				}
+			}
+
+			/*아니 show는 되는데
+			$(#closeBtnModal).click(function(){
+				$("#cocoaModal").hide();
+		
+			}); 이건 왜 안 되는데...
+			*/
+
+
+			/*		jsp? 암튼 ajax 비동기 통신
+			
+			
+			
+						$(function () {
+							var $body = $('body');
+							var $btn = $('#toggle_button');
+							var sidebar_mini_class = 'sidebar-mini';
+							var current_sidebar_mini_class = "";
+							var $menubar_toggle = $body.find('#header .menubar-toggle');
+							var $close_btn = $('._close_btn');
+							$btn.off('click touch').on('click touch', function () {
+								if ($body.hasClass(sidebar_mini_class)) {
+									setSideMenu('show');
+								} else {
+									setSideMenu('hide');
+								}
+							});
+							if (current_sidebar_mini_class === sidebar_mini_class) $body.addClass(sidebar_mini_class);
+							else $body.removeClass(sidebar_mini_class);
+							function setSideMenu(show) {
+								$.ajax({
+									type: 'POST',
+									data: { 'status': show },
+									url: ('http://127.0.0.1:5500/gowoon\adminTP\adminpage\shoppingManagementModar.html'),
+									dataType: 'json', 
+									async: false,
+									cache: false,
+									success: function (status) {
+										if (res.msg === "show") {
+											$body.removeClass(sidebar_mini_class);
+										} else {
+											$body.addClass(sidebar_mini_class);
+										}
+									}
+								});
+							}
+						});*/
+
+		</script>
+	</div> <!-- END BASE -->
+
+
+	<div style="position: absolute; width: 1px; height: 1px; left: -10000px;" data-ip="123.109.60.221" data-ip2=""
+		data-ip3="123.109.60.221, 130.176.126.94">
+		<input id="dummy_input" type="text">
+	</div>
+
+	<!--내보내기 모달 팝업창 시작-->
+	<div id="cocoaModal" role="dialog" data-backdrop="true" data-keyboard="true"
+		class="modal in modal_admin_prod_excel_download">
+		<div class="modal-dialog ui-draggable">
+			<div class="modal-content">
+				<div id="dashboard_loader_sub" class="se-pre-con" style="display: none;">
+					<div class="page-loader-spinner">
+						<div class="double-bounce1"></div>
+						<div class="double-bounce2"></div>
+					</div>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width:70%">
+							<label>70%</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-header">
+					<button type="button" onclick="pdModalBtn()" id="closeBtnModal" class="close" data-dismiss="modal"
+						aria-label="Close"><i class="btm bt-times"></i></button>
+					<h3 class="modal-title">상품 내보내기</h3>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="control-label">상품 파일 종류</label>
+						<div style="width: 180px;">
+							<select class="form-control _excel_download_type">F
+								<option value="normal">모든 데이터 포함</option>
+								<option value="facebook">Facebook 다이내믹 광고</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">상품 파일 언어</label>
+						<div style="width: 180px;">
+							<select class="form-control _excel_lang_type">
+								<option value="u2022012761f228e111b38">대한민국</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label">상품 배송국가</label>
+						<div style="width: 180px;">
+							<select class="form-control _excel_deliv_country">
+								<option value="KR">대한민국</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group _facebook_warning_text" style="display: none">
+						<label class="text-danger">* <span>facebook 다이내믹 광고 csv 다운로드 시 <strong>브랜드명</strong>과
+								<strong>요약설명</strong>이 누락된 상품 데이터는 삽입되지 않으며,<br>상품정보 제공고시 미설정 시 google_product_category
+								항목은 삽입되지 않습니다.</span></label>
+					</div>
+					<div class="form-group">
+						<a href="javascript:;" onclick=""
+							class="btn btn-primary btn-sm btn-sm-padding request_btn _request_btn" data-toggle="tooltip"
+							data-placement="top" title="" data-original-title="상품 파일 요청">상품 파일 요청</a>
+					</div>
+					<div class="form-group">
+						<table class="table table-order-excel-list full-width full-height">
+							<colgroup>
+								<col style="width: 100px; ">
+								<col style="width: 100px;">
+								<col style="width: 130px;">
+								<col style="width: 60px;">
+								<col style="width: 60px;">
+							</colgroup>
+							<thead class="subject">
+								<tr>
+									<th style="padding-left: 15px;">요청 항목</th>
+									<th>요청 일시</th>
+									<th>다운로드 가능기한</th>
+									<th class="text-right" style="padding-right: 10px;">다운로드</th>
+									<th class="text-right" style="padding-right: 20px;">삭제</th>
+								</tr>
+							</thead>
+							<tbody class="excel_list_body" id="_excel_list_body"></tbody>
+						</table>
+						<div class="text-center excel_empty_wrap _excel_empty_wrap" style="display: block;">
+							요청된 데이터가 없습니다. </div>
+					</div>
+				</div>
+
+				<!--레이어모더팝업창 푸터 닫기 창 
+	
+	<div class="modal-footer">
+	<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+</div>
+-->
+
+
+				<script>
+
+
+					/*	수정전
+					
+						$(function(){
+							$('.btn-popover').popover();
+							SHOP_PROD_MANAGE.loadExcelList();
+						});
+					
+						$('._request_btn').off('click').on('click', function(){
+							SHOP_PROD_MANAGE.runProdExcelMake($('._excel_download_type').val(),'');
+						});
+					
+						$('._excel_download_type').on('change', function(){
+							if($('._excel_download_type').val() == 'facebook'){
+								$('._facebook_warning_text').show();
+							}else{
+								$('._facebook_warning_text').hide();
+							}
+						});
+						$('._excel_lang_type').on('change', function(){
+							SHOP_PROD_MANAGE.ProdExcelDownloadModalChangeUnit($(this).val());
+						});*/
+
+				</script>
+			</div>
+		</div>
+	</div>
+
+	<!--내보내기 모달팝업창 끝-->
+
+	<!--내보내기 사이드 모달창-->
+	<div class="modal submodal" role="dialog" id="cocoaSubModal" style="z-index: 17001">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<!--iframe 삭제! 챗봇 삭제!-->
+
+	<!--<div class="text-center excel_emty_wrap_exel_emty_wrap" style="display: block;">요청된 데이터가 없습니다</div>-->
+	<!--여기에 이따가 데이터 넣기! <div class="text-center excel_emty_wrap_exel_emty_wrap" style="display: block;">요청된 데이터가 없습니다</div>-->
+	<!--</div>
+    </div>
+	<div class="modal-footer">
+        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+    </div>
+</div>
+
+
+<script>
+/*$(function(){
+	$('.btn-popover').popover();
+	SHOP_PROD_MANAGE.loadExcelList();
+});
+
+$('._request_btn').off('click').on('click', function(){
+	SHOP_PROD_MANAGE.runProdExcelMake($('._excel_download_type').val(),'');
+});
+
+$('._excel_download_type').on('change', function(){
+	if($('._excel_download_type').val() == 'facebook'){
+		$('._facebook_warning_text').show();
+	}else{
+		$('._facebook_warning_text').hide();
+	}
+});
+$('._excel_lang_type').on('change', function(){
+	SHOP_PROD_MANAGE.ProdExcelDownloadModalChangeUnit($(this).val());
+});
+*/
+</script>
+
+<div class="modal" id="cocoaModal" role="dialog">
+	<div class="modal-dialog wrap">
+		<div class="modal-content">
+		
+		</div>
+	</div>
+</div>-->
+
+
+
+
+
+
+</body>
+
+</html>

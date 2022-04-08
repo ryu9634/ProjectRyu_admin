@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="https://code.jquery.com/jquery-1.12.3.js" type="text/javascript" ></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script src="javascript/script.js" type="text/javascript" defer></script>
+
+
+
+	<!--stylesheet cdn-->
+
+	
+	<title>취소거절관리</title>
+<style>
+
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+.sh_notice{
+	text-align: left;
+}
+@charset "utf-8";
+/* CSS Document */
+/* #0066ad #30a3f3 #ffffff #333333 로고컬러변경 개별메뉴 탭 슬라이드fade 푸터로고회색 */
+
+/* 전체 페이지 초기화 영역*/
+*{margin:0 auto; color:#333333; font-family:"맑은 고딕"}
+html,body{width:1200px; background:#ffffff}
+ul,li{list-style:none; padding:0; margin:0;}
+a{text-decoration:none; color:inherit; cursor:pointer;}
+
+
+
+
+
+/* 모달 레이어 팝업창 */
+.mlp{
+	display:none; position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.8); top:0; left:0;
+}
+
+
+
+.mlp .popup{ position:fixed; width:720px; height:646.54px; 
+	left: 50%;
+top: 50%;
+
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+-moz-transform: translate(-50%, -50%);
+-o-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+	background:white;
+	z-index:100; 
+	   box-shadow:0 0 10px gray; }
+.mlp .popup .heading{
+	width:1100px; margin:10px; padding:3px;
+	
+};
+
+/*모달 콘텐츠*/
+
+
+
+.mlp .popup .contents{
+	width:700px; height:290px; border:1px solid gray;text-align:center;
+}
+.mlp .popup .contents p{ 
+	width:700px; height:60px; padding:0 10px 10px 10px; 
+}
+
+
+.cscBtnArea{
+	position:absolute, bottom:0, right:0
+				border:1px solid gray; border:3px;
+			 }
+
+
+	div.cancelTb.miniCancelTb{
+		margin:10px;
+
+
+	}
+div.cancelNotice{
+	display: inline-flex;
+	width: 550px;
+	font-size:15px;
+	padding: auto;
+	margin-left: auto;
+	
+}
+	th,td {
+		border-bottom: 1px solid #ced4da;
+		padding: 7px;
+	  }
+
+	  table#sheet0.sheet0.gridlines{
+ margin-top: 10%;
+ margin-bottom: 10%;
+ }
+
+button.cscBtnArea.close{
+	
+}
+
+#refusal_header{
+	margin:25px;
+}
+	.heading{
+		margin:25px;
+	}
+
+</style>
+
+<script>
+// Javascript Document
+$(document).ready(function(){  
+
+/* 팝업창 */
+	$('.close_btn').click(function(){
+		$('.mlp').show();	
+	});
+	$('.close').click(function(){
+		$('.mlp').hide();	
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+
+	<div class="btn">클릭</div>
+	
+<div class="mlp">
+	<div class="popup">
+		<div class="heading">
+			<div class="headingTitle">
+				<h3 id="refulsal_header">취소거절관리</h3>
+				<div class="cscBtnArea">
+					<button style="display:inline-block">취소</button>  
+				<button type="button" class="close" data-dismiss="modal"style="display:inline-block">닫기</button>
+				</div>
+			</div>
+	<div><p>선택하신 1개의 주문 중 처리 가능한 주문은 1건 입니다.
+	</p><p>취소거절 처리시 발송처리됩니다.</p>
+		</div>
+		</div>
+        <div class="contents">
+<div class="cancelNotice">
+
+</div>
+
+<table border="0"  id="sheet0" class="sheet0 gridlines">
+	<tbody>
+	  <tr class="row0">
+		<td class="column0 style0 s">주문번호</td>
+		<td class="column1 style6 null style6" colspan="4" rowspan="2"></td>
+	  </tr>
+	  <tr class="row1">
+		<td class="column0 style0 s">13자리</td>
+	  </tr>
+	  <tr class="row2">
+		<td class="column0 style1 s">품목주문번호</td>
+		<td class="column1 style1 s">주문상태</td>
+		<td class="column2 style1 s">취소요청일</td>
+		<td class="column3 style1 s">사유</td>
+		<td class="column4 style1 s">상품명</td>
+	  </tr>
+	  <tr class="row3">
+		<td class="column0 style2 s">10자리</td>
+		<td class="column1 style2 s">결제완료</td>
+		<td class="column2 style2 s">2020.02.19</td>
+		<td class="column3 style2 s">구매 의사 취소</td>
+		<td class="column4 style3 s">듀오백 의자<br>
+색상: 블랙/ 수량: 1개</td>
+	  </tr>
+	  <tr class="row4">
+		<td class="column0 style2 s">배송정보</td>
+		<td class="column1 style4 s style5" colspan="4">홍길동<br>
+서울 마포구 동교로 194(동교동, 혜원빌딩) 2층<br>
+우)03995</td>
+	  </tr>
+	  <tr class="row5">
+		<td class="column0 style0 s">운송장정보입력</td>
+		<td class="column1 style0 s"><select name="택배사" id=""><option value="">우체국택배</option><option value=""></option>
+		<option value="">CJ대한통운</option>
+		<option value="">로젠택배</option>
+		<option value="">한진택배</option>
+		<option value="">현대택배</option></select></td>
+		<td class="column2 style7 s style7" colspan="3"><input type="text" value="운송장정보입력"></td>
+	  </tr>
+	</tbody>	
+			</table>
+		</div>    
+
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+

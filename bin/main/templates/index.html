@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org/">
+<head>
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/plugins/ua/ecommerce.js"></script><script type="text/javascript" async="" src="https://static.hotjar.com/c/hotjar-944088.js?sv=7"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://sdk.bigin.io/v1/bigin.sdk.js"></script><script src="https://connect.facebook.net/signals/config/1300116850041141?v=2.9.52&amp;r=stable" async=""></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-P68765D"></script><script>
+		var IS_MOBILE = false;
+		var UPLOAD_URL = '/upload/';
+		var CDN_UPLOAD_URL = 'https://cdn.imweb.me/upload/';
+		var IS_MAIN = true;
+		var ROOT_PATH = '/home/doznut/html/main/kr';
+		var BROWSER_LANGUAGE = 'kr';
+		/* 프로아라 에디터사용을 위해 common.js 로드할때 필요함 */
+		var IS_ANDROID_APP = 'N';
+		var FROALA_VERSION = 311;
+		var FROALA_KEY = '6LF5g1B3D3F3C6C3E2F-11SLJCKHXOSLMc1YGSGb1ZXHSe1CgB5A4D4C3E3C2A13A19B7B2==';
+	</script>
+	<title>듀오백 관리자 페이지</title>
+<link rel="canonical" href="https://imweb.me/login">
+<link rel="alternate" href="https://imweb.me/login" hreflang="ko-KR">
+<link rel="alternate" href="https://imweb.me/tw/login" hreflang="zh-TW">
+<meta property="og:title" content="아임웹">
+<meta name="description" content="쇼핑몰, 홈페이지, 막막하죠? 홈페—EASY하게 아임웹으로 시작하세요. 쉬운 시작과 빠른 성장.">
+<meta property="og:description" content="쇼핑몰, 홈페이지, 막막하죠? 홈페—EASY하게 아임웹으로 시작하세요. 쉬운 시작과 빠른 성장.">
+<meta property="og:image" content="https://vendor-cdn.imweb.me/images/main/newblue_imweb_og_logo.png?v1">
+<meta charset="utf-8">
+<meta name="naver-site-verification" content="fc57c0e1f2e6ef6d7535e05a7a3ee6f176d3a79f">
+<meta name="google-site-verification" content="FHvZu3i5B6ZvO3kv3YXx0CkS0JEiyUb08ri2_nSQYIQ">
+<meta name="author" content="(주)아임웹">
+<meta name="content-language" content="kr">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=no">
+<style>
+      *{
+    box-sizing: border-box;
+    font-family: "", "";
+    border-radius: 5px;    
+}
+
+body{
+    
+    margin: 0% ;
+    background-color: #03A79D;
+
+}
+
+.login-wrap{
+   
+    margin-top:50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    padding: 20px;
+    background-color: #EEEFF1;
+    border-radius: 5px;    
+
+}
+header{
+float:none;
+}
+
+.form-control{
+    margin-top: 10px;
+    margin-bottom:10px;
+    font-size: 14px;
+    display:block;
+    border: none ;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.input-group.input-group-login{
+    margin-top: 10px;
+    margin-bottom:10px;
+}
+
+
+h3{
+    text-align: center;
+    color:#9B9B9B;
+}
+
+button{
+  background: #03A79D;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  margin:0 auto;
+  width: 100%;
+
+}
+button:hover{
+  background:#fff;
+  color: #03A79D;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+#auto_login{
+    color:#9B9B9B;
+}
+
+
+
+@font-face {
+    font-family: 'NEXON Lv2 Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+</style>
+ 
+
+</head>
+<body id="snowfall" class="">
+
+
+<div id="loader" class="se-pre-con style-gray" style="display: none;">
+	<div class="page-loader-spinner">
+		<div class="double-bounce1"></div>
+		<div class="double-bounce2"></div>
+	</div>
+	<div class="loader-text text-semi-bold text-24 _loader_text">사이트를 구성 중입니다. 잠시만 기다려주세요.</div>
+</div>
+
+<div style="display: block; width: 1413px; height: 70px; float: none;"></div><script>
+	var backurl = "https://imweb.me/mysite";
+</script>
+
+<!--로그인 영역-->
+
+		<div class="login-wrap">
+			<header class="margin-bottom-xxxxxl">
+				<h3 class="margin-bottom-xxl text-center">
+					관리자 로그인
+				</h3>
+
+			</header>
+	
+				<form method="post" action="/admin/login">
+				<div class="input-group input-group-login">
+					<input type="text" class="form-control" placeholder="Admin ID" name="adminId" onkeyup="if(isEnter(event)) $('#btn_login_check').click();">
+					<input type="password" class="form-control" placeholder="비밀번호" name="adminPw" onkeyup="if(isEnter(event)) $('#btn_login_check').click();">
+				</div>
+				<div class="form-group margin-bottom-xxxl">
+					<!-- <button type="button" class="btn btn-primary btn-block" onclick="javascript:login($('#txt_email').val(),$('#txt_pass').val(),'main','',$('#auto_login').val())"id="btn_login_check">로그인</button><br> -->
+					<button type="submit" class="btn btn-primary btn-block" id="btn_login_check">로그인</button><br>
+					
+
+
+	
+				</div>
+
+				</form>
+		<script type="text/javascript">
+			var is_mobile = "";
+
+			$(".ch-btn").on("click",function(){location.href="/login";});
+			if(!is_mobile){
+				$('.ch-btn').popover({
+					'content': '실시간 상담은 <b>로그인 사용자</b>에게만 허용됩니다.',
+					'placement': 'left',
+					'trigger': 'hover',
+					'html' : true
+				});
+			}
+			$(".ch-btn").show();
+		</script>
+			
+		
+		<!--로그인 영역 끝-->	
+
+		<!-- // 모바일용 footer 네비게이션 -->
+		
+
+<span itemscope="" itemtype="http://schema.org/Organization">
+	<link itemprop="url" href="http://www.imweb.me">
+	<a itemprop="sameAs" href="https://www.facebook.com/imwebme"></a>
+	<a itemprop="sameAs" href="http://cafe.naver.com/imwebcomm"></a>
+	<a itemprop="sameAs" href="https://www.instagram.com/imweb.me"></a>
+</span>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P68765D" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script>
+	$( window ).scroll(function() {
+		topMenuMovePostionByScrollPostion();
+	});
+
+	$(document).ready(function() {
+		$('[data-toggle="tooltip"]').tooltip();
+		$('[data-toggle="popover"]').popover();
+	});
+</script>
+<script src="https://wcs.naver.net/wcslog.js"></script>
+<script>
+	if(!wcs_add) var wcs_add = {};
+	wcs_add["wa"] = "s_36b497ae818b";
+	if (!_nasa) var _nasa={};
+	wcs.inflow("imweb.me");
+	wcs_do(_nasa);
+</script>
+<script>
+	/* <![CDATA[ */
+	var google_conversion_id = 854709164;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
+</script>
+<script src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/854709164/?guid=ON&amp;script=0"/>
+	</div>
+</noscript>
+<div class="modal" id="cocoaModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+	</div>
+</div>
+
+<div class="modal submodal" role="dialog" id="cocoaSubModal" style="z-index: 17001">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+	</div>
+</div>
+<iframe name="hidden_frame" id="hidden_frame" style="position: absolute; left: -9999px; width: 1px; height: 1px; top:-9999px;"></iframe><!--임시로 넣어둠-->
+<script>
+$(function(){
+	if(typeof fbq != 'undefined'){
+		fbq('track', 'Search');
+	}
+});
+</script>
+
+<script>
+	var $owl_container = $('#owl-carousel');
+	var $nav = $('#imweb-navbar');
+	var $nav_sub = $('#navbar_top_menu');
+	var $banner = $('._shop_banner');
+	var window_width = $(window).width();
+	var before_position = $(window).scrollTop();
+
+	if(window_width < 767){
+		var document_url = document.URL.substr(document.URL.indexOf('.me/') + 3);;
+		var is_sticky = '';
+		if(document_url.indexOf('features') > 0){
+			is_sticky = 'features'; //ab
+		}else if(document_url.indexOf('global_shopping') > 0){
+			is_sticky = 'global_shopping'; //re
+		}else if(document_url.indexOf('additional_service') > 0){
+			is_sticky = 'additional_service'; //ab
+		}else if(document_url.indexOf('best_production_list') > 0){
+			is_sticky = 'best_production_list'; //re
+		}else if(document_url.indexOf('notice') > 0){
+			is_sticky = 'notice'; //re
+		}else if(document_url.indexOf('faq') > 0){
+			is_sticky = 'faq'; //ab
+		}else if(document_url.indexOf('customer') > 0){
+			is_sticky = 'customer'; //ab
+		}else if(document_url.indexOf('blog') > 0){
+			is_sticky = 'blog'; //re
+		}
+
+		//스크롤에 따른 이벤트
+		function headerScrollEvent(){
+			$(window).scroll(function(){
+				var after_position = $(window).scrollTop();
+				if(before_position > after_position){
+					$nav.css({top : 0,});
+				}
+				if(before_position < after_position){
+					$nav.css({top : -51,});
+				}
+				before_position = after_position;
+			});
+		}
+
+		switch(is_sticky){
+			case 'faq':
+			case 'customer':
+				//여기선 absoulte이므로 따로 배경을 추가함.
+				var faq_bg_hieght = $('section.section-customer-bg').outerHeight(true);
+				$nav.css({position : 'sticky', top : '-51px', transition : '0.1s'});
+				$nav.before('<div class="faq-img-bg" style="height:' + faq_bg_hieght +'px; background: url(https://vendor-cdn.imweb.me/images/main/cs_top_bg.jpg) no-repeat center center;"></div>')
+				$('section.section-customer-bg').addClass('faq-bg');
+				headerScrollEvent();
+				break;
+			case 'features':
+			case 'additional_service':
+				$nav.css({position : 'absolute', top : '80px',});
+				break;
+
+			case 'global_shopping':
+			case 'best_production_list':
+			case 'notice':
+			case 'blog':
+				$nav.css({position : 'relative', top : '0px',});
+				break;
+
+			default:
+				$nav.css({position : 'sticky', top : '-51px', transition : '0.1s'});
+				headerScrollEvent();
+				break;
+		}
+	}
+	$owl_container.owlCarousel({
+		items:1,
+		dots: true,
+		nav: true,
+		loop: true,
+		animateOut: 'fadeOut',
+		autoplay: true,
+        autoplayHoverPause: true
+		,
+		onInitialize : function(e){
+			// $owl_container.children().sort(function(){
+			// 	return Math.round(Math.random()) - 0.5;
+			// }).each(function(){
+			// 	$(this).appendTo($owl_container);
+			// });
+			//
+			// if ( !$owl_container.children().eq(0).hasClass('_dark_banner') ) {
+			// 	$banner.toggleClass('dark-banner', false);
+			// }
+
+			$banner.toggleClass('dark-banner', false);
+		}
+	});
+
+	// $owl_container.on('change.owl.carousel', function(e){
+	// 	var $item = e.page.index - 1;
+	// 	console.log($(e.target).find('.owl-item').eq($item).find('._dark_banner').length);
+	// 	if ( $(e.target).find('.owl-item').eq($item).find('._dark_banner').length > 0 ) {
+	// 		$banner.toggleClass('dark-banner', true);
+	// 	} else {
+	// 		$banner.toggleClass('dark-banner', false);
+	// 	}
+	// });
+
+	$owl_container.on('changed.owl.carousel', function(e){
+		var $item = e.page.index;
+		if ( $item === 2 || $item === 4 || $item === 5  )
+			$banner.toggleClass('dark-banner', true);
+		else
+			$banner.toggleClass('dark-banner', false);
+	});
+
+		$(window).load(function(){
+		if ( $nav_sub.length < 1 ) {
+			var limit = 0;
+		} else {
+			var limit = $nav_sub.offset().top - $nav.height();
+		}
+
+		$nav.scrollToFixed({
+			limit: limit
+		});
+	});
+	</script>
+		</div></body></html>
